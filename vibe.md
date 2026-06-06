@@ -51,3 +51,8 @@ When executing a task, you will encounter decisions. Apply the following rules i
 3. **Present options, not open questions.** When asking, frame the question with concrete options and their trade-offs rather than asking "what do you want?" An informed choice is faster than a blank prompt.
 
 4. **Document the decision.** Once the user has answered, record the decision and its rationale in `./docs/` (either by updating design documents, API specifications, or creating a new Architecture Decision Record under a clear, descriptive filename) before proceeding. This ensures all critical project knowledge is consolidated and accessible for future reference, preventing the same questions from arising in a future session.
+
+## Recommendations
+
+1. **Python Toolchain:** Prefer using `uv` (e.g. `uv run python script.py`) to execute python commands, install packages, or manage environments, ensuring fast and reliable builds.
+
