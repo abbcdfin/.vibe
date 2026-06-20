@@ -81,3 +81,16 @@
     * Maintain clear separation of concerns (Layered Architecture: API -> Service -> Repo).
     * Leave the code cleaner than you found it (Boy Scout Rule).
 * **Check:** "Does this code introduce a circular dependency or leak an abstraction?"
+
+---
+
+## Resolving Tensions: Simple Now, Flexible Later
+
+These principles can pull against each other — most often **Minimal Mechanism (#6)** vs **Design for Scale (#5)**. They are not ranked; they apply at different levels:
+
+* **Implementation level → keep it simple.** Build the simplest thing that solves today's problem. Do not add abstraction, configuration, or infrastructure for a need that does not yet exist (YAGNI).
+* **Structural level → stay flexible.** Keep boundaries, interfaces, and layering clean enough that scaling later is an *extension, not a rewrite*. Preserve the seams (clear module edges, stateless handlers, an external store you *could* swap in) without building the scale machinery now.
+
+* **Check:**
+    * "Am I building scale I don't need yet?" → simplify.
+    * "Would scaling this later force a rewrite rather than an extension?" → fix the seam now.
