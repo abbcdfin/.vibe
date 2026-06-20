@@ -22,6 +22,7 @@ Use `plan.md` as the interactive design board and high-level roadmap.
 - **Status Tracking:** Use Markdown checkboxes: `[ ]` (Todo), `[/]` (In Progress), `[x]` (Done).
 - **Just-In-Time (JIT) Planning:** For the active phase, create a granular plan in `./vdesign/active_plan.md`. Do not detail future phases in the JIT plan.
 - **Summarize and Collapse:** Once a phase is finished, move a concise summary of the outcome to `plan.md` and delete/archive the tactical details from `active_plan.md`.
+- **Deferred Work:** When you consciously *defer* out-of-scope work you discover mid-phase, record it the moment you decide — as a scoped inline TODO if it is tied to a specific code location, or as a future phase in `plan.md` if it is a whole workstream — so it does not vanish when the JIT plan collapses.
 
 ### Checkpoint (`./vdesign/checkpoint.md`)
 Used strictly for volatile short-term memory and session handoffs.
