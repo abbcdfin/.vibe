@@ -4,10 +4,17 @@
 Roles are defined in the `./.vibe/identities` directory. You should pick the proper role based on each individual task.
 
 ## Specification
-The specification of this project is in the project root `README.md`. (Note: Ensure this file exists or point to the relevant documentation).
+The specification of this project is divided into different facets based on the audience:
+1. **`README.md` (Root):** The storefront. Contains the high-level vision, summary, and quick-start instructions.
+2. **`./docs/product_specification.md`:** The functional blueprint ("What & Why"). Defines user workflows, features, and business logic.
+3. **`./docs/architecture_design.md`:** The technical blueprint ("How"). Defines the tech stack, system architecture, and engineering decisions.
 
 ## Vibe Design & Docs (Project Specific)
-While `.vibe/` contains generic framework rules, all project-specific design artifacts, active development logs, and documentation MUST be placed directly inside the project repository. We distinguish between two key directories to organize this information:
+While `.vibe/` contains generic framework rules, all project-specific design artifacts, active development logs, and documentation MUST be placed directly inside the project repository. 
+
+> **Important Version Control Note:** The `.vibe/` directory is an independently managed repository. When initializing or managing the Git repository for this project, you MUST ensure `.vibe/` is added to the project's root `.gitignore` file.
+
+We distinguish between two key directories to organize project-specific information:
 
 *   **`./vdesign/`**: Maintains the **memory, volatile state, and planning of the active design and development process**. This contains highly dynamic, process-oriented documents (such as active plans, session checkpoints, and local environmental variables) that guide the AI agent and maintain context between sessions.
 *   **`./docs/`**: Records the **stable, outcome-oriented project specifications, system architecture, and consolidated design decisions**. This contains formal design specifications, architectural blueprints, API contracts, and user guides.
