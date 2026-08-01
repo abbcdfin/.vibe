@@ -1,7 +1,12 @@
 # Index of information required for vibe design
 
 ## System Role
-Roles are defined in the `./.vibe/identities` directory. You should pick the proper role based on each individual task.
+Roles are defined once in the `agents/` directory of the vibe framework (`software-expert`, `product-owner`). Each definition is used in **two** ways — pick the proper role for each task:
+
+- **Adopt (default for your own work):** when *you* do the work on the main thread, adopt the matching role's mindset — read and embody its `agents/<role>.md` definition so your own reasoning follows that role.
+- **Delegate (for isolated, bounded tasks):** invoke the role as a subagent so it runs in its own context and returns a result.
+
+The two are complementary, not exclusive: adopt a role to drive the main thread, and delegate leaf tasks to a role's subagent when isolation helps. The single source for both is the same `agents/<role>.md` file.
 
 ## Specification
 The specification of this project is divided into different facets based on the audience:
@@ -10,9 +15,9 @@ The specification of this project is divided into different facets based on the 
 3. **`./docs/architecture_design.md`:** The technical blueprint ("How"). Defines the tech stack, system architecture, and engineering decisions.
 
 ## Vibe Design & Docs (Project Specific)
-While `.vibe/` contains generic framework rules, all project-specific design artifacts, active development logs, and documentation MUST be placed directly inside the project repository. 
+The vibe framework is installed as a plugin (its generic rules live outside your repository). All project-specific design artifacts, active development logs, and documentation MUST be placed directly inside the project repository.
 
-> **Important Version Control Note:** The `.vibe/` directory is an independently managed repository. When initializing or managing the Git repository for this project, you MUST ensure `.vibe/` is added to the project's root `.gitignore` file.
+> **Version Control Note:** Because the framework is a plugin rather than an embedded directory, there is nothing framework-related to commit or gitignore in your project — only your own `vdesign/` and `docs/` artifacts belong in the repo. Run `/vibe:init` to scaffold them.
 
 We distinguish between two key directories to organize project-specific information:
 
@@ -45,7 +50,7 @@ Project-specific technical or business constraints.
 Project-specific setup, toolchains, or environment variables.
 
 ## Work Flow
-1. **Initialize:** On first entry, read `.vibe/vibe.md` to understand the rules.
+1. **Initialize:** These rules are injected automatically at session start by the vibe plugin. For a new project, run `/vibe:init` to scaffold `vdesign/` and `docs/`.
 2. **Context Sync:** Read `./vdesign/plan.md` and `./vdesign/checkpoint.md` to understand the current state.
 3. **Wait:** Please wait for my instructions before starting execution.
 

@@ -1,0 +1,14 @@
+{
+  "name": "vibe-marketplace",
+  "description": "The vibe coding framework, distributed as an installable Claude Code plugin.",
+  "owner": {
+    "name": "Jian Zhang"
+  },
+  "plugins": [
+    {
+      "name": "vibe",
+      "source": ".",
+      "description": "Vibe coding framework: always-on engineering governance, role identities, architectural & agentic principles, and project initialization (single-repo or hub-and-spoke)."
+    }
+  ]
+}

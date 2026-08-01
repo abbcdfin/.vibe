@@ -3,7 +3,8 @@
 > **Status: CANDIDATE — not adopted.** This is a proposal awaiting validation, not an
 > active framework rule. Do **not** treat it as doctrine. It must be run manually on at
 > least one real multi-repository project and pass a Decision Check Point before it
-> graduates into the framework (i.e. into `vibe.md`).
+> graduates into the framework. Per [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md),
+> the graduation target is `modes/` (loaded by mode-dependent injection), **not** `vibe.md`.
 
 ## Motivation
 
@@ -77,15 +78,15 @@ Only the **Context Sync** step becomes scope-aware:
 
 Everything else in `vibe.md` (identities, principles, decision-making ladder) is untouched.
 
-## Open design question
+## Resolved design question: mode awareness delivery
 
-Does the agent reliably *know* which mode and scope it is in?
+*Does the agent reliably know which mode and scope it is in?*
 
-* If reading `workspace.md` at context-sync is sufficient → keep it a plain file.
-* If the agent keeps losing scope awareness → mode + topology must be **always-on**
-  (hook-injected governance), not merely read.
-
-This is a primary thing validation should answer, not something to decide up front.
+**Resolved by [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md):**
+mode awareness is delivered as **always-on hook-injected governance**, not left to a
+discretionary read. The `SessionStart` hook reads `vdesign/workspace.md` and appends
+the matching `modes/*.md` module to the injected spine. Validation should still
+confirm this holds up in practice, but the mechanism is decided.
 
 ## How to validate
 
@@ -115,10 +116,12 @@ depend on one shared contract**. (One spoke, or two unrelated spokes, proves not
 
 ## Graduation criteria
 
-Promote out of `proposals/` (into `vibe.md`) only after:
+Promote out of `proposals/` **into `modes/`** (per [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md);
+the operational rules become `modes/hub.md` + `modes/spoke.md`, with a small
+mode-agnostic pointer added to `vibe.md`) only after:
 
 * It has been run manually on at least one real multi-repository project.
 * The three validation tasks completed with **no duplication of shared contracts** across
   spokes and the agent consistently consulted the hub before writing cross-boundary code.
-* The open design question above is resolved — with evidence for whether mode-awareness
-  needs to be hook-injected or a read at context-sync suffices.
+* The `workspace.md`-driven hook injection reliably makes the agent mode-aware in
+  practice (the mechanism is decided in ADR 0001; validation confirms it works).
