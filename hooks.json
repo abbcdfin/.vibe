@@ -1,0 +1,16 @@
+{
+  "vibe-governance": {
+    "PreInvocation": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'exec \"$HOME/.gemini/antigravity-cli/plugins/vibe/hooks/inject-governance-agy.sh\"'",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

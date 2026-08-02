@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "vibe",
+  "description": "Vibe coding framework: always-on engineering governance (via PreInvocation hook), selectable role identities (agents/), and architectural & agentic principles (skills/). Antigravity CLI manifest; the Claude Code manifest lives in .claude-plugin/plugin.json."
+}

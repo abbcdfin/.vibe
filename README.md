@@ -63,6 +63,37 @@ These are your operating rules for all coding work:
 This is rock-solid always-on (user memory is always loaded) and keeps a single
 source of truth (`vibe.md`). Updating the framework is then just `git pull`.
 
+## Install (Antigravity CLI)
+
+The same repository also carries an Antigravity CLI plugin. The tool-specific files
+sit alongside the Claude Code ones and read the **same** `vibe.md`:
+
+| Concern | Claude Code | Antigravity CLI |
+|---------|-------------|-----------------|
+| Manifest | `.claude-plugin/plugin.json` | `plugin.json` (root) |
+| Always-on hook | `hooks/hooks.json` → `SessionStart` (stdout) | `hooks.json` (root) → `PreInvocation` (JSON `additionalContext`) |
+| Hook script | `hooks/inject-governance.sh` | `hooks/inject-governance-agy.sh` |
+| Skills / Agents | `skills/`, `agents/` | `skills/`, `agents/` (shared, same format) |
+
+Install locally (Antigravity documents local install only — no git/marketplace):
+
+```
+agy plugin install /path/to/vibe
+agy plugin list          # confirm it's staged & enabled
+```
+
+Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
+
+> **Best-effort / verify on your install.** Antigravity support is built from its
+> published docs (manifest, `skills/`, `agents/`, `rules/`, `hooks.json`) plus a
+> secondary source for the hook format. Two things to check after installing:
+> 1. **Hook path.** `hooks.json` invokes the script via `$HOME/.gemini/antigravity-cli/plugins/vibe/hooks/inject-governance-agy.sh`. Antigravity requires absolute paths; if `$HOME` doesn't expand, hard-code your absolute path there.
+> 2. **`PreInvocation` re-injects** the spine each turn (Antigravity has no `SessionStart`). If that's too heavy, and Antigravity's `rules/` directory auto-loads, move the governance there as a lighter one-time load.
+>
+> Also: `/vibe:init` is a Claude Code `commands/` file; Antigravity's documented
+> plugin dirs are `skills/`/`agents/`/`rules/`, so the initializer may need to be
+> invoked as a skill there. Not yet ported.
+
 ## Initialize a project
 
 ```
@@ -85,9 +116,10 @@ source of truth (`vibe.md`). Updating the framework is then just `git pull`.
 - **Why the spine is a hook, not a skill.** Governance must be *always-on*; skills
   load only on-demand. A skill spine would silently fail to fire. See the git
   history and `proposals/` for the reasoning.
-- **Antigravity CLI.** The `SKILL.md` and `agents/` formats are portable; porting
-  mainly means providing the equivalent manifest and a `PreInvocation` hook for the
-  spine. Not yet done.
+- **Antigravity CLI.** Supported alongside Claude Code: `skills/` and `agents/` are
+  shared verbatim; `plugin.json` (root) is the manifest and `hooks.json` (root) wires
+  a `PreInvocation` hook that injects the same `vibe.md`. Best-effort pending a live
+  test — see the install section's caveats.
 
 ## Versioning
 
