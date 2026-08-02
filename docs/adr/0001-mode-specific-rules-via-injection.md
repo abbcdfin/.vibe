@@ -33,11 +33,16 @@ mode is declared in `workspace.md`; multi-repo modes load additional rules).
 End-state structure:
 
 ```
-vibe.md        base spine + tiny "Workspace Modes" pointer (always injected)
-modes/hub.md   adopted; injected only when mode: hub
-modes/spoke.md adopted; injected only when mode: spoke
+vibe.md            base spine + tiny "Workspace Modes" pointer (always injected)
+modes/workspace.md adopted; injected when launched at a workspace-root map (mode: workspace)
+modes/hub.md       adopted; injected only when mode: hub
+modes/spoke.md     adopted; injected only when mode: spoke
 (single = base spine only)
 ```
+
+The manifest is read from the launch cwd — the root `workspace.md` map, or a repo's
+`vdesign/workspace.md`. See `proposals/hub-and-spoke-mode.md` for the workspace-root
+(coordinator) model.
 
 Consequently, the graduation target for the hub-and-spoke proposal is **`modes/`,
 not `vibe.md`** — graduating means moving from `proposals/` (candidate) to `modes/`

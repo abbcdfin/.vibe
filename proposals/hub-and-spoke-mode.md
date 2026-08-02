@@ -78,15 +78,67 @@ Only the **Context Sync** step becomes scope-aware:
 
 Everything else in `vibe.md` (identities, principles, decision-making ladder) is untouched.
 
+## The workspace root (coordinator launch)
+
+By default the agent is launched *inside* a hub or spoke repo. For cross-cutting work
+that spans several repos, that fragments one task across repo-scoped sessions. The
+**workspace root** gives a single coordinator session that sees the whole system —
+mapping onto the Coordinator role in the agentic principles.
+
+Keep the workspace root a **plain folder, not a repo**. It holds *only* a small map;
+everything substantive stays in the repos:
+
+```
+workspace/                 # plain folder — NOT a repo
+├── workspace.md           # the map (below) — a pointer, not a source of truth
+├── architecture/          # hub repo: docs/contracts/, cross-cutting plan, its vdesign/
+├── firmware/              # spoke repo
+└── mobile/                # spoke repo
+```
+
+The root map names **only the hub**, so the authoritative topology (the spoke list)
+still lives once, in the hub's manifest — no drift:
+
+```yaml
+# workspace.md (workspace root)
+mode: workspace
+hub: ./architecture   # read the hub's manifest for the authoritative topology
+```
+
+This separates the coordination *location* (the root, where you launch) from the
+coordination *storage* (the hub repo, versioned). The root is a lens, not a store.
+`/vibe:init workspace`, run at the root, drops only this map file — nothing else.
+
+**Three launch scopes, all manifest-driven** (the hook reads the manifest in the
+launch cwd):
+
+| Launch cwd | Manifest | Scope |
+|------------|----------|-------|
+| Workspace root | `./workspace.md` (`mode: workspace`) | Coordinator — read hub manifest + contracts; work across repos, committing per-repo |
+| Hub repo | `vdesign/workspace.md` (`mode: hub`) | Global / cross-cutting authoring |
+| Spoke repo | `vdesign/workspace.md` (`mode: spoke`) | Local work; consult hub contracts first |
+
+The per-repo (spoke/hub) workflow is unchanged; the coordinator scope is *added*, not
+a replacement.
+
+**Tradeoffs (accepted):**
+
+* The root map is **not version-controlled** (plain folder). Intentional — it is a
+  trivial, recreatable pointer, and clone layouts differ per developer. Nothing
+  important is unversioned; the versioned coordination point is the hub.
+* **Git stays per-repo** — a coordinator session commits into each repo separately
+  (already true before). No submodules or root repo are required.
+
 ## Resolved design question: mode awareness delivery
 
 *Does the agent reliably know which mode and scope it is in?*
 
 **Resolved by [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md):**
 mode awareness is delivered as **always-on hook-injected governance**, not left to a
-discretionary read. The `SessionStart` hook reads `vdesign/workspace.md` and appends
-the matching `modes/*.md` module to the injected spine. Validation should still
-confirm this holds up in practice, but the mechanism is decided.
+discretionary read. The `SessionStart` hook reads the workspace manifest in the launch
+cwd (the root `workspace.md`, or a repo's `vdesign/workspace.md`) and appends the
+matching `modes/*.md` module to the injected spine. Validation should still confirm
+this holds up in practice, but the mechanism is decided.
 
 ## How to validate
 
@@ -104,21 +156,28 @@ depend on one shared contract**. (One spoke, or two unrelated spokes, proves not
 3. **Cross-cutting feature** — one feature spanning hub + both spokes. *Tests context-sync
    order and that nothing is duplicated across scopes.*
 
+Run task 3 **twice** — once launched inside a repo, and once from the **workspace root**
+(coordinator launch) — to validate both entry points and that the root map correctly
+routes to the hub.
+
 ## Known failure modes to watch during validation
 
 * **Source drift** — the agent edits the shared contract *from within a spoke* locally
   instead of at the hub. (Primary risk; defeats single-source.)
 * **Over-consultation** — global context-sync fires for trivial local work; overhead exceeds
   benefit.
-* **Stale manifest** — `workspace.md` drifts out of sync with the actual repos.
+* **Stale manifest** — a `workspace.md` (hub or root map) drifts out of sync with the
+  actual repos, or the root map points at the wrong hub.
 * **Placement ambiguity** — the agent is unsure whether a new file belongs in the hub or a
   spoke.
+* **Cross-repo commit errors** — in a coordinator (workspace-root) session, the agent
+  commits a change into the wrong repo, or forgets that each repo commits separately.
 
 ## Graduation criteria
 
 Promote out of `proposals/` **into `modes/`** (per [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md);
-the operational rules become `modes/hub.md` + `modes/spoke.md`, with a small
-mode-agnostic pointer added to `vibe.md`) only after:
+the operational rules become `modes/workspace.md` + `modes/hub.md` + `modes/spoke.md`,
+with a small mode-agnostic pointer added to `vibe.md`) only after:
 
 * It has been run manually on at least one real multi-repository project.
 * The three validation tasks completed with **no duplication of shared contracts** across
