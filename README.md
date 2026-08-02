@@ -108,6 +108,12 @@ Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 - **hub / spoke** — implement `proposals/hub-and-spoke-mode.md`, a CANDIDATE pattern
   that is **not yet adopted**. Use for validation only.
 
+> **Candidate mode-aware harness.** The governance hooks read the workspace manifest in
+> the launch cwd (root `workspace.md`, or a repo's `vdesign/workspace.md`) and append the
+> matching **draft** module from `modes/` (`workspace.md` / `hub.md` / `spoke.md`). This
+> exists to *validate* the hub-and-spoke proposal — `modes/*.md` are DRAFT, not adopted
+> doctrine. Single-repo projects have no manifest, so nothing extra is injected.
+
 ## Design notes
 
 - **Single source of truth.** Each principle's full text lives once, in its skill's

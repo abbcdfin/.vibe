@@ -20,10 +20,21 @@ cat <<'EOF'
 
 The vibe coding framework is installed. The rules below are ALWAYS in effect for
 this session. Follow them. The framework also ships selectable role identities
-(agents/), architectural & agentic principles (skills/), and a `/vibe-init`
+(agents/), architectural & agentic principles (skills/), and a `/vibe:init`
 command to scaffold a project.
 
 ---
 EOF
 
 cat "$SPINE"
+
+# CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).
+# Appends a draft modes/<mode>.md based on the workspace manifest in the launch cwd.
+# shellcheck source=lib-mode.sh
+. "$ROOT/hooks/lib-mode.sh"
+_mode="$(vibe_detect_mode "$PWD")"
+_module="$(vibe_mode_module "$ROOT" "${_mode:-}")"
+if [ -n "$_module" ]; then
+  printf '\n\n---\n\n'
+  cat "$_module"
+fi

@@ -25,6 +25,19 @@ The vibe framework is installed. The rules below are ALWAYS in effect for this s
 "
 FULL="$PREAMBLE$(cat "$SPINE")"
 
+# CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).
+# shellcheck source=lib-mode.sh
+. "$ROOT/hooks/lib-mode.sh"
+_mode="$(vibe_detect_mode "$PWD")"
+_module="$(vibe_mode_module "$ROOT" "${_mode:-}")"
+if [ -n "$_module" ]; then
+  FULL="$FULL
+
+---
+
+$(cat "$_module")"
+fi
+
 if command -v jq >/dev/null 2>&1; then
   printf '%s' "$FULL" | jq -Rs '{allow_tool: true, additionalContext: .}'
 else
