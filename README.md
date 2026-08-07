@@ -13,7 +13,7 @@ are written once, and each tool gets a small always-on injector that reads the
 | Tool | Always-on mechanism | Adapter | Confidence |
 |------|---------------------|---------|------------|
 | Claude Code | `SessionStart` hook (stdout) | `hooks/inject-governance.sh` | Tested |
-| OpenAI Codex CLI | standalone `SessionStart` hook (JSON `additionalContext`) | `hooks/inject-governance-codex.sh` | Tested (Codex 0.146.0) |
+| OpenAI Codex CLI | plugin-bundled `SessionStart` hook (JSON `additionalContext`) | `.codex-plugin/` + `hooks/inject-governance-codex.sh` | Tested (Codex 0.146.0) |
 | Antigravity CLI | `PreInvocation` hook (JSON `additionalContext`) | `hooks/inject-governance-agy.sh` | Best-effort |
 | pi | `before_agent_start` extension (`systemPrompt`) | `pi/vibe.ts` | Best-effort |
 
@@ -108,34 +108,34 @@ Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 
 ## Install (OpenAI Codex CLI)
 
-Tested against Codex **0.146.0**. Codex's standalone `hooks` feature is stable and
-provides a `SessionStart` event (fires on startup/resume/clear/compact) whose
-`hookSpecificOutput.additionalContext` is injected as developer context — the same
-shape Claude Code uses. Note: Codex's `plugin_hooks` feature is **removed**, so the
-hook cannot be bundled inside a plugin; register it **standalone** in your Codex
-config, pointing at the script in this repo. Check your own install first:
+Tested against Codex **0.146.0**, end-to-end (plugin install → `SessionStart` hook
+fires → `vibe.md` injected). Codex delivers the full framework — skills **and** the
+always-on spine — from a single plugin, like Claude Code and Antigravity.
+
+**A. Plugin via marketplace (recommended).** The repo is its own Codex marketplace
+(`.agents/plugins/marketplace.json`) and plugin (`.codex-plugin/plugin.json`, which
+exposes `skills/` and bundles a `SessionStart` hook → `.codex-plugin/hooks.json` →
+`hooks/inject-governance-codex.sh`).
 
 ```bash
-codex features list | grep -E '^(hooks|plugin_hooks)'
-# hooks         stable  true      <- required
-# plugin_hooks  removed false     <- expected; that's why the hook is standalone
+codex plugin marketplace add /path/to/vibe   # or:  codex plugin marketplace add abbcdfin/.vibe
+codex plugin add vibe@vibe
 ```
 
-**Recommended — run the installer** (idempotent; writes a marker-delimited block
-to `$CODEX_HOME/config.toml`, so re-runs update in place and `--uninstall` removes
-it cleanly):
+> **One-time trust review.** Installing a plugin does **not** auto-trust its hooks —
+> Codex skips a bundled hook until you review and trust it (by hash). On first
+> interactive `codex` you'll be prompted to trust the vibe `SessionStart` hook;
+> approve it once and it fires every session thereafter. (For CI/automation,
+> `codex exec --dangerously-bypass-hook-trust` runs enabled hooks without the
+> prompt.) This trust step is the only difference from the Claude Code experience.
 
-```bash
-scripts/install-codex.sh              # register the SessionStart hook
-scripts/install-codex.sh --fallback   # also symlink $CODEX_HOME/AGENTS.md -> vibe.md
-scripts/install-codex.sh --dry-run    # preview without writing
-scripts/install-codex.sh --uninstall  # remove the hook block (and managed symlink)
-```
+The hook reads the same `vibe.md` as every other adapter and reuses the candidate
+mode harness (`hooks/lib-mode.sh`): single-repo injects the spine only; a workspace
+with a `mode:` manifest also appends the matching `modes/*.md`.
 
-It resolves the absolute hook path for you, checks the `hooks` feature is enabled,
-respects `$CODEX_HOME`, and verifies the hook emits valid JSON before finishing.
-
-Or wire it by hand — add to `~/.codex/config.toml` (absolute path to your clone):
+**B. Standalone config hook (fallback).** If you'd rather register the hook yourself
+than trust a bundled one — or want it independent of the plugin system — add it to
+`~/.codex/config.toml` by hand (absolute path to your clone):
 
 ```toml
 [[hooks.SessionStart]]
@@ -145,18 +145,13 @@ command = '/path/to/vibe/hooks/inject-governance-codex.sh'
 timeout = 30
 ```
 
-**Verify:** `codex` — the vibe rules should appear in context. The script reads the
-same `vibe.md` as every other adapter and reuses the candidate mode harness
-(`hooks/lib-mode.sh`), so single-repo injects the spine only and a workspace with a
-`mode:` manifest also appends the matching `modes/*.md`.
+Note the standalone `config.toml` schema keys events at the top level
+(`[[hooks.SessionStart]]`), which differs from the plugin `hooks.json` schema (events
+nested under `hooks:`) — the same `inject-governance-codex.sh` script, different wiring.
 
-**Fallback (belt-and-braces).** Codex also always loads `~/.codex/AGENTS.md`
-(no `@import` support, unlike CLAUDE.md). For a hook-independent guarantee, symlink
-it to the single source:
-
-```bash
-ln -s /path/to/vibe/vibe.md ~/.codex/AGENTS.md
-```
+**C. AGENTS.md (belt-and-braces).** Codex always loads `~/.codex/AGENTS.md` (no
+`@import`, unlike CLAUDE.md). For a hook-independent guarantee, symlink it to the
+single source: `ln -s /path/to/vibe/vibe.md ~/.codex/AGENTS.md`.
 
 ## Install (pi)
 
@@ -222,9 +217,14 @@ hook-independent fallback.
   extension. `skills/` and `agents/` are Markdown shared verbatim across the tools
   that support them. Codex and Claude are tested; Antigravity and pi are best-effort
   pending live tests — see each install section's caveats.
-- **Why Codex's hook is standalone, not plugin-bundled.** Codex's `plugin_hooks`
-  feature is removed, so hooks inside a plugin don't fire; the standalone `hooks`
-  feature is stable. The hook is therefore registered in `~/.codex/config.toml`.
+- **Codex ships as a plugin (bundled hook), with a standalone fallback.** Plugin-
+  bundled `SessionStart` hooks *do* fire in Codex 0.146.0 (tested); the `plugin_hooks`
+  feature reading `removed` means the flag graduated to standard, not that the
+  capability was pulled. Bundled hooks require a one-time trust review, so a
+  hand-registered standalone `config.toml` hook is documented as the fallback for
+  anyone who prefers not to trust a bundled hook. Both paths run the same
+  `inject-governance-codex.sh` but use different hook schemas (plugin nests events
+  under `hooks:`; standalone keys them at top level).
 
 ## Versioning
 

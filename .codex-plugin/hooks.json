@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/inject-governance-codex.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "vibe",
+  "version": "0.3.0",
+  "description": "Vibe coding framework: always-on engineering governance (SessionStart hook) plus architectural & agentic-principles skills. Reads the same single-source vibe.md as the Claude Code and Antigravity manifests.",
+  "author": { "name": "Jian Zhang" },
+  "repository": "https://github.com/abbcdfin/.vibe",
+  "skills": "./skills/",
+  "hooks": "./.codex-plugin/hooks.json"
+}
