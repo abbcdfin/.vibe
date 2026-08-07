@@ -1,9 +1,21 @@
 # Vibe
 
-An installable **vibe coding framework** for Claude Code (and, later, Antigravity CLI).
-Install it once and every project gets the same always-on engineering governance,
-selectable role identities, architectural & agentic principles, and a one-command
-project initializer — with nothing to copy into individual repositories.
+An installable **vibe coding framework** for Claude Code, Antigravity CLI, OpenAI
+Codex CLI, and pi. Install it once and every project gets the same always-on
+engineering governance, selectable role identities, architectural & agentic
+principles, and a one-command project initializer — with nothing to copy into
+individual repositories.
+
+The design is **one source, N thin adapters**: `vibe.md` + `skills/` + `agents/`
+are written once, and each tool gets a small always-on injector that reads the
+*same* `vibe.md`. Adding a tool is just writing that adapter.
+
+| Tool | Always-on mechanism | Adapter | Confidence |
+|------|---------------------|---------|------------|
+| Claude Code | `SessionStart` hook (stdout) | `hooks/inject-governance.sh` | Tested |
+| OpenAI Codex CLI | standalone `SessionStart` hook (JSON `additionalContext`) | `hooks/inject-governance-codex.sh` | Tested (Codex 0.146.0) |
+| Antigravity CLI | `PreInvocation` hook (JSON `additionalContext`) | `hooks/inject-governance-agy.sh` | Best-effort |
+| pi | `before_agent_start` extension (`systemPrompt`) | `pi/vibe.ts` | Best-effort |
 
 ## What's in the plugin
 
@@ -94,6 +106,87 @@ Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 > plugin dirs are `skills/`/`agents/`/`rules/`, so the initializer may need to be
 > invoked as a skill there. Not yet ported.
 
+## Install (OpenAI Codex CLI)
+
+Tested against Codex **0.146.0**. Codex's standalone `hooks` feature is stable and
+provides a `SessionStart` event (fires on startup/resume/clear/compact) whose
+`hookSpecificOutput.additionalContext` is injected as developer context — the same
+shape Claude Code uses. Note: Codex's `plugin_hooks` feature is **removed**, so the
+hook cannot be bundled inside a plugin; register it **standalone** in your Codex
+config, pointing at the script in this repo. Check your own install first:
+
+```bash
+codex features list | grep -E '^(hooks|plugin_hooks)'
+# hooks         stable  true      <- required
+# plugin_hooks  removed false     <- expected; that's why the hook is standalone
+```
+
+**Recommended — run the installer** (idempotent; writes a marker-delimited block
+to `$CODEX_HOME/config.toml`, so re-runs update in place and `--uninstall` removes
+it cleanly):
+
+```bash
+scripts/install-codex.sh              # register the SessionStart hook
+scripts/install-codex.sh --fallback   # also symlink $CODEX_HOME/AGENTS.md -> vibe.md
+scripts/install-codex.sh --dry-run    # preview without writing
+scripts/install-codex.sh --uninstall  # remove the hook block (and managed symlink)
+```
+
+It resolves the absolute hook path for you, checks the `hooks` feature is enabled,
+respects `$CODEX_HOME`, and verifies the hook emits valid JSON before finishing.
+
+Or wire it by hand — add to `~/.codex/config.toml` (absolute path to your clone):
+
+```toml
+[[hooks.SessionStart]]
+[[hooks.SessionStart.hooks]]
+type = "command"
+command = '/path/to/vibe/hooks/inject-governance-codex.sh'
+timeout = 30
+```
+
+**Verify:** `codex` — the vibe rules should appear in context. The script reads the
+same `vibe.md` as every other adapter and reuses the candidate mode harness
+(`hooks/lib-mode.sh`), so single-repo injects the spine only and a workspace with a
+`mode:` manifest also appends the matching `modes/*.md`.
+
+**Fallback (belt-and-braces).** Codex also always loads `~/.codex/AGENTS.md`
+(no `@import` support, unlike CLAUDE.md). For a hook-independent guarantee, symlink
+it to the single source:
+
+```bash
+ln -s /path/to/vibe/vibe.md ~/.codex/AGENTS.md
+```
+
+## Install (pi)
+
+> **Best-effort — not yet validated on a live pi install.** Built from pi's
+> published extension docs. pi loads extensions from `~/.pi/agent/extensions/`
+> (global) and `.pi/extensions/` (project), and supports git/npm packages via
+> `settings.json`. The adapter (`pi/vibe.ts`) subscribes to `before_agent_start`
+> and prepends the same `vibe.md` spine to the system prompt.
+
+Install from git (declared via this repo's `package.json` `"pi"` field):
+
+```json
+// ~/.pi/agent/settings.json
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.3.0"] }
+```
+
+Or drop it in globally without a package manager:
+
+```bash
+mkdir -p ~/.pi/agent/extensions
+ln -s /path/to/vibe/pi/vibe.ts ~/.pi/agent/extensions/vibe.ts
+```
+
+**Verify on your install:** confirm pi's current API still uses the
+`before_agent_start` event returning `{ systemPrompt }`; if it has drifted, adjust
+`pi/vibe.ts` accordingly. The candidate `modes/*.md` harness is **not** ported to
+pi — it gets the spine only. pi also reads `AGENTS.md` from `~/.pi/agent/`, so a
+symlink there (`ln -s /path/to/vibe/vibe.md ~/.pi/agent/AGENTS.md`) is the
+hook-independent fallback.
+
 ## Initialize a project
 
 ```
@@ -122,12 +215,19 @@ Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 - **Why the spine is a hook, not a skill.** Governance must be *always-on*; skills
   load only on-demand. A skill spine would silently fail to fire. See the git
   history and `proposals/` for the reasoning.
-- **Antigravity CLI.** Supported alongside Claude Code: `skills/` and `agents/` are
-  shared verbatim; `plugin.json` (root) is the manifest and `hooks.json` (root) wires
-  a `PreInvocation` hook that injects the same `vibe.md`. Best-effort pending a live
-  test — see the install section's caveats.
+- **Four tools, one source.** Every adapter reads the *same* `vibe.md` and reuses the
+  same candidate mode harness (`hooks/lib-mode.sh`) where it applies. The adapters
+  differ only in how each tool takes always-on context: Claude Code and Codex use a
+  `SessionStart` hook, Antigravity a `PreInvocation` hook, pi a `before_agent_start`
+  extension. `skills/` and `agents/` are Markdown shared verbatim across the tools
+  that support them. Codex and Claude are tested; Antigravity and pi are best-effort
+  pending live tests — see each install section's caveats.
+- **Why Codex's hook is standalone, not plugin-bundled.** Codex's `plugin_hooks`
+  feature is removed, so hooks inside a plugin don't fire; the standalone `hooks`
+  feature is stable. The hook is therefore registered in `~/.codex/config.toml`.
 
 ## Versioning
 
 `v0.1.0` tags the pre-plugin, embedded-`.vibe/` framework. `v0.2.0` is the first
-plugin form.
+plugin form (Claude Code + Antigravity CLI). `v0.3.0` adds OpenAI Codex CLI and pi
+adapters.
