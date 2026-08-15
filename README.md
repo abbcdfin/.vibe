@@ -14,7 +14,7 @@ are written once, and each tool gets a small always-on injector that reads the
 |------|---------------------|---------|------------|
 | Claude Code | `SessionStart` hook (stdout) | `hooks/inject-governance.sh` | Tested |
 | OpenAI Codex CLI | plugin-bundled `SessionStart` hook (JSON `additionalContext`) | `.codex-plugin/` + `hooks/inject-governance-codex.sh` | Tested (Codex 0.146.0) |
-| Antigravity CLI | `PreInvocation` hook (JSON `additionalContext`) | `hooks/inject-governance-agy.sh` | Best-effort |
+| Antigravity CLI | `PreInvocation` hook (JSON `injectSteps`/`ephemeralMessage`) | `hooks/inject-governance-agy.sh` | Tested (agy CLI) |
 | pi | `before_agent_start` extension (`systemPrompt`) | `pi/vibe.ts` | Best-effort |
 
 ## What's in the plugin
@@ -83,7 +83,7 @@ sit alongside the Claude Code ones and read the **same** `vibe.md`:
 | Concern | Claude Code | Antigravity CLI |
 |---------|-------------|-----------------|
 | Manifest | `.claude-plugin/plugin.json` | `plugin.json` (root) |
-| Always-on hook | `hooks/hooks.json` → `SessionStart` (stdout) | `hooks.json` (root) → `PreInvocation` (JSON `additionalContext`) |
+| Always-on hook | `hooks/hooks.json` → `SessionStart` (stdout) | `hooks.json` (root) → `PreInvocation` (JSON `injectSteps`/`ephemeralMessage`) |
 | Hook script | `hooks/inject-governance.sh` | `hooks/inject-governance-agy.sh` |
 | Skills / Agents | `skills/`, `agents/` | `skills/`, `agents/` (shared, same format) |
 
@@ -96,10 +96,17 @@ agy plugin list          # confirm it's staged & enabled
 
 Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 
-> **Best-effort / verify on your install.** Antigravity support is built from its
-> published docs (manifest, `skills/`, `agents/`, `rules/`, `hooks.json`) plus a
-> secondary source for the hook format. Two things to check after installing:
-> 1. **Hook path.** `hooks.json` invokes the script via `$HOME/.gemini/antigravity-cli/plugins/vibe/hooks/inject-governance-agy.sh`. Antigravity requires absolute paths; if `$HOME` doesn't expand, hard-code your absolute path there.
+> **Verified against Antigravity's hook contract.** The `PreInvocation` wiring
+> follows the authoritative hooks reference (`agy-customizations/docs/hooks.md`):
+> `PreInvocation` uses the **flat** handler-list structure (no `matcher`/`hooks`
+> wrapper — that's only for `PreToolUse`/`PostToolUse`), and the command returns
+> `{"injectSteps":[{"ephemeralMessage":"<spine>"}]}` on stdout. Two things worth
+> knowing:
+> 1. **No absolute path needed.** Antigravity runs the hook with cwd set to the
+>    directory containing `hooks.json` (the plugin root), so `hooks.json` calls the
+>    script by the relative path `./hooks/inject-governance-agy.sh` — robust to any
+>    install location. The user's project isn't cwd; it arrives as `workspacePaths`
+>    on stdin, which the mode harness reads (falling back to `$PWD`).
 > 2. **`PreInvocation` re-injects** the spine each turn (Antigravity has no `SessionStart`). If that's too heavy, and Antigravity's `rules/` directory auto-loads, move the governance there as a lighter one-time load.
 >
 > The initializer **is** ported: Antigravity's documented plugin dirs are
@@ -248,4 +255,7 @@ logic as the `vibe-init` **skill** instead:
 `v0.1.0` tags the pre-plugin, embedded-`.vibe/` framework. `v0.2.0` is the first
 plugin form (Claude Code + Antigravity CLI). `v0.3.0` adds OpenAI Codex CLI and pi
 adapters. `v0.4.0` ports the `/vibe:init` initializer to a cross-tool `vibe-init`
-skill (Antigravity CLI + Codex, since neither loads Claude's `commands/`).
+skill (Antigravity CLI + Codex, since neither loads Claude's `commands/`). `v0.4.1`
+fixes the Antigravity `PreInvocation` hook (flat schema, `injectSteps`/
+`ephemeralMessage` output contract, install-location-independent relative path) —
+verified firing live on the `agy` CLI.
