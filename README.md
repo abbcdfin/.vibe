@@ -25,7 +25,7 @@ are written once, and each tool gets a small always-on injector that reads the
 | **Role identities** | `agents/` (`software-expert`, `product-owner`) | Adopted by the main thread *or* delegated as subagents; each agent file is the single canonical role definition |
 | **Architectural principles** | `skills/architectural-principles/` | On-demand skill; full text in its `reference.md` |
 | **Agentic principles** | `skills/agentic-principles/` | On-demand skill; full text in its `reference.md` |
-| **Project initializer** | `commands/init.md` → `/vibe:init` | Slash command |
+| **Project initializer** | `commands/init.md` → `/vibe:init` (Claude); `skills/vibe-init/` (Antigravity, Codex) — shared `reference.md` | Slash command / skill |
 | **Candidate patterns** | `proposals/` | Not adopted — awaiting validation |
 
 ## Install (Claude Code)
@@ -102,9 +102,10 @@ Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 > 1. **Hook path.** `hooks.json` invokes the script via `$HOME/.gemini/antigravity-cli/plugins/vibe/hooks/inject-governance-agy.sh`. Antigravity requires absolute paths; if `$HOME` doesn't expand, hard-code your absolute path there.
 > 2. **`PreInvocation` re-injects** the spine each turn (Antigravity has no `SessionStart`). If that's too heavy, and Antigravity's `rules/` directory auto-loads, move the governance there as a lighter one-time load.
 >
-> Also: `/vibe:init` is a Claude Code `commands/` file; Antigravity's documented
-> plugin dirs are `skills/`/`agents/`/`rules/`, so the initializer may need to be
-> invoked as a skill there. Not yet ported.
+> The initializer **is** ported: Antigravity's documented plugin dirs are
+> `skills/`/`agents/`/`rules/` (no `commands/`), and skills auto-convert to slash
+> commands, so `/vibe:init` is available here as the `vibe-init` skill — see
+> [Initialize a project](#initialize-a-project).
 
 ## Install (OpenAI Codex CLI)
 
@@ -165,7 +166,7 @@ Install from git (declared via this repo's `package.json` `"pi"` field):
 
 ```json
 // ~/.pi/agent/settings.json
-{ "packages": ["git:github.com/abbcdfin/.vibe@v0.3.0"] }
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.4.0"] }
 ```
 
 Or drop it in globally without a package manager:
@@ -184,6 +185,17 @@ hook-independent fallback.
 
 ## Initialize a project
 
+The initializer works on every tool, driven by one **mode** argument (`single` |
+`hub` | `spoke`, default `single`). How you invoke it differs because only Claude
+Code has a `commands/` slash-command loader — Antigravity and Codex expose the same
+logic as the `vibe-init` **skill** instead:
+
+| Tool | Invocation | Argument passing |
+|------|-----------|------------------|
+| Claude Code | `/vibe:init hub` (`commands/init.md`) | positional `$1` |
+| Antigravity CLI | `/vibe-init hub`, or just ask ("bootstrap a hub workspace here") | skill reads the mode word from your message |
+| OpenAI Codex CLI | `vibe-init` skill, or just ask | skill reads the mode word from your message |
+
 ```
 /vibe:init            # single-repo (default)
 /vibe:init single
@@ -195,6 +207,11 @@ hook-independent fallback.
   `docs/` in the current repo.
 - **hub / spoke** — implement `proposals/hub-and-spoke-mode.md`, a CANDIDATE pattern
   that is **not yet adopted**. Use for validation only.
+
+> **Skills have no positional `$1`.** The `vibe-init` skill (`skills/vibe-init/`)
+> reads the mode word (`single`/`hub`/`spoke`) out of your invocation text and
+> defaults to `single`. Both the Claude command and the skill are thin wrappers over
+> one shared procedure (`skills/vibe-init/reference.md`) — one source, three tools.
 
 > **Candidate mode-aware harness.** The governance hooks read the workspace manifest in
 > the launch cwd (root `workspace.md`, or a repo's `vdesign/workspace.md`) and append the
@@ -230,4 +247,5 @@ hook-independent fallback.
 
 `v0.1.0` tags the pre-plugin, embedded-`.vibe/` framework. `v0.2.0` is the first
 plugin form (Claude Code + Antigravity CLI). `v0.3.0` adds OpenAI Codex CLI and pi
-adapters.
+adapters. `v0.4.0` ports the `/vibe:init` initializer to a cross-tool `vibe-init`
+skill (Antigravity CLI + Codex, since neither loads Claude's `commands/`).

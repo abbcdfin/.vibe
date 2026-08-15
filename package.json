@@ -1,6 +1,6 @@
 {
   "name": "vibe",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Installable vibe coding framework — always-on engineering governance for AI coding agents. This file exists so pi can git-install the extension; the Claude Code and Antigravity manifests live in .claude-plugin/plugin.json and plugin.json.",
   "private": true,
   "repository": "https://github.com/abbcdfin/.vibe",
