@@ -1,10 +1,9 @@
 # Vibe Project Initializer — Procedure
 
-The single source of truth for initializing a directory as a **vibe** project. Both
-the Claude Code command (`commands/init.md` → `/vibe:init`) and the cross-tool skill
-(`skills/vibe-init/SKILL.md`, exposed on Antigravity CLI and OpenAI Codex) execute
-this same procedure. The caller supplies one input — the workspace **mode**
-(`single` | `hub` | `spoke`), defaulting to `single`.
+The single source of truth for initializing a directory as a **vibe** project. The
+`init` skill (`skills/init/SKILL.md`) — plugin-namespaced to `/vibe:init` on Claude
+Code, Codex, and Antigravity — executes this procedure. The caller supplies one
+input — the workspace **mode** (`single` | `hub` | `spoke`), defaulting to `single`.
 
 First, confirm the target directory with the user if it is not empty or if any
 `vdesign/` or `docs/` already exists — do not overwrite existing artifacts; merge

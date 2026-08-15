@@ -25,7 +25,7 @@ are written once, and each tool gets a small always-on injector that reads the
 | **Role identities** | `agents/` (`software-expert`, `product-owner`) | Adopted by the main thread *or* delegated as subagents; each agent file is the single canonical role definition |
 | **Architectural principles** | `skills/architectural-principles/` | On-demand skill; full text in its `reference.md` |
 | **Agentic principles** | `skills/agentic-principles/` | On-demand skill; full text in its `reference.md` |
-| **Project initializer** | `commands/init.md` → `/vibe:init` (Claude); `skills/vibe-init/` (Antigravity, Codex) — shared `reference.md` | Slash command / skill |
+| **Project initializer** | `skills/init/` → `/vibe:init` (plugin-namespaced skill, identical on all tools) | Skill |
 | **Candidate patterns** | `proposals/` | Not adopted — awaiting validation |
 
 ## Install (Claude Code)
@@ -109,9 +109,9 @@ Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 >    on stdin, which the mode harness reads (falling back to `$PWD`).
 > 2. **`PreInvocation` re-injects** the spine each turn (Antigravity has no `SessionStart`). If that's too heavy, and Antigravity's `rules/` directory auto-loads, move the governance there as a lighter one-time load.
 >
-> The initializer **is** ported: Antigravity's documented plugin dirs are
-> `skills/`/`agents/`/`rules/` (no `commands/`), and skills auto-convert to slash
-> commands, so `/vibe:init` is available here as the `vibe-init` skill — see
+> The initializer is available here: Antigravity's documented plugin dirs are
+> `skills/`/`agents/`/`rules/` (no `commands/`), and it namespaces plugin skills, so
+> the `init` skill is invoked as `/vibe:init` — identical to every other tool. See
 > [Initialize a project](#initialize-a-project).
 
 ## Install (OpenAI Codex CLI)
@@ -192,16 +192,10 @@ hook-independent fallback.
 
 ## Initialize a project
 
-The initializer works on every tool, driven by one **mode** argument (`single` |
-`hub` | `spoke`, default `single`). How you invoke it differs because only Claude
-Code has a `commands/` slash-command loader — Antigravity and Codex expose the same
-logic as the `vibe-init` **skill** instead:
-
-| Tool | Invocation | Argument passing |
-|------|-----------|------------------|
-| Claude Code | `/vibe:init hub` (`commands/init.md`) | positional `$1` |
-| Antigravity CLI | `/vibe-init hub`, or just ask ("bootstrap a hub workspace here") | skill reads the mode word from your message |
-| OpenAI Codex CLI | `vibe-init` skill, or just ask | skill reads the mode word from your message |
+The initializer is a single plugin skill (`skills/init/`), driven by one **mode**
+argument (`single` | `hub` | `spoke`, default `single`). Because all three tools
+namespace plugin skills by the plugin name, it is invoked identically everywhere as
+**`/vibe:init`** — no per-tool split:
 
 ```
 /vibe:init            # single-repo (default)
@@ -210,15 +204,19 @@ logic as the `vibe-init` **skill** instead:
 /vibe:init spoke      # EXPERIMENTAL — multi-repo spoke (see proposals/)
 ```
 
+You can also just ask in natural language ("bootstrap a hub workspace here") — the
+skill triggers on its description.
+
 - **single** — scaffolds `vdesign/` (plan, checkpoint, constraints, env, utils) and
   `docs/` in the current repo.
 - **hub / spoke** — implement `proposals/hub-and-spoke-mode.md`, a CANDIDATE pattern
   that is **not yet adopted**. Use for validation only.
 
-> **Skills have no positional `$1`.** The `vibe-init` skill (`skills/vibe-init/`)
-> reads the mode word (`single`/`hub`/`spoke`) out of your invocation text and
-> defaults to `single`. Both the Claude command and the skill are thin wrappers over
-> one shared procedure (`skills/vibe-init/reference.md`) — one source, three tools.
+> **Skills have no positional `$1`.** The `init` skill (`skills/init/`) reads the mode
+> word (`single`/`hub`/`spoke`) out of your invocation text and defaults to `single`.
+> `SKILL.md` is a thin entry point over the shared procedure in
+> `skills/init/reference.md` — one source, three tools. The plugin namespace (`vibe:`)
+> keeps `/vibe:init` distinct from Claude's built-in bare `/init`.
 
 > **Candidate mode-aware harness.** The governance hooks read the workspace manifest in
 > the launch cwd (root `workspace.md`, or a repo's `vdesign/workspace.md`) and append the
@@ -254,8 +252,13 @@ logic as the `vibe-init` **skill** instead:
 
 `v0.1.0` tags the pre-plugin, embedded-`.vibe/` framework. `v0.2.0` is the first
 plugin form (Claude Code + Antigravity CLI). `v0.3.0` adds OpenAI Codex CLI and pi
-adapters. `v0.4.0` ports the `/vibe:init` initializer to a cross-tool `vibe-init`
-skill (Antigravity CLI + Codex, since neither loads Claude's `commands/`). `v0.4.1`
+adapters. `v0.4.0` ports the `/vibe:init` initializer to a cross-tool skill
+(Antigravity CLI + Codex, since neither loads Claude's `commands/`). `v0.4.1`
 fixes the Antigravity `PreInvocation` hook (flat schema, `injectSteps`/
 `ephemeralMessage` output contract, install-location-independent relative path) —
-verified firing live on the `agy` CLI.
+verified firing live on the `agy` CLI. `v0.5.0` collapses the initializer to a
+single plugin-namespaced `init` skill invoked as `/vibe:init` on all three tools
+(dropping the redundant Claude `commands/init.md`, since plugin skills namespace by
+plugin name on every tool) — a minor bump because it changes the external
+invocation contract (the former `vibe:vibe-init` skill and Claude `/vibe:init`
+command are gone).
