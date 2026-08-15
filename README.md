@@ -44,7 +44,7 @@ claude --plugin-dir /path/to/vibe
 
 ```
 /plugin marketplace add abbcdfin/.vibe
-/plugin install vibe@vibe-marketplace
+/plugin install vibe@uc-labs
 /reload-plugins
 ```
 
@@ -52,7 +52,7 @@ Or add the local clone instead of the remote:
 
 ```
 /plugin marketplace add /path/to/vibe
-/plugin install vibe@vibe-marketplace
+/plugin install vibe@uc-labs
 /reload-plugins
 ```
 
@@ -120,7 +120,7 @@ exposes `skills/` and bundles a `SessionStart` hook → `.codex-plugin/hooks.jso
 
 ```bash
 codex plugin marketplace add /path/to/vibe   # or:  codex plugin marketplace add abbcdfin/.vibe
-codex plugin add vibe@vibe
+codex plugin add vibe@uc-labs
 ```
 
 > **One-time trust review.** Installing a plugin does **not** auto-trust its hooks —

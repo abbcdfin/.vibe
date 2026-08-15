@@ -1,6 +1,6 @@
 {
-  "name": "vibe-marketplace",
-  "description": "The vibe coding framework, distributed as an installable Claude Code plugin.",
+  "name": "uc-labs",
+  "description": "UC Labs marketplace — home of the vibe coding framework and future Ubiquitous Computing tooling.",
   "owner": {
     "name": "Jian Zhang"
   },
