@@ -27,12 +27,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SPINE="$ROOT/vibe.md"
 [ -f "$SPINE" ] || { printf '{"injectSteps":[]}'; exit 0; }
 
-PREAMBLE="# Vibe Framework — Active Operating Governance
-The vibe framework is installed. The rules below are ALWAYS in effect for this session. Follow them.
-
----
-"
-FULL="$PREAMBLE$(cat "$SPINE")"
+FULL="$(cat "$SPINE")"
 
 # Resolve the user's workspace from the payload (cwd is the plugin dir, not the
 # project), so mode detection sees the real project. Fall back to $PWD.

@@ -15,17 +15,6 @@ ROOT="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 SPINE="$ROOT/vibe.md"
 [ -f "$SPINE" ] || { echo "vibe: governance spine not found at $SPINE" >&2; exit 0; }
 
-cat <<'EOF'
-# Vibe Framework — Active Operating Governance
-
-The vibe coding framework is installed. The rules below are ALWAYS in effect for
-this session. Follow them. The framework also ships selectable role identities
-(agents/), architectural & agentic principles (skills/), and a `/vibe:init`
-command to scaffold a project.
-
----
-EOF
-
 cat "$SPINE"
 
 # CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).

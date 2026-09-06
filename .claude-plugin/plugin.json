@@ -1,7 +1,7 @@
 {
   "name": "vibe",
   "displayName": "Vibe",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Vibe coding framework: always-on engineering governance, selectable role identities, architectural & agentic principles, and project initialization for single-repo or hub-and-spoke workspaces.",
   "author": {
     "name": "Jian Zhang"

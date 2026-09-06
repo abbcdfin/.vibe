@@ -173,7 +173,7 @@ Install from git (declared via this repo's `package.json` `"pi"` field):
 
 ```json
 // ~/.pi/agent/settings.json
-{ "packages": ["git:github.com/abbcdfin/.vibe@v0.4.0"] }
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.6.0"] }
 ```
 
 Or drop it in globally without a package manager:
@@ -261,4 +261,7 @@ single plugin-namespaced `init` skill invoked as `/vibe:init` on all three tools
 (dropping the redundant Claude `commands/init.md`, since plugin skills namespace by
 plugin name on every tool) — a minor bump because it changes the external
 invocation contract (the former `vibe:vibe-init` skill and Claude `/vibe:init`
-command are gone).
+command are gone). `v0.6.0` re-bases the spine on two axes — **where** an artifact
+lives (volatility) and **when** work advances (the DRAFT → ACCEPTED → BUILDING
+lifecycle) — adds an output-discipline section, and folds the injection preamble into
+`vibe.md` so all four adapters are pure transport wrappers over one file.

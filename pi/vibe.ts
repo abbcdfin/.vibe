@@ -22,12 +22,6 @@ import { dirname, join } from "node:path";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SPINE = join(HERE, "..", "vibe.md");
 
-const PREAMBLE = `# Vibe Framework — Active Operating Governance
-The vibe framework is installed. The rules below are ALWAYS in effect for this session. Follow them.
-
----
-`;
-
 export default function (pi: ExtensionAPI) {
   pi.on("before_agent_start", async (event) => {
     let spine: string;
@@ -36,7 +30,6 @@ export default function (pi: ExtensionAPI) {
     } catch {
       return {}; // spine missing — inject nothing rather than break startup
     }
-    const governance = `${PREAMBLE}${spine}`;
-    return { systemPrompt: `${event.systemPrompt}\n\n---\n\n${governance}` };
+    return { systemPrompt: `${event.systemPrompt}\n\n---\n\n${spine}` };
   });
 }

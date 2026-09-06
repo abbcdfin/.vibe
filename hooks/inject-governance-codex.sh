@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Vibe always-on governance injector — OpenAI Codex CLI variant.
 #
-# Registered as a STANDALONE SessionStart hook in ~/.codex/config.toml (or a
-# ~/.codex/hooks.json). It is NOT bundled inside the plugin: Codex's
-# `plugin_hooks` feature is removed, so plugin-bundled hooks do not fire — but
-# the standalone `hooks` feature is stable. See README (Install — Codex CLI).
+# Bundled in the plugin as a SessionStart hook (.codex-plugin/hooks.json), which
+# fires in Codex 0.146.0 after a one-time trust review. Also registerable as a
+# standalone hook in ~/.codex/config.toml for anyone who prefers not to trust a
+# bundled hook — same script, different wiring. See README (Install — Codex CLI).
 #
 # Codex SessionStart fires on startup/resume/clear/compact. The hook reads a JSON
 # payload on stdin and writes a JSON response on stdout; the string at
@@ -20,12 +20,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SPINE="$ROOT/vibe.md"
 [ -f "$SPINE" ] || { printf '{"continue":true}'; exit 0; }
 
-PREAMBLE="# Vibe Framework — Active Operating Governance
-The vibe framework is installed. The rules below are ALWAYS in effect for this session. Follow them.
-
----
-"
-FULL="$PREAMBLE$(cat "$SPINE")"
+FULL="$(cat "$SPINE")"
 
 # CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).
 # shellcheck source=lib-mode.sh

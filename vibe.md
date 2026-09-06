@@ -1,5 +1,8 @@
 # Vibe Operating Governance
 
+The vibe framework is installed; these rules are in effect for this session.
+Follow them.
+
 Two axes generate this document: **where** an artifact lives (by volatility) and
 **when** work advances (by lifecycle state). Everything below follows from one of them.
 
