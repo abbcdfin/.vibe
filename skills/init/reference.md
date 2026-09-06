@@ -14,7 +14,8 @@ or ask.
 Scaffold a standard single-repository vibe project. Create only what's missing:
 
 - `vdesign/plan.md` — interactive design board & roadmap. Seed with a title and an
-  empty checkbox list (`[ ]` Todo, `[/]` In Progress, `[x]` Done).
+  empty checkbox list (`[ ]` Todo, `[/]` In Progress, `[x]` Done), plus an
+  empty `## Candidates` section — the holding pen for unnumbered DRAFT ideas.
 - `vdesign/checkpoint.md` — volatile session memory. Seed with a "Next Steps" section.
 - `vdesign/constraints.md` — project-specific technical/business constraints (stub).
 - `vdesign/env.md` — setup, toolchains, env vars (stub).

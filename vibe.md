@@ -32,10 +32,15 @@ Please ask for confirmation if you are not sure where a new file belongs.
 
 ### Plan (`./vdesign/plan.md`)
 Use `plan.md` as the interactive design board and high-level roadmap.
+- **Idea Lifecycle (DRAFT → ACCEPTED → BUILDING):** A new idea enters a holding pen, not the roadmap.
+    * **DRAFT** — an unvalidated candidate. Park it **unnumbered** in a `## Candidates` section of `plan.md`, or in its own file under `./vdesign/proposals/` when it needs a real argument. A phase number is an ordering commitment — do not make it before the verdict, and rejecting a numbered draft leaves a hole to renumber around.
+    * **ACCEPTED** — the candidate has cleared a Decision Check Point. *Now* it becomes a numbered phase in `plan.md`, with its rationale recorded in `./docs/` per the Decision Making rules below.
+    * **BUILDING** — the active phase, and only the active phase, gets the granular JIT board in `active_plan.md`.
+    * **REJECTED** — record the verdict and its reason rather than deleting the draft, so the idea does not return unexamined in a later session.
 - **Status Tracking:** Use Markdown checkboxes: `[ ]` (Todo), `[/]` (In Progress), `[x]` (Done).
 - **Just-In-Time (JIT) Planning:** For the active phase, create a granular plan in `./vdesign/active_plan.md`. Do not detail future phases in the JIT plan.
 - **Summarize and Collapse:** Once a phase is finished, move a concise summary of the outcome to `plan.md` and delete/archive the tactical details from `active_plan.md`.
-- **Deferred Work:** When you consciously *defer* out-of-scope work you discover mid-phase, record it the moment you decide — as a scoped inline TODO if it is tied to a specific code location, or as a future phase in `plan.md` if it is a whole workstream — so it does not vanish when the JIT plan collapses.
+- **Deferred Work:** When you consciously *defer* out-of-scope work you discover mid-phase, record it the moment you decide — as a scoped inline TODO if it is tied to a specific code location, or as a DRAFT candidate in the holding pen if it is a whole workstream (it becomes a numbered phase only once accepted) — so it does not vanish when the JIT plan collapses.
 
 ### Checkpoint (`./vdesign/checkpoint.md`)
 Used strictly for volatile short-term memory and session handoffs.
