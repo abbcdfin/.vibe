@@ -4,7 +4,7 @@ This document outlines the foundational principles, design patterns, and archite
 
 ## 1. Architectural Foundation & Philosophy
 * **Generality Before Specialization (Graceful Degradation):** Start with a generic reasoning core supported by highly modular scaffolding. Decouple domain context from the operational logic (Prompt-as-Data). Only degrade into specialized, hardcoded architectures when operational constraints (e.g., strict determinism, ultra-low latency, or context window overload) demand it.
-* **Separation of Reasoning and Execution:** The Large Language Model (LLM) serves as the "cognitive engine" responsible for reasoning, planning, and proposing actions. The "harness" (the surrounding code infrastructure) is strictly responsible for executing those actions, managing state, and enforcing safety. The model should never directly execute code or access the filesystem without going through the harness.
+* **Separation of Reasoning and Execution:** The Large Language Model (LLM) serves as the "cognitive engine" responsible for reasoning, planning, and proposing actions. The "harness" (the surrounding code infrastructure) is strictly responsible for executing those actions, managing state, and enforcing safety. The LLM should never directly execute code or access the filesystem without going through the harness.
 * **The Agentic Loop:** Core systems should utilize a foundational "while-true" state loop: perceive the environment, update internal context, reason/plan, propose tool use, execute via harness, and repeat until the objective is met.
 
 ## 2. Core Workflow Patterns
@@ -15,12 +15,12 @@ Do not rely on a single monolithic prompt for complex tasks. Decompose workflows
 * **Prioritization:** Empower agents to autonomously rank tasks based on urgency, dependencies, and resource constraints.
 
 ## 3. Tool Use & Boundary Management
-* **Strict Tool Definition:** Equip the model with well-defined tools (functions, APIs) to interact with external environments. Tools are the *only* bridge between internal reasoning and external action.
+* **Strict Tool Definition:** Equip the LLM with well-defined tools (functions, APIs) to interact with external environments. Tools are the *only* bridge between internal reasoning and external action.
 * **Context as a Scarce Resource:** Implement progressive context management (e.g., multi-layered compaction pipelines). Only inject the precise data, API schemas, or business rules needed for the immediate task to prevent hallucination and context overload.
 
 ## 4. Cognitive Architecture & Resilience
 * **Planning:** Before executing complex tasks, agents must generate structured, multi-step plans. 
-* **Reflection & Self-Correction:** Implement "Generator-Critic" patterns (Self-Refine). An agent's initial output should rarely be the final output. Introduce a secondary evaluation step (either by the same model or a specialized critic agent) to verify factual accuracy, adherence to constraints, and logical soundness before returning results to the user.
+* **Reflection & Self-Correction:** Implement "Generator-Critic" patterns (Self-Refine). An agent's initial output should rarely be the final output. Introduce a secondary evaluation step (either by the same LLM or a specialized critic agent) to verify factual accuracy, adherence to constraints, and logical soundness before returning results to the user.
 * **Graceful Recovery:** The harness must handle tool failures, parsing errors, or API timeouts gracefully by returning the error state to the LLM, allowing the agent to reason about the failure and attempt alternative paths.
 
 ## 5. Multi-Agent Orchestration

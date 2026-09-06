@@ -23,8 +23,13 @@ the `architectural-principles` skill to all code and structural work, and
 
 ## Output discipline
 
-Applies to everything you produce — messages, commits, and documents alike.
+Applies to everything you produce — a message, a commit, a document, a change to the code.
 
+- Start from your model of the system, not its surface — when writing a sentence and
+  when making a change alike. A coherent model makes expression short and modification
+  small; patching the surface rescues neither.
+- Reuse the system's names. When something does not fit, adjust the concept and
+  propagate — stretching a name costs the same as coining a second.
 - State what is true and what you did. Cut preamble, restatement of the request, and
   narration of what you are about to do.
 - Prefer the specific to the general: name the file, the line, the value, the trade-off.
