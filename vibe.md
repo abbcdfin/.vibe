@@ -83,6 +83,10 @@ The axis is **state**. Work advances DRAFT → ACCEPTED → BUILDING → DONE, a
 
 Track state in `plan.md` with checkboxes: `[ ]` todo, `[/]` in progress, `[x]` done.
 
+**Build thin, then widen.** Inside a phase, make the narrowest end-to-end path work before
+making any part of it complete, and let unhandled cases fail loudly — those failures are
+the backlog. Apply the `agile-principles` skill to how a phase is built and sequenced.
+
 **Deferred work.** When you consciously defer something discovered mid-phase, record it
 the moment you decide — a scoped inline TODO if it is tied to a code location, a DRAFT
 candidate if it is a whole workstream — so it survives the collapse.

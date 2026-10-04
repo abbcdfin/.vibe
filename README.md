@@ -25,6 +25,7 @@ are written once, and each tool gets a small always-on injector that reads the
 | **Role identities** | `agents/` (`software-expert`, `product-owner`) | Adopted by the main thread *or* delegated as subagents; each agent file is the single canonical role definition |
 | **Architectural principles** | `skills/architectural-principles/` | On-demand skill; full text in its `reference.md` |
 | **Agentic principles** | `skills/agentic-principles/` | On-demand skill; full text in its `reference.md` |
+| **Agile method principles** | `skills/agile-principles/` | On-demand skill; the twelve Agile Manifesto principles plus this framework's method rules |
 | **Project initializer** | `skills/init/` → `/vibe:init` (plugin-namespaced skill, identical on all tools) | Skill |
 | **Candidate patterns** | `proposals/` | Not adopted — awaiting validation |
 
@@ -173,7 +174,7 @@ Install from git (declared via this repo's `package.json` `"pi"` field):
 
 ```json
 // ~/.pi/agent/settings.json
-{ "packages": ["git:github.com/abbcdfin/.vibe@v0.6.0"] }
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.7.0"] }
 ```
 
 Or drop it in globally without a package manager:
@@ -264,4 +265,8 @@ invocation contract (the former `vibe:vibe-init` skill and Claude `/vibe:init`
 command are gone). `v0.6.0` re-bases the spine on two axes — **where** an artifact
 lives (volatility) and **when** work advances (the DRAFT → ACCEPTED → BUILDING
 lifecycle) — adds an output-discipline section, and folds the injection preamble into
-`vibe.md` so all four adapters are pure transport wrappers over one file.
+`vibe.md` so all four adapters are pure transport wrappers over one file. `v0.7.0` adds `agile-principles`, a third
+on-demand skill covering **method** — how work is sequenced, built, and verified — beside
+the architectural (structure) and agentic (domain) sets: the twelve Agile Manifesto
+principles mapped onto the framework machinery that already discharges each, plus build
+thin then widen with fail-loud as its engine. The spine's Lifecycle points at it.
