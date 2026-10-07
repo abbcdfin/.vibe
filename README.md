@@ -174,7 +174,7 @@ Install from git (declared via this repo's `package.json` `"pi"` field):
 
 ```json
 // ~/.pi/agent/settings.json
-{ "packages": ["git:github.com/abbcdfin/.vibe@v0.7.0"] }
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.8.0"] }
 ```
 
 Or drop it in globally without a package manager:
@@ -269,4 +269,8 @@ lifecycle) — adds an output-discipline section, and folds the injection preamb
 on-demand skill covering **method** — how work is sequenced, built, and verified — beside
 the architectural (structure) and agentic (domain) sets: the twelve Agile Manifesto
 principles mapped onto the framework machinery that already discharges each, plus build
-thin then widen with fail-loud as its engine. The spine's Lifecycle points at it.
+thin then widen with fail-loud as its engine. The spine's Lifecycle points at it. `v0.8.0` renames the scaffolded
+`vdesign/env.md` to `dev_env.md` and scopes it to the development environment only — what
+the built system runs on belongs in `docs/architecture_design.md` or `constraints.md`. A
+minor bump because it changes a scaffolded filename; `/vibe:init` renames an existing
+`env.md` rather than creating a second file.
