@@ -1,6 +1,6 @@
 ---
 name: init
-description: Initialize the current directory as a vibe project — scaffold vdesign/ (plan, checkpoint, constraints, env) and docs/ stubs. Takes one architecture-mode argument — single (default), hub, or spoke — for multi-repository workspaces. Use whenever the user asks to initialize, scaffold, bootstrap, or set up a vibe project or workspace.
+description: Initialize the current directory as a vibe project — scaffold vdesign/ (plan, checkpoint, constraints, dev_env) and docs/ stubs. Takes one architecture-mode argument — single (default), hub, or spoke — for multi-repository workspaces. Use whenever the user asks to initialize, scaffold, bootstrap, or set up a vibe project or workspace.
 ---
 
 # Vibe Project Initializer

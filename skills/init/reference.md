@@ -7,7 +7,9 @@ input — the workspace **mode** (`single` | `hub` | `spoke`), defaulting to `si
 
 First, confirm the target directory with the user if it is not empty or if any
 `vdesign/` or `docs/` already exists — do not overwrite existing artifacts; merge
-or ask.
+or ask. If a `vdesign/env.md` exists from before the rename, rename it to
+`dev_env.md` rather than creating a second file — and move anything in it describing the
+*built system's* runtime out to `docs/architecture_design.md` or `constraints.md`.
 
 ## Mode: `single` (default)
 
@@ -18,7 +20,7 @@ Scaffold a standard single-repository vibe project. Create only what's missing:
   empty `## Candidates` section — the holding pen for unnumbered DRAFT ideas.
 - `vdesign/checkpoint.md` — volatile session memory. Seed with a "Next Steps" section.
 - `vdesign/constraints.md` — project-specific technical/business constraints (stub).
-- `vdesign/env.md` — the *development* environment: setup, toolchains, local paths, the
+- `vdesign/dev_env.md` — the *development* environment: setup, toolchains, local paths, the
   variables you need set to work here (stub). Not the built system's runtime environment —
   that is architecture or a constraint.
 - `vdesign/utils/.gitkeep` — home for exploratory/supportive scripts.

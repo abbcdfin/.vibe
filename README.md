@@ -208,7 +208,7 @@ namespace plugin skills by the plugin name, it is invoked identically everywhere
 You can also just ask in natural language ("bootstrap a hub workspace here") — the
 skill triggers on its description.
 
-- **single** — scaffolds `vdesign/` (plan, checkpoint, constraints, env, utils) and
+- **single** — scaffolds `vdesign/` (plan, checkpoint, constraints, dev_env, utils) and
   `docs/` in the current repo.
 - **hub / spoke** — implement `proposals/hub-and-spoke-mode.md`, a CANDIDATE pattern
   that is **not yet adopted**. Use for validation only.
