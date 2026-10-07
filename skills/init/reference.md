@@ -18,7 +18,9 @@ Scaffold a standard single-repository vibe project. Create only what's missing:
   empty `## Candidates` section — the holding pen for unnumbered DRAFT ideas.
 - `vdesign/checkpoint.md` — volatile session memory. Seed with a "Next Steps" section.
 - `vdesign/constraints.md` — project-specific technical/business constraints (stub).
-- `vdesign/env.md` — setup, toolchains, env vars (stub).
+- `vdesign/env.md` — the *development* environment: setup, toolchains, local paths, the
+  variables you need set to work here (stub). Not the built system's runtime environment —
+  that is architecture or a constraint.
 - `vdesign/utils/.gitkeep` — home for exploratory/supportive scripts.
 - `docs/` — create the directory; add `docs/product_specification.md` (What & Why)
   and `docs/architecture_design.md` (How) as brief stubs.

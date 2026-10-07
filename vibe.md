@@ -61,8 +61,11 @@ The `vdesign/` artifacts:
 - **`checkpoint.md`** — session memory for handoff. Update only on explicit instruction
   or a critical milestone, never for minor edits, and always leave a "Next Steps" section.
 - **`constraints.md`** — project-specific technical and business constraints.
-- **`env.md`** — setup, toolchains, environment variables, tool preferences. Default to
-  `uv` for Python (`uv run …`) unless this file says otherwise.
+- **`env.md`** — the **development** environment: setup, toolchains, local paths, and the
+  variables you need set to work here. Default to `uv` for Python (`uv run …`) unless this
+  file says otherwise. What the *built system* runs on is not this file — a deployment
+  target or a runtime variable is an engineering decision (`docs/architecture_design.md`)
+  or an imposed limit (`constraints.md`).
 
 ## Lifecycle
 
