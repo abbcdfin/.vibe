@@ -47,8 +47,8 @@ upgrade check that passed or caught a gap, and no tag moved afterwards.
 
 **Run 1 — this repo, v0.8.1.** The check, from 0.7.0, caught three gaps in the notes
 (listed in the release commit) and produced rule 2's channel clause: the `uc-labs`
-marketplace clones `main`, so pushing `main` publishes. Pending: tag, push, and confirm
-on the real install.
+marketplace clones `main`, so pushing `main` publishes. Tagged and pushed with `main`
+to both remotes, then confirmed by upgrading the real install from 0.7.0 to 0.8.1.
 
 ## Open questions
 
