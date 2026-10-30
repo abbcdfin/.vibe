@@ -1,0 +1,72 @@
+# Changelog
+
+What changed in each vibe release, newest first, for the people who install it. Update
+the plugin as your tool's section of the [README](README.md) describes; an **Upgrade**
+line names any further step a release needs. Versions follow
+[Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
+changes a feature, and a patch fixes one.
+
+## v0.8.1 — 2026-10-29
+
+- Release notes move here from the README.
+- The README's Claude Code update steps gain the missing
+  `claude plugin update vibe@uc-labs`; `marketplace update` alone leaves the old version.
+- The v0.8.0 entry gains the upgrade step it shipped without, and `/vibe:init` now
+  migrates an old `vdesign/env.md` by that step.
+- Adds `proposals/release-rules.md`, a candidate not yet in effect.
+
+## v0.8.0 — 2026-10-08
+
+- `vdesign/env.md` is renamed `vdesign/dev_env.md` and scoped to the development
+  environment: setup, toolchains, local paths, and the variables you set to work here.
+- **Upgrade:** in each project with a `vdesign/env.md`, rename it to `dev_env.md` —
+  `/vibe:init` does this. Then move out what describes the built system: a runtime
+  variable or deployment target to `docs/architecture_design.md`, an imposed limit to
+  `vdesign/constraints.md`, creating either file if the project lacks it. A variable
+  that is both, such as a URL you override to run locally, is defined in
+  `docs/architecture_design.md`; `dev_env.md` keeps only the value you set.
+
+## v0.7.0 — 2026-10-05
+
+- Adds the `agile-principles` skill, the method layer — how work is sequenced, built
+  and verified — beside the architectural (structure) and agentic (domain) skills. It
+  maps the twelve Agile Manifesto principles onto the framework machinery that
+  discharges each, and carries "build thin, then widen", with fail-loud as its engine.
+  The spine's Lifecycle points at it.
+
+## v0.6.0 — 2026-09-06
+
+- The spine is re-based on two axes: **where** an artifact lives (volatility) and
+  **when** work advances (the DRAFT → ACCEPTED → BUILDING → DONE lifecycle). Adds an
+  Output discipline section.
+- The injection preamble moves into `vibe.md`, so all four adapters are pure transport
+  over one file.
+
+## v0.5.0 — 2026-08-16
+
+- The initializer is a single plugin-namespaced `init` skill, invoked as `/vibe:init`
+  on Claude Code, Codex and Antigravity. Claude's `commands/init.md` is dropped.
+- **Upgrade:** invoke `/vibe:init` on every tool; the `vibe:vibe-init` skill is gone.
+
+## v0.4.1 — 2026-08-15
+
+- Fixes the Antigravity `PreInvocation` hook: flat schema, the `injectSteps` /
+  `ephemeralMessage` output contract, and a relative path that works from any install
+  location. Verified firing live on the `agy` CLI.
+
+## v0.4.0 — 2026-08-15
+
+- Ports the `/vibe:init` initializer to a cross-tool skill, for Antigravity and Codex,
+  which do not load Claude's `commands/`.
+
+## v0.3.0 — 2026-08-07
+
+- Adds OpenAI Codex CLI and pi adapters.
+
+## v0.2.0 — 2026-08-02
+
+- The first plugin form, for Claude Code and Antigravity CLI.
+
+## v0.1.0 — 2026-07-31
+
+- The pre-plugin framework, embedded in each repository as `.vibe/`.

@@ -7,9 +7,8 @@ input — the workspace **mode** (`single` | `hub` | `spoke`), defaulting to `si
 
 First, confirm the target directory with the user if it is not empty or if any
 `vdesign/` or `docs/` already exists — do not overwrite existing artifacts; merge
-or ask. If a `vdesign/env.md` exists from before the rename, rename it to
-`dev_env.md` rather than creating a second file — and move anything in it describing the
-*built system's* runtime out to `docs/architecture_design.md` or `constraints.md`.
+or ask. If a `vdesign/env.md` exists from before the rename, migrate it by the v0.8.0
+**Upgrade** step in the framework's `CHANGELOG.md` rather than creating a second file.
 
 ## Mode: `single` (default)
 

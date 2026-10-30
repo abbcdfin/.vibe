@@ -40,8 +40,7 @@ This repository is both the plugin (at its root) and a single-plugin marketplace
 claude --plugin-dir /path/to/vibe
 ```
 
-**B. Install persistently from the git remote** (recommended — updates via `git pull`
-+ `/plugin marketplace update`):
+**B. Install persistently from the git remote** (recommended):
 
 ```
 /plugin marketplace add abbcdfin/.vibe
@@ -56,6 +55,15 @@ Or add the local clone instead of the remote:
 /plugin install vibe@uc-labs
 /reload-plugins
 ```
+
+**Update** from a shell, then restart Claude Code (for a local clone, `git pull` first):
+
+```bash
+claude plugin marketplace update uc-labs
+claude plugin update vibe@uc-labs
+```
+
+Then take any **Upgrade** step in [CHANGELOG.md](CHANGELOG.md) since your version.
 
 **Verify:** start Claude Code in any repo — the vibe rules should be present in
 context, and `/vibe:init` should be available. Check the `/plugin` **Errors** tab if
@@ -174,7 +182,7 @@ Install from git (declared via this repo's `package.json` `"pi"` field):
 
 ```json
 // ~/.pi/agent/settings.json
-{ "packages": ["git:github.com/abbcdfin/.vibe@v0.8.0"] }
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.8.1"] }
 ```
 
 Or drop it in globally without a package manager:
@@ -249,28 +257,6 @@ skill triggers on its description.
   `inject-governance-codex.sh` but use different hook schemas (plugin nests events
   under `hooks:`; standalone keys them at top level).
 
-## Versioning
+## Releases
 
-`v0.1.0` tags the pre-plugin, embedded-`.vibe/` framework. `v0.2.0` is the first
-plugin form (Claude Code + Antigravity CLI). `v0.3.0` adds OpenAI Codex CLI and pi
-adapters. `v0.4.0` ports the `/vibe:init` initializer to a cross-tool skill
-(Antigravity CLI + Codex, since neither loads Claude's `commands/`). `v0.4.1`
-fixes the Antigravity `PreInvocation` hook (flat schema, `injectSteps`/
-`ephemeralMessage` output contract, install-location-independent relative path) —
-verified firing live on the `agy` CLI. `v0.5.0` collapses the initializer to a
-single plugin-namespaced `init` skill invoked as `/vibe:init` on all three tools
-(dropping the redundant Claude `commands/init.md`, since plugin skills namespace by
-plugin name on every tool) — a minor bump because it changes the external
-invocation contract (the former `vibe:vibe-init` skill and Claude `/vibe:init`
-command are gone). `v0.6.0` re-bases the spine on two axes — **where** an artifact
-lives (volatility) and **when** work advances (the DRAFT → ACCEPTED → BUILDING
-lifecycle) — adds an output-discipline section, and folds the injection preamble into
-`vibe.md` so all four adapters are pure transport wrappers over one file. `v0.7.0` adds `agile-principles`, a third
-on-demand skill covering **method** — how work is sequenced, built, and verified — beside
-the architectural (structure) and agentic (domain) sets: the twelve Agile Manifesto
-principles mapped onto the framework machinery that already discharges each, plus build
-thin then widen with fail-loud as its engine. The spine's Lifecycle points at it. `v0.8.0` renames the scaffolded
-`vdesign/env.md` to `dev_env.md` and scopes it to the development environment only — what
-the built system runs on belongs in `docs/architecture_design.md` or `constraints.md`. A
-minor bump because it changes a scaffolded filename; `/vibe:init` renames an existing
-`env.md` rather than creating a second file.
+What changed in each version, and any step an upgrade needs: [CHANGELOG.md](CHANGELOG.md).
