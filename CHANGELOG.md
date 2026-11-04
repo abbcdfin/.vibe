@@ -6,6 +6,11 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
+## Unreleased
+
+- The README's Antigravity section gains update steps (install again) and the staging
+  path Antigravity CLI 1.4.4 uses, `~/.gemini/config/plugins/vibe/`.
+
 ## v0.9.0 — 2026-11-04
 
 - Adopts increment progress units: persistent "done when", optional slices and tasks,

@@ -103,7 +103,10 @@ agy plugin install /path/to/vibe
 agy plugin list          # confirm it's staged & enabled
 ```
 
-Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
+Plugins stage at `~/.gemini/config/plugins/vibe/` (Antigravity CLI 1.4.4). The staged copy
+does not follow your clone: to **update**, `git pull`, then run the same
+`agy plugin install /path/to/vibe` again — it replaces the staged version in place. Then
+take any **Upgrade** step in [CHANGELOG.md](CHANGELOG.md) since your version.
 
 > **Verified against Antigravity's hook contract.** The `PreInvocation` wiring
 > follows the authoritative hooks reference (`agy-customizations/docs/hooks.md`):
