@@ -1,6 +1,12 @@
 ---
 name: agile-principles
-description: Apply when sequencing, building, or verifying work — deciding what to build first, how much of it, how a phase proceeds, whether to prototype, or how to grow a partial implementation. Covers the twelve Agile Manifesto principles and this framework's method rules: build thin then widen, fail loudly on unhandled cases, thin-and-end-to-end over thick-and-partial, and the spike/slice/demo distinction. Applies alongside architectural-principles, which governs structure rather than method.
+description: >-
+  Apply when sequencing, building, or verifying work — deciding what to build first,
+  how much of it, how an increment proceeds, whether to prototype, or how to grow a
+  partial implementation. Covers the twelve Agile Manifesto principles and this
+  framework's method rules: build thin then widen, fail loudly on unhandled cases,
+  thin-and-end-to-end over thick-and-partial, and the spike/slice/demo distinction.
+  Applies alongside architectural-principles, which governs structure rather than method.
 ---
 
 # Agile Method Principles
@@ -15,8 +21,8 @@ framework machinery, and the method rules. Read it and apply it.
 
 The core loop:
 
-1. **Build thin, then widen.** Make the narrowest end-to-end path work before making any
-   part of it complete.
+1. **Build thin, then widen.** For software work, make the narrowest end-to-end path work
+   before making any part of it complete; widen within the increment's "done when".
 2. **Fail loudly on the unhandled case.** Raise; never return a plausible default. The
    loud failures *are* the backlog that says what to widen next — this is the engine of
    the loop, not a style preference.

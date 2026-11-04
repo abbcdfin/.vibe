@@ -17,7 +17,8 @@
 # Working directory: Antigravity sets cwd to the directory containing hooks.json
 # (the plugin root), so the plugin's own files are addressed relative to "..".
 # The user's project is NOT cwd here — it arrives as `workspacePaths` on stdin,
-# which is what the mode harness keys off (falling back to $PWD).
+# which is what the mode harness keys off. cwd is never a fallback: it is the plugin
+# root, so a payload without a workspace gets the spine alone.
 set -euo pipefail
 
 # Capture the stdin JSON payload (contains workspacePaths, conversationId, ...).
@@ -29,18 +30,27 @@ SPINE="$ROOT/vibe.md"
 
 FULL="$(cat "$SPINE")"
 
-# Resolve the user's workspace from the payload (cwd is the plugin dir, not the
-# project), so mode detection sees the real project. Fall back to $PWD.
-WS=""
-if command -v jq >/dev/null 2>&1; then
-  WS="$(printf '%s' "$_stdin" | jq -r '.workspacePaths[0] // empty' 2>/dev/null || true)"
-fi
-[ -n "$WS" ] || WS="$PWD"
+# Resolve the user's workspace from the payload, with jq or, failing that, python3.
+_first_ws() {
+  if command -v jq >/dev/null 2>&1; then
+    jq -r '.workspacePaths[0] // empty' 2>/dev/null
+  else
+    python3 -c 'import json,sys
+try: print((json.load(sys.stdin).get("workspacePaths") or [""])[0])
+except Exception: pass' 2>/dev/null
+  fi
+}
+WS="$(printf '%s' "$_stdin" | _first_ws || true)"
 
 # CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).
 # shellcheck source=lib-mode.sh
 . "$ROOT/hooks/lib-mode.sh"
-_mode="$(vibe_detect_mode "$WS")"
+_mode=""
+if [ -n "$WS" ]; then
+  _mode="$(vibe_detect_mode "$WS")"
+else
+  echo "vibe: no workspacePaths in the PreInvocation payload; mode modules skipped" >&2
+fi
 _module="$(vibe_mode_module "$ROOT" "${_mode:-}")"
 if [ -n "$_module" ]; then
   FULL="$FULL

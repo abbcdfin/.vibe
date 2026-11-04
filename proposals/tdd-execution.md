@@ -2,7 +2,7 @@
 
 > **Status: CANDIDATE — not adopted.** This is a proposal awaiting validation, not an
 > active framework rule. Do **not** treat it as doctrine. It must be run manually on at
-> least one real task and pass a Decision Check Point before it graduates into the
+> least one real task and receive user acceptance before it graduates into the
 > framework (e.g. a `workflows/` file referenced by `vibe.md`).
 
 ## Motivation
@@ -11,15 +11,15 @@ A failing test is an **executable, objective contract**. For agentic work this s
 two hardest problems at once:
 
 1. **Verifiable completion** — green tests are a success signal, not a vibe. This
-   operationalizes the existing `vibe.md` directive that *each phase should be verifiable
-   so it can be properly completed*.
+   operationalizes the `vibe.md` requirement that an increment's accepted outcome is
+   verified before it reaches DONE.
 2. **Context hygiene for subagents** — the test contract is a compressed, unambiguous
    handoff. A fresh implementation subagent needs the contract, not the exploratory mess
    that produced it.
 
 ## Scope: when to use it (and when not)
 
-Test-first is a **phase-scoped tool**, not a universal default. Forcing it everywhere
+Test-first is an **increment-scoped tool**, not a universal default. Forcing it everywhere
 conflicts with **Minimal Mechanism (#6)**.
 
 * **Use it** for implementation work with a *knowable contract*: business logic, pure
@@ -30,6 +30,8 @@ conflicts with **Minimal Mechanism (#6)**.
   failing test for an interface you are still discovering.
 
 ## Workflow
+
+These are phases of this optional workflow, not the roadmap's increment units.
 
 | Phase | Who | Context State | Tooling / Output |
 |-------|-----|---------------|------------------|

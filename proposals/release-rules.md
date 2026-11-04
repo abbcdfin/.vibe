@@ -27,8 +27,8 @@
   ADR in `docs/` records them: the version scheme and what counts as breaking, the tagged
   branch, the channels consumers install from and the push that publishes to each, and
   where fixes for older lines go.
-- **When.** A release is an event, not a lifecycle state. It bundles phases already DONE,
-  and each phase's DONE summary in `plan.md` names the release that carried it.
+- **When.** A release is an event, not a lifecycle state. It bundles increments already
+  DONE, and publication adds the release to each increment's DONE summary in `plan.md`.
 
 ## Validation
 

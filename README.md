@@ -27,7 +27,7 @@ are written once, and each tool gets a small always-on injector that reads the
 | **Agentic principles** | `skills/agentic-principles/` | On-demand skill; full text in its `reference.md` |
 | **Agile method principles** | `skills/agile-principles/` | On-demand skill; the twelve Agile Manifesto principles plus this framework's method rules |
 | **Project initializer** | `skills/init/` → `/vibe:init` (plugin-namespaced skill, identical on all tools) | Skill |
-| **Candidate patterns** | `proposals/` | Not adopted — awaiting validation |
+| **Proposals** | `proposals/` | Candidates awaiting validation; adopted proposals point to their canonical guidance |
 
 ## Install (Claude Code)
 
@@ -115,7 +115,7 @@ Plugins stage at `~/.gemini/antigravity-cli/plugins/vibe/`.
 >    directory containing `hooks.json` (the plugin root), so `hooks.json` calls the
 >    script by the relative path `./hooks/inject-governance-agy.sh` — robust to any
 >    install location. The user's project isn't cwd; it arrives as `workspacePaths`
->    on stdin, which the mode harness reads (falling back to `$PWD`).
+>    on stdin, which the mode harness reads; without it, the spine is injected alone.
 > 2. **`PreInvocation` re-injects** the spine each turn (Antigravity has no `SessionStart`). If that's too heavy, and Antigravity's `rules/` directory auto-loads, move the governance there as a lighter one-time load.
 >
 > The initializer is available here: Antigravity's documented plugin dirs are
@@ -235,6 +235,8 @@ skill triggers on its description.
 
 ## Design notes
 
+- **Progress by increment.** Plans track bounded, verifiable improvements; working
+  boards use optional slices and tasks. See the [governance Lifecycle](vibe.md#lifecycle).
 - **Single source of truth.** Each principle's full text lives once, in its skill's
   `reference.md` (the `SKILL.md` is a thin entry point). Each role's definition lives
   once, in its `agents/*.md` file. The hook injects `vibe.md`. Nothing is duplicated.

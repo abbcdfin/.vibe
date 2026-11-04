@@ -2,7 +2,7 @@
 
 > **Status: CANDIDATE — not adopted.** This is a proposal awaiting validation, not an
 > active framework rule. Do **not** treat it as doctrine. It must be run manually on at
-> least one real multi-repository project and pass a Decision Check Point before it
+> least one real multi-repository project and receive user acceptance before it
 > graduates into the framework. Per [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md),
 > the graduation target is `modes/` (loaded by mode-dependent injection), **not** `vibe.md`.
 

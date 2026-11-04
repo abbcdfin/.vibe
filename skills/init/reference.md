@@ -14,9 +14,9 @@ or ask. If a `vdesign/env.md` exists from before the rename, migrate it by the v
 
 Scaffold a standard single-repository vibe project. Create only what's missing:
 
-- `vdesign/plan.md` — interactive design board & roadmap. Seed with a title and an
-  empty checkbox list (`[ ]` Todo, `[/]` In Progress, `[x]` Done), plus an
-  empty `## Candidates` section — the holding pen for unnumbered DRAFT ideas.
+- `vdesign/plan.md` — roadmap. Use the seed below: an empty increment list and a
+  holding pen for unnumbered DRAFT candidates. Add the optional IPD context only where
+  the project uses it; do not invent a phase or decision reference.
 - `vdesign/checkpoint.md` — volatile session memory. Seed with a "Next Steps" section.
 - `vdesign/constraints.md` — project-specific technical/business constraints (stub).
 - `vdesign/dev_env.md` — the *development* environment: setup, toolchains, local paths, the
@@ -26,6 +26,36 @@ Scaffold a standard single-repository vibe project. Create only what's missing:
 - `docs/` — create the directory; add `docs/product_specification.md` (What & Why)
   and `docs/architecture_design.md` (How) as brief stubs.
 - `README.md` — create only if absent (high-level vision / quick start stub).
+
+Seed `plan.md` with:
+
+```markdown
+# Plan
+
+<!-- Optional: IPD: <phase> (DCP <date>, <decision reference>). -->
+
+## Increments
+
+## Candidates
+```
+
+When an increment is accepted, add a numbered checkbox under `## Increments` with its
+outcome and "done when", or a reference to its definition in `docs/`. Group increments
+under headings if needed; do not nest them. Lifecycle rules live in `vibe.md`.
+
+Create `vdesign/active_plan.md` only when an increment enters BUILDING. Its seed is:
+
+```markdown
+# Increment <number> — <outcome>
+
+Done when: [increment <number> in the plan](plan.md#increments).
+
+- [ ] <task>
+```
+
+Tasks alone suffice for small increments. Add optional slice headings when integration
+points help organize the work. Point to the increment's "done when" rather than copying
+it onto the board, and remove the board when the increment reaches DONE.
 
 Do NOT create a `.vibe/` directory or add it to `.gitignore` — the framework is
 installed as a plugin, not embedded in the repo.
@@ -43,7 +73,8 @@ Run this in the workspace root / architecture ("hub") repo. Scaffold:
   hub: .            # this repo is the single source of truth
   spokes: []        # add each component repo path, e.g. [firmware/, mobile/, cloud/]
   ```
-- `plan.md` (repo root) — the cross-cutting, cross-stack roadmap.
+- `plan.md` (repo root) — the cross-cutting, cross-stack roadmap; use the increment
+  layout above.
 - `docs/contracts/` — the shared seams (schemas / API contracts). Add a README
   explaining that cross-boundary data structures are defined here FIRST, then
   consumed by spokes (never re-invented locally).

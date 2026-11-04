@@ -6,6 +6,19 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
+## Unreleased
+
+- Adopts increment progress units: persistent "done when", optional slices and tasks,
+  explicit scope boundaries, verification at DONE and release tracking after publication.
+- Increment acceptance is distinct from IPD Decision Check Points. IPD Lifecycle Phases
+  retain their names; increments use the activities appropriate to their outcome.
+- Updates governance, Agile guidance, initializer seeds and dependent proposals.
+- **Upgrade:** existing plans switch from phases to increments at their next increment;
+  DONE history stays as written. Keep each new increment's "done when" in `plan.md` or
+  a referenced specification, and have `active_plan.md` point to it.
+- Antigravity: when the hook payload names no workspace, the hook injects the spine alone
+  instead of reading the plugin's own directory for a workspace manifest.
+
 ## v0.8.1 — 2026-10-29
 
 - Release notes move here from the README.

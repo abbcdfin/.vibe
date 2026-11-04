@@ -36,12 +36,12 @@ the gap is usually smaller than it looks.
 
 | Principle | Discharged by |
 |---|---|
-| 1, 3, 7 — early, frequent, working software is the measure | **Build thin, then widen** (below); the Lifecycle's one-phase-at-a-time rule |
-| 2 — welcome late change | The Lifecycle's holding pen: an unnumbered DRAFT costs nothing to reorder, and a phase number is withheld until a verdict |
+| 1, 3, 7 — early, frequent, working software is the measure | **Build thin, then widen** (below); the Lifecycle's one-increment-at-a-time rule |
+| 2 — welcome late change | The Lifecycle's holding pen: an unnumbered DRAFT costs nothing to reorder, and an increment number is withheld until acceptance |
 | 4 — business and developers together daily | `product-owner` and `software-expert` as two roles with a declared seam, and Decision making rules 2–3 (ask with options rather than assume) |
 | 9 — technical excellence | `architectural-principles` #7 Resist Entropy |
 | 10 — maximize work not done | `architectural-principles` #6 Minimal Mechanism, YAGNI |
-| 12 — reflect and adjust | DONE collapses a phase into an outcome summary; a rejected DRAFT is recorded with its reason |
+| 12 — reflect and adjust | DONE collapses an increment into an outcome and verification summary; a rejected DRAFT is recorded with its reason |
 | 5, 6, 8, 11 — team, pace, conversation, self-organization | **Not framework concerns.** They govern how humans organize, not how an agent works. Do not simulate them |
 
 Principle 6 deserves a note in an agent context: the nearest honest equivalent is asking
@@ -52,8 +52,11 @@ substitute a long document for a short question.
 
 ### Build thin, then widen
 
-Inside a phase, make the narrowest end-to-end path work before making any part of it
-complete. Then widen, one case at a time.
+Inside a software increment, make the narrowest end-to-end path work before making any
+part of it complete. Then widen, one case at a time, within its "done when". The
+governance Lifecycle defines acceptance, scope changes and the handling of findings.
+Configuration and documentation work use the activities and verification they need;
+they do not have to simulate software development phases.
 
 - **An unhandled case must fail loudly.** Raise — `NotImplementedError`, an assertion, a
   default branch that errors. Never return a plausible default, never a catch-all that
@@ -69,12 +72,13 @@ complete. Then widen, one case at a time.
 
 ### Thin and end-to-end over thick and partial
 
-Where a phase has the choice, the first increment runs the narrowest path through *every*
-layer; later phases thicken it. Completing one component at a time defers all integration
-risk to the end, where it costs most.
+Where a software increment spans layers, its first slice runs the narrowest path through
+*every* layer; later slices thicken it up to its "done when". Work outside that boundary
+is a candidate for another increment unless the user accepts a scope change. Completing
+one component at a time defers all integration risk to the end, where it costs most.
 
 This pairs with "Simple Now, Flexible Later" (`architectural-principles`): the slice is
-the simple implementation, and clean seams are what let later phases thicken it by
+the simple implementation, and clean seams are what let later slices thicken it by
 extension rather than rewrite.
 
 ### Three things called "a prototype"
@@ -85,10 +89,10 @@ technical question and is then discarded (the XP sense).
 
 | | **Spike** | **Thin slice** | **Demo** |
 |---|---|---|---|
-| Purpose | Answer one technical question | Deliver the first increment | Elicit what to build |
+| Purpose | Answer one technical question | Make the increment's first working, end-to-end version | Elicit what to build |
 | Lifespan | Throwaway by definition | Kept and grown | Throwaway |
 | Output | A finding | Running software | Requirements |
-| Place in development | Before a phase is accepted | How a BUILDING phase proceeds | Before any DRAFT exists |
+| Place in development | Before an increment is accepted | How a BUILDING software increment proceeds | Before any DRAFT exists |
 | Owner | `software-expert` | `software-expert` | `product-owner` (IPD Concept) |
 | Home | `vdesign/utils/` | the production tree | — |
 
@@ -105,7 +109,7 @@ answers the question:
 - **It lives in `vdesign/utils/`**, exempt from the architectural standards — which is
   exactly why it must not survive.
 - **Its output is a finding,** recorded with the DRAFT. The code is not the deliverable.
-- **No silent promotion.** To keep the code, accept a phase whose scope includes bringing
+- **No silent promotion.** To keep the code, accept an increment whose scope includes bringing
   it to standard. Promotion requires the gate, never inertia.
 - **Fail loudly while probing.** A probe that stubs its hard cases with plausible values
   answers nothing — the faked case is usually the one that decides the verdict.
@@ -116,6 +120,6 @@ answers the question:
   `constraints.md`, the README. A probe is for an unknown, not for unread context.
 - **As a substitute for a decision.** If the blocker is an unmade choice, make it or ask.
   Building something is not a way to avoid deciding.
-- **Thin-slicing, when there are no layers to slice through** or a phase is genuinely one
+- **Thin-slicing, when there are no layers to slice through** or an increment is genuinely one
   component deep.
 - **Fail-loud at a trust boundary.** See "validate at the edge" above.
