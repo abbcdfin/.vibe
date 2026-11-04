@@ -6,7 +6,7 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
-## Unreleased
+## v0.9.0 — 2026-11-04
 
 - Adopts increment progress units: persistent "done when", optional slices and tasks,
   explicit scope boundaries, verification at DONE and release tracking after publication.
@@ -16,6 +16,8 @@ changes a feature, and a patch fixes one.
 - **Upgrade:** existing plans switch from phases to increments at their next increment;
   DONE history stays as written. Keep each new increment's "done when" in `plan.md` or
   a referenced specification, and have `active_plan.md` point to it.
+- The README gains Codex update steps: install the plugin again, after
+  `codex plugin marketplace upgrade uc-labs` for the Git marketplace.
 - Antigravity: when the hook payload names no workspace, the hook injects the spine alone
   instead of reading the plugin's own directory for a workspace manifest.
 

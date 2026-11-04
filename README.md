@@ -139,6 +139,16 @@ codex plugin marketplace add /path/to/vibe   # or:  codex plugin marketplace add
 codex plugin add vibe@uc-labs
 ```
 
+**Update** by installing again, then restart Codex. For a local clone, `git pull` first;
+for the Git marketplace, refresh its snapshot first:
+
+```bash
+codex plugin marketplace upgrade uc-labs   # Git marketplace only
+codex plugin add vibe@uc-labs
+```
+
+Then take any **Upgrade** step in [CHANGELOG.md](CHANGELOG.md) since your version.
+
 > **One-time trust review.** Installing a plugin does **not** auto-trust its hooks —
 > Codex skips a bundled hook until you review and trust it (by hash). On first
 > interactive `codex` you'll be prompted to trust the vibe `SessionStart` hook;
@@ -182,7 +192,7 @@ Install from git (declared via this repo's `package.json` `"pi"` field):
 
 ```json
 // ~/.pi/agent/settings.json
-{ "packages": ["git:github.com/abbcdfin/.vibe@v0.8.1"] }
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.9.0"] }
 ```
 
 Or drop it in globally without a package manager:
