@@ -1,5 +1,5 @@
 <!-- DRAFT — CANDIDATE, not adopted. Injected by the mode-aware hook harness to
-     validate proposals/hub-and-spoke-mode.md. Not framework doctrine. -->
+     validate the vibe framework's hub-and-spoke proposal. Not framework doctrine. -->
 
 # Workspace Mode: HUB (candidate)
 

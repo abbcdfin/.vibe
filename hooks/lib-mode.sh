@@ -1,11 +1,11 @@
 # Shared mode detection for the vibe governance hooks.
 #
-# CANDIDATE / validation harness for proposals/hub-and-spoke-mode.md. This lets the
-# always-on hook append a draft modes/<mode>.md module based on the workspace manifest
-# in the launch cwd. Not adopted framework doctrine.
+# CANDIDATE / validation harness for the hub-and-spoke proposal. This lets the always-on
+# hook append a draft modes/<mode>.md module based on the workspace manifest in the
+# launch cwd. Not adopted framework doctrine.
 #
-# Sourced by hooks/inject-governance.sh (Claude Code) and
-# hooks/inject-governance-agy.sh (Antigravity CLI). Keeps detection single-sourced.
+# Sourced by hooks/inject-governance.sh (Claude Code), inject-governance-codex.sh (Codex)
+# and inject-governance-agy.sh (Antigravity CLI). Keeps detection single-sourced.
 
 # Echo the active mode (workspace|hub|spoke) for the given cwd, or nothing (single).
 vibe_detect_mode() {

@@ -3,7 +3,7 @@
 > **Status: CANDIDATE — not adopted.** This is a proposal awaiting validation, not an
 > active framework rule. Do **not** treat it as doctrine. It must be run manually on at
 > least one real multi-repository project and receive user acceptance before it
-> graduates into the framework. Per [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md),
+> graduates into the framework. Per [ADR 0001](../../docs/adr/0001-mode-specific-rules-via-injection.md),
 > the graduation target is `modes/` (loaded by mode-dependent injection), **not** `vibe.md`.
 
 ## Motivation
@@ -133,7 +133,7 @@ a replacement.
 
 *Does the agent reliably know which mode and scope it is in?*
 
-**Resolved by [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md):**
+**Resolved by [ADR 0001](../../docs/adr/0001-mode-specific-rules-via-injection.md):**
 mode awareness is delivered as **always-on hook-injected governance**, not left to a
 discretionary read. The `SessionStart` hook reads the workspace manifest in the launch
 cwd (the root `workspace.md`, or a repo's `vdesign/workspace.md`) and appends the
@@ -175,7 +175,7 @@ routes to the hub.
 
 ## Graduation criteria
 
-Promote out of `proposals/` **into `modes/`** (per [ADR 0001](../docs/adr/0001-mode-specific-rules-via-injection.md);
+Promote out of `proposals/` **into `modes/`** (per [ADR 0001](../../docs/adr/0001-mode-specific-rules-via-injection.md);
 the operational rules become `modes/workspace.md` + `modes/hub.md` + `modes/spoke.md`,
 with a small mode-agnostic pointer added to `vibe.md`) only after:
 

@@ -41,22 +41,30 @@ Applies to everything you produce — a message, a commit, a document, a change 
 
 The axis is **volatility**.
 
-- **`./vdesign/` — volatile.** The active process: planning, session memory, local
-  context. Expect it to churn and be collapsed.
-- **`./docs/` — stable.** Outcomes that outlive the work: specifications, architecture,
-  decisions and their rationale.
+- **`./vdesign/` — volatile.** The active process: planning, proposals, session memory,
+  local context. Expect it to churn and be collapsed.
+- **`./docs/` — stable.** Outcomes that outlive the work.
 - **`README.md` — the front door.** Vision, summary, quick start.
 
-Inside `docs/`, the secondary split is audience: `product_specification.md` (what & why
-— workflows, features, business logic) and `architecture_design.md` (how — stack,
-structure, engineering decisions). Keep filenames descriptive and the directory flat;
-add subdirectories (`docs/adr/`, `docs/knowledge/`) and an index only once it outgrows
-roughly five files. Exploratory or throwaway scripts belong in `./vdesign/utils/`, never
-in the production tree.
+`docs/` holds two kinds of document:
+
+- **Design documents** describe the system as currently designed and change with it:
+  `product_specification.md` (what & why — workflows, features, business logic) and
+  `architecture_design.md` (how — stack, structure, mechanisms).
+- **Decision records** (ADRs), `docs/adr/NNNN-<slug>.md`, each keep one decision as made —
+  context, choice, rejected alternatives, consequences — and are superseded, never
+  rewritten. Write one when alternatives were weighed and the choice is hard to reverse;
+  otherwise put the rationale in the design document the decision shapes.
+
+Keep filenames descriptive and `docs/` otherwise flat; add a subdirectory
+(`docs/knowledge/`) and an index only once it outgrows roughly five files. Exploratory or
+throwaway scripts belong in `./vdesign/utils/`, never in the production tree.
 
 The `vdesign/` artifacts:
 
 - **`plan.md`** — the roadmap and the holding pen for candidates. See Lifecycle.
+- **`proposals/`** — the argument for a candidate that needs more than a line. See
+  Lifecycle.
 - **`active_plan.md`** — the granular board for the increment under construction, nothing else.
 - **`checkpoint.md`** — session memory for handoff. Update only on explicit instruction
   or an increment reaching DONE, or a release; always leave a "Next Steps" section.
@@ -75,24 +83,27 @@ used as needed, and every increment gets the verification its outcome calls for.
 
 The axis is **state**. Increments advance DRAFT → ACCEPTED → BUILDING → DONE, and skip nothing.
 
-- **DRAFT** — an unvalidated candidate. Park it **unnumbered** under `## Candidates` in
-  `plan.md`, or in its own file under `./vdesign/proposals/` when it needs a real
-  argument. An increment number is an ordering commitment: do not make it before the verdict,
-  and rejecting a numbered draft leaves a hole to renumber around.
+- **DRAFT** — an unvalidated candidate, listed **unnumbered** under `## Candidates` in
+  `plan.md`. When it needs a real argument, the line links to its **proposal** in
+  `./vdesign/proposals/`. An increment number is an ordering commitment: do not make it
+  before the verdict, and rejecting a numbered draft leaves a hole to renumber around.
 - **ACCEPTED** — the candidate cleared **acceptance**: prepared by `product-owner`,
   decided by the user. IPD Decision Check Points are separate gates. *Now* it becomes a
   numbered increment in `plan.md`, with its **"done when"** written there or linked to its
-  definition in `docs/`, and the features it delivers, if any.
+  definition in `docs/`, and the features it delivers, if any. A proposal's decision goes
+  to `docs/` (Decision making, rule 4); the proposal stays until DONE.
 - **BUILDING** — one increment at a time. Only that increment gets the granular board in
   `active_plan.md`, which points to its "done when" rather than restating it. Tasks are
   commit-sized checkboxes; optional **slice** headings mark integration points. A software
   slice leaves the product working and integrated; other work ends with a verifiable
   deliverable. Tasks alone suffice for small increments.
-- **DONE** — verify "done when", record a concise outcome and verification summary in
-  `plan.md`, then delete the board. Checked tasks alone do not establish completion, and
+- **DONE** — verify "done when", bring the design documents in line with the result, and
+  record a concise outcome and verification summary in `plan.md`; then delete the board and
+  the increment's proposal, if any. Checked tasks alone do not establish completion, and
   DONE does not wait for a release.
-- **REJECTED** — record the verdict and its reason rather than deleting the draft, so the
-  idea does not return unexamined in a later session.
+- **REJECTED** — record the verdict and its reason on the candidate line and atop any
+  proposal, rather than deleting the draft, so the idea does not return unexamined in a
+  later session.
 
 Track increments in `plan.md` with checkboxes — `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE —
 grouped under headings, never nested. Slices and tasks use plain checkboxes. Feature
@@ -127,5 +138,5 @@ Apply in order:
    An answer the user already gave to the same question stands; do not ask it again.
 3. **Offer options, not a blank prompt.** Frame the question as concrete choices with
    their trade-offs.
-4. **Record it.** Once answered, write the decision and its rationale into `./docs/` —
-   updating a design document or adding an ADR — before proceeding.
+4. **Record it.** Once answered, write the decision and its rationale into `./docs/` (see
+   *Where things live*) before proceeding.

@@ -3,7 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-08-01
 - **Deciders:** Jian Zhang
-- **Related:** [`proposals/hub-and-spoke-mode.md`](../../proposals/hub-and-spoke-mode.md)
+- **Related:** [`proposals/hub-and-spoke-mode.md`](../../vdesign/proposals/hub-and-spoke-mode.md)
 
 ## Context
 

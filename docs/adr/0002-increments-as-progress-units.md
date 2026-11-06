@@ -3,7 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-11-04
 - **Decider:** Jian Zhang
-- **Related:** [Progress Units proposal](../../proposals/progress-units.md)
+- **Related:** Progress Units proposal, drafted in `25cb943` and revised in `85b20c0`
 
 ## Context
 

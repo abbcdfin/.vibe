@@ -23,8 +23,10 @@ Scaffold a standard single-repository vibe project. Create only what's missing:
   variables you need set to work here (stub). Not the built system's runtime environment —
   that is architecture or a constraint.
 - `vdesign/utils/.gitkeep` — home for exploratory/supportive scripts.
-- `docs/` — create the directory; add `docs/product_specification.md` (What & Why)
-  and `docs/architecture_design.md` (How) as brief stubs.
+- `docs/` — create the directory; add the design documents
+  `docs/product_specification.md` (what & why) and `docs/architecture_design.md` (how) as
+  brief stubs. Create `docs/adr/` with the first decision record, and
+  `vdesign/proposals/` with the first proposal — not before.
 - `README.md` — create only if absent (high-level vision / quick start stub).
 
 Seed `plan.md` with:
@@ -62,8 +64,8 @@ installed as a plugin, not embedded in the repo.
 
 ## Mode: `hub` (EXPERIMENTAL — candidate proposal)
 
-> This mode implements `proposals/hub-and-spoke-mode.md`, which is a CANDIDATE and
-> not yet adopted. Tell the user it is experimental before scaffolding.
+> This mode implements the vibe framework's hub-and-spoke proposal, which is a
+> CANDIDATE and not yet adopted. Tell the user it is experimental before scaffolding.
 
 Run this in the workspace root / architecture ("hub") repo. Scaffold:
 

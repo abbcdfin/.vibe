@@ -10,12 +10,14 @@ The design is **one source, N thin adapters**: `vibe.md` + `skills/` + `agents/`
 are written once, and each tool gets a small always-on injector that reads the
 *same* `vibe.md`. Adding a tool is just writing that adapter.
 
-| Tool | Always-on mechanism | Adapter | Confidence |
-|------|---------------------|---------|------------|
-| Claude Code | `SessionStart` hook (stdout) | `hooks/inject-governance.sh` | Tested |
-| OpenAI Codex CLI | plugin-bundled `SessionStart` hook (JSON `additionalContext`) | `.codex-plugin/` + `hooks/inject-governance-codex.sh` | Tested (Codex 0.146.0) |
-| Antigravity CLI | `PreInvocation` hook (JSON `injectSteps`/`ephemeralMessage`) | `hooks/inject-governance-agy.sh` | Tested (agy CLI) |
-| pi | `before_agent_start` extension (`systemPrompt`) | `pi/vibe.ts` | Best-effort |
+| Tool | Confidence |
+|------|------------|
+| Claude Code | Tested |
+| OpenAI Codex CLI | Tested (Codex 0.146.0) |
+| Antigravity CLI | Tested (agy CLI) |
+| pi | Best-effort |
+
+How each adapter works, and why: [architecture design](docs/architecture_design.md).
 
 ## What's in the plugin
 
@@ -27,7 +29,6 @@ are written once, and each tool gets a small always-on injector that reads the
 | **Agentic principles** | `skills/agentic-principles/` | On-demand skill; full text in its `reference.md` |
 | **Agile method principles** | `skills/agile-principles/` | On-demand skill; the twelve Agile Manifesto principles plus this framework's method rules |
 | **Project initializer** | `skills/init/` → `/vibe:init` (plugin-namespaced skill, identical on all tools) | Skill |
-| **Proposals** | `proposals/` | Candidates awaiting validation; adopted proposals point to their canonical guidance |
 
 ## Install (Claude Code)
 
@@ -222,8 +223,8 @@ namespace plugin skills by the plugin name, it is invoked identically everywhere
 ```
 /vibe:init            # single-repo (default)
 /vibe:init single
-/vibe:init hub        # EXPERIMENTAL — multi-repo hub (see proposals/)
-/vibe:init spoke      # EXPERIMENTAL — multi-repo spoke (see proposals/)
+/vibe:init hub        # EXPERIMENTAL — multi-repo hub
+/vibe:init spoke      # EXPERIMENTAL — multi-repo spoke
 ```
 
 You can also just ask in natural language ("bootstrap a hub workspace here") — the
@@ -231,8 +232,8 @@ skill triggers on its description.
 
 - **single** — scaffolds `vdesign/` (plan, checkpoint, constraints, dev_env, utils) and
   `docs/` in the current repo.
-- **hub / spoke** — implement `proposals/hub-and-spoke-mode.md`, a CANDIDATE pattern
-  that is **not yet adopted**. Use for validation only.
+- **hub / spoke** — implement the [hub-and-spoke proposal](vdesign/proposals/hub-and-spoke-mode.md),
+  a CANDIDATE pattern that is **not yet adopted**. Use for validation only.
 
 > **Skills have no positional `$1`.** The `init` skill (`skills/init/`) reads the mode
 > word (`single`/`hub`/`spoke`) out of your invocation text and defaults to `single`.
@@ -246,31 +247,12 @@ skill triggers on its description.
 > exists to *validate* the hub-and-spoke proposal — `modes/*.md` are DRAFT, not adopted
 > doctrine. Single-repo projects have no manifest, so nothing extra is injected.
 
-## Design notes
+## Design
 
-- **Progress by increment.** Plans track bounded, verifiable improvements; working
-  boards use optional slices and tasks. See the [governance Lifecycle](vibe.md#lifecycle).
-- **Single source of truth.** Each principle's full text lives once, in its skill's
-  `reference.md` (the `SKILL.md` is a thin entry point). Each role's definition lives
-  once, in its `agents/*.md` file. The hook injects `vibe.md`. Nothing is duplicated.
-- **Why the spine is a hook, not a skill.** Governance must be *always-on*; skills
-  load only on-demand. A skill spine would silently fail to fire. See the git
-  history and `proposals/` for the reasoning.
-- **Four tools, one source.** Every adapter reads the *same* `vibe.md` and reuses the
-  same candidate mode harness (`hooks/lib-mode.sh`) where it applies. The adapters
-  differ only in how each tool takes always-on context: Claude Code and Codex use a
-  `SessionStart` hook, Antigravity a `PreInvocation` hook, pi a `before_agent_start`
-  extension. `skills/` and `agents/` are Markdown shared verbatim across the tools
-  that support them. Codex and Claude are tested; Antigravity and pi are best-effort
-  pending live tests — see each install section's caveats.
-- **Codex ships as a plugin (bundled hook), with a standalone fallback.** Plugin-
-  bundled `SessionStart` hooks *do* fire in Codex 0.146.0 (tested); the `plugin_hooks`
-  feature reading `removed` means the flag graduated to standard, not that the
-  capability was pulled. Bundled hooks require a one-time trust review, so a
-  hand-registered standalone `config.toml` hook is documented as the fallback for
-  anyone who prefers not to trust a bundled hook. Both paths run the same
-  `inject-governance-codex.sh` but use different hook schemas (plugin nests events
-  under `hooks:`; standalone keys them at top level).
+What vibe provides is specified in [docs/product_specification.md](docs/product_specification.md),
+how it is built in [docs/architecture_design.md](docs/architecture_design.md), and why
+in the [decision records](docs/adr/). Work in progress and candidate proposals are in the
+[plan](vdesign/plan.md).
 
 ## Releases
 

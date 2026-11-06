@@ -25,5 +25,5 @@ Read `reference.md` alongside this file and follow the procedure for the resolve
 mode exactly. It is the single source of truth for the scaffolding steps — do not
 re-derive them here.
 
-`hub` and `spoke` are EXPERIMENTAL candidate patterns (`proposals/hub-and-spoke-mode.md`,
-not yet adopted); tell the user so before scaffolding them.
+`hub` and `spoke` are EXPERIMENTAL candidate patterns (the vibe framework's hub-and-spoke
+proposal, not yet adopted); tell the user so before scaffolding them.
