@@ -10,15 +10,17 @@ changes a feature, and a patch fixes one.
 
 - `docs/` holds two kinds of document: **design documents**, which describe the system as
   currently designed and change with it, and **decision records** (ADRs) in `docs/adr/`,
-  dated and superseded rather than rewritten. Write an ADR only when alternatives were
-  weighed and the choice is hard to reverse; otherwise put the rationale in the design
-  document the decision shapes.
+  dated and superseded rather than rewritten — upkeep is limited to status, supersession
+  links and repaired references. Write an ADR only when alternatives were weighed and the
+  choice is hard to reverse; otherwise put the rationale in the design document the
+  decision shapes. A design document marks accepted but unbuilt parts as pending.
 - Every candidate is listed in `plan.md`; a proposal in `vdesign/proposals/` is the
   argument its line links to. An accepted proposal's decision goes to `docs/`; the
   proposal is deleted when its increment is DONE, which now includes bringing the design
-  documents in line with the result.
+  documents in line with the result. Links to a proposal are repointed before it goes.
 - **Upgrade:** list any proposal missing from `## Candidates` in `plan.md`. For a proposal
-  whose increment is already DONE, make sure its decision is in `docs/`, then delete it.
+  whose increment is already DONE, make sure its decision is in `docs/`, repoint links to
+  it at that document or a Git revision, then delete it.
 - This repository follows the same rules: its proposals move to `vdesign/proposals/`, and
   the README's design notes to `docs/architecture_design.md`.
 - The README's Antigravity section gains update steps (install again) and the staging

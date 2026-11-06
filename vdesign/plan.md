@@ -33,7 +33,9 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   `docs/architecture_design.md`. Verified: the Claude Code, Codex and Antigravity hooks
   inject `vibe.md` byte for byte and a hub manifest still appends its module; `pi/vibe.ts`
   is unchanged and was not run. Both plugin validators, all local Markdown links
-  and anchors, and `git diff --check` pass. Unreleased.
+  and anchors, and `git diff --check` pass. A peer review then added link repair before a
+  proposal's deletion, the limits of ADR upkeep and pending marks for unbuilt design.
+  Unreleased.
 
 ## Candidates
 

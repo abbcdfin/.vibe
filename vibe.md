@@ -50,11 +50,13 @@ The axis is **volatility**.
 
 - **Design documents** describe the system as currently designed and change with it:
   `product_specification.md` (what & why — workflows, features, business logic) and
-  `architecture_design.md` (how — stack, structure, mechanisms).
+  `architecture_design.md` (how — stack, structure, mechanisms). Mark a part accepted but
+  not yet built as pending, naming its increment; DONE removes the mark.
 - **Decision records** (ADRs), `docs/adr/NNNN-<slug>.md`, each keep one decision as made —
-  context, choice, rejected alternatives, consequences — and are superseded, never
-  rewritten. Write one when alternatives were weighed and the choice is hard to reverse;
-  otherwise put the rationale in the design document the decision shapes.
+  context, choice, rejected alternatives, consequences. That record is never rewritten: a
+  later ADR supersedes it, and upkeep is limited to status, supersession links and
+  repaired references. Write one when alternatives were weighed and the choice is hard to
+  reverse; otherwise put the rationale in the design document the decision shapes.
 
 Keep filenames descriptive and `docs/` otherwise flat; add a subdirectory
 (`docs/knowledge/`) and an index only once it outgrows roughly five files. Exploratory or
@@ -99,8 +101,9 @@ The axis is **state**. Increments advance DRAFT → ACCEPTED → BUILDING → DO
   deliverable. Tasks alone suffice for small increments.
 - **DONE** — verify "done when", bring the design documents in line with the result, and
   record a concise outcome and verification summary in `plan.md`; then delete the board and
-  the increment's proposal, if any. Checked tasks alone do not establish completion, and
-  DONE does not wait for a release.
+  any proposal, first repointing links to it at the design document, ADR or Git revision
+  that replaces it. Checked tasks alone do not establish completion, and DONE does not
+  wait for a release.
 - **REJECTED** — record the verdict and its reason on the candidate line and atop any
   proposal, rather than deleting the draft, so the idea does not return unexamined in a
   later session.
