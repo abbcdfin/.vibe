@@ -6,7 +6,7 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
-## Unreleased
+## v0.10.0 — 2026-11-06
 
 - Distinguishes living design documents from historical ADRs. Accepted but unbuilt
   design is marked pending; ADR upkeep preserves the original decision and reasoning.

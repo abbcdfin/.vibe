@@ -35,7 +35,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   is unchanged and was not run. Both plugin validators, all local Markdown links
   and anchors, and `git diff --check` pass. A peer review then added link repair before a
   proposal's deletion, the limits of ADR upkeep and pending marks for unbuilt design.
-  Unreleased.
+  Released in v0.10.0.
 - [x] 4. Framework consistency and concision — accepted by the user's cleanup request.
   Done when: governance, roles, skills, initialization and current design documents agree;
   redundant wording and document inconsistencies are removed while committed principle
@@ -50,7 +50,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   Verified: four skills, two role definitions, local links and anchors, 18 adapter cases
   with terminal newlines normalized, exact reference/draft preservation and whitespace
   checks. `claude plugin validate .` passes; Antigravity validation passes with its
-  expected Claude-hook warning. Live pi validation was not run. Unreleased.
+  expected Claude-hook warning. Live pi validation was not run. Released in v0.10.0.
 - [x] 5. Topic design documents — accepted in
   [ADR 0004](../docs/adr/0004-topic-design-documents.md).
   Done when: the spine places feature, component and subsystem designs in
@@ -61,7 +61,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   Outcome: the spine and initializer place topic designs as decided; this repository has
   none, so nothing moved. Verified: the Claude Code, Codex and Antigravity hooks inject
   `vibe.md` unchanged, the hub manifest still appends its module, 31 files' local links
-  resolve, `git diff --check` is clean and both plugin validators pass. Unreleased.
+  resolve, `git diff --check` is clean and both plugin validators pass. Released in v0.10.0.
 
 ## Candidates
 
