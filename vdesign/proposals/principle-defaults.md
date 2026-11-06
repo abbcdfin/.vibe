@@ -59,7 +59,7 @@ constraints, delegation overhead and inadequate self-review. Include unknown-act
 and destructive-action cases to verify the safety invariant.
 
 The user selects which defaults, if any, to change. Record the decision and rejected
-alternatives in ADR 0004 if accepted; no ADR or numbered increment is created while
+alternatives in an ADR if accepted; no ADR or numbered increment is created while
 this remains a candidate. Any implementation must update references and their name
 indexes together, and check the documents that cite principles by name or number:
 [ADR 0001](../../docs/adr/0001-mode-specific-rules-via-injection.md) cites "Context as

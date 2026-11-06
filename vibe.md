@@ -27,11 +27,12 @@ For messages, documents and code:
 Place artifacts by volatility: `vdesign/` holds active process, `docs/` durable
 outcomes, and `README.md` the vision, summary and quick start.
 
-- **Design documents** in `docs/` describe the current design and change with it:
-  `product_specification.md` covers features, workflows and business rationale;
-  `architecture_design.md` covers structure and mechanisms.
-  Mark accepted but unbuilt parts **pending**, naming their increment; remove the mark
-  at DONE.
+- **Design documents** describe the current design and change with it. Two global ones
+  sit at the root of `docs/`: `product_specification.md` covers features, workflows and
+  business rationale; `architecture_design.md` covers structure and mechanisms. A
+  feature, component or subsystem that needs more gets `docs/design/<topic>.md`, linked
+  from the global document it refines. Mark accepted but unbuilt parts **pending**,
+  naming their increment; remove the mark at DONE.
 - **Decision records**, `docs/adr/NNNN-<slug>.md`, preserve a decision's context, choice,
   rejected alternatives and consequences. Write an ADR when alternatives were weighed
   and the choice is hard to reverse; otherwise put the rationale in the design document.

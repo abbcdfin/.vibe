@@ -9,7 +9,7 @@ Antigravity update steps. The next release is minor, v0.10.0.
 ## Next Steps
 
 - Decide the [principle-defaults candidate](proposals/principle-defaults.md); the
-  committed references stay authoritative until then, and an accepted change needs ADR 0004.
+  committed references stay authoritative until then, and an accepted change needs an ADR.
 - Release v0.10.0 when the user asks, by the candidate
   [release rules](proposals/release-rules.md); the GitLab mirror also lacks v0.9.0.
 - Select a host project for the pending real-project pilot and follow its

@@ -12,6 +12,9 @@ changes a feature, and a patch fixes one.
   design is marked pending; ADR upkeep preserves the original decision and reasoning.
 - Lists every candidate in the plan and deletes its proposal at DONE, after preserving
   the decision and redirecting surviving links.
+- Gives a feature, component or subsystem design its own `docs/design/<topic>.md`,
+  linked from the global design document it refines. The two global documents stay at
+  the root of `docs/`.
 - Shortens governance, skill entry points, roles and setup instructions while preserving
   the committed architectural and agentic principle defaults.
 - Aligns experimental hub/spoke planning paths and marks workspace-root initialization
@@ -20,6 +23,8 @@ changes a feature, and a patch fixes one.
 - Documents Antigravity update steps and the staging path checked with CLI 1.4.4.
 - **Upgrade:** list proposals missing from `## Candidates`. Before deleting a DONE
   proposal, preserve its decision in `docs/` and redirect links there or to a Git revision.
+  Move topic design documents from the root of `docs/` into `docs/design/`, link each
+  from its global design document, and repoint other links to it.
 
 ## v0.9.0 — 2026-11-04
 

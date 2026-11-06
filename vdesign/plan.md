@@ -51,6 +51,17 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   with terminal newlines normalized, exact reference/draft preservation and whitespace
   checks. `claude plugin validate .` passes; Antigravity validation passes with its
   expected Claude-hook warning. Live pi validation was not run. Unreleased.
+- [x] 5. Topic design documents — accepted in
+  [ADR 0004](../docs/adr/0004-topic-design-documents.md).
+  Done when: the spine places feature, component and subsystem designs in
+  `docs/design/<topic>.md`, linked from the global design document they refine; the
+  initializer creates the directory only with its first document; the changelog carries
+  the upgrade step; the adapters inject `vibe.md` unchanged; local links resolve; both
+  plugin validators pass.
+  Outcome: the spine and initializer place topic designs as decided; this repository has
+  none, so nothing moved. Verified: the Claude Code, Codex and Antigravity hooks inject
+  `vibe.md` unchanged, the hub manifest still appends its module, 31 files' local links
+  resolve, `git diff --check` is clean and both plugin validators pass. Unreleased.
 
 ## Candidates
 

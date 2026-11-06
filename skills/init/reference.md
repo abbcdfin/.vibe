@@ -16,8 +16,8 @@ Create:
 - `docs/product_specification.md` and `docs/architecture_design.md`, as design stubs.
 - `README.md`, only if absent, with a vision and quick start.
 
-Create `docs/adr/` only when writing the first ADR, and `vdesign/proposals/` only when
-writing the first proposal — not during initial scaffolding. Do not create `.vibe/`;
+Create `docs/design/`, `docs/adr/` and `vdesign/proposals/` only when writing their
+first document — not during initial scaffolding. Do not create `.vibe/`;
 the framework is installed as a plugin.
 
 Seed `plan.md` with:
