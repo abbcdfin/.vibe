@@ -1,10 +1,12 @@
 # Checkpoint
 
-Increments 1–4 are DONE; their outcomes and verification are recorded in
+Increments 1–5 are DONE; their outcomes and verification are recorded in
 [the plan](plan.md#increments). Increments 1 and 2 were published in
-[v0.9.0](../CHANGELOG.md#v090--2026-11-04). Increment 3 ([ADR 0003](../docs/adr/0003-document-kinds-and-proposal-lifecycle.md))
-and increment 4's consistency cleanup are unreleased, along with the README's
-Antigravity update steps. The next release is minor, v0.10.0.
+[v0.9.0](../CHANGELOG.md#v090--2026-11-04). Unreleased: document kinds
+([ADR 0003](../docs/adr/0003-document-kinds-and-proposal-lifecycle.md)), the consistency
+cleanup, and topic design documents in `docs/design/`
+([ADR 0004](../docs/adr/0004-topic-design-documents.md)). The next release is minor,
+v0.10.0.
 
 ## Next Steps
 

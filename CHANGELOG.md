@@ -24,7 +24,8 @@ changes a feature, and a patch fixes one.
 - **Upgrade:** list proposals missing from `## Candidates`. Before deleting a DONE
   proposal, preserve its decision in `docs/` and redirect links there or to a Git revision.
   Move topic design documents from the root of `docs/` into `docs/design/`, link each
-  from its global design document, and repoint other links to it.
+  from its global design document, and fix relative links and image paths both to and
+  inside each moved file.
 
 ## v0.9.0 — 2026-11-04
 
