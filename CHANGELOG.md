@@ -8,23 +8,18 @@ changes a feature, and a patch fixes one.
 
 ## Unreleased
 
-- `docs/` holds two kinds of document: **design documents**, which describe the system as
-  currently designed and change with it, and **decision records** (ADRs) in `docs/adr/`,
-  dated and superseded rather than rewritten — upkeep is limited to status, supersession
-  links and repaired references. Write an ADR only when alternatives were weighed and the
-  choice is hard to reverse; otherwise put the rationale in the design document the
-  decision shapes. A design document marks accepted but unbuilt parts as pending.
-- Every candidate is listed in `plan.md`; a proposal in `vdesign/proposals/` is the
-  argument its line links to. An accepted proposal's decision goes to `docs/`; the
-  proposal is deleted when its increment is DONE, which now includes bringing the design
-  documents in line with the result. Links to a proposal are repointed before it goes.
-- **Upgrade:** list any proposal missing from `## Candidates` in `plan.md`. For a proposal
-  whose increment is already DONE, make sure its decision is in `docs/`, repoint links to
-  it at that document or a Git revision, then delete it.
-- This repository follows the same rules: its proposals move to `vdesign/proposals/`, and
-  the README's design notes to `docs/architecture_design.md`.
-- The README's Antigravity section gains update steps (install again) and the staging
-  path Antigravity CLI 1.4.4 uses, `~/.gemini/config/plugins/vibe/`.
+- Distinguishes living design documents from historical ADRs. Accepted but unbuilt
+  design is marked pending; ADR upkeep preserves the original decision and reasoning.
+- Lists every candidate in the plan and deletes its proposal at DONE, after preserving
+  the decision and redirecting surviving links.
+- Shortens governance, skill entry points, roles and setup instructions while preserving
+  the committed architectural and agentic principle defaults.
+- Aligns experimental hub/spoke planning paths and marks workspace-root initialization
+  as proposed. The initializer preserves existing content and avoids repeating resolved
+  target questions.
+- Documents Antigravity update steps and the staging path checked with CLI 1.4.4.
+- **Upgrade:** list proposals missing from `## Candidates`. Before deleting a DONE
+  proposal, preserve its decision in `docs/` and redirect links there or to a Git revision.
 
 ## v0.9.0 — 2026-11-04
 

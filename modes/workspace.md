@@ -6,10 +6,11 @@
 You are launched at the **workspace root** — a plain folder that coordinates several
 repositories. You can see and edit all of them in this one session.
 
-- This root holds only a map (`workspace.md`) naming the hub via its `hub:` field. It is
-  NOT a repository and stores nothing substantive.
-- Read the hub's manifest (`<hub>/vdesign/workspace.md`) for the authoritative topology
-  (the spoke list), and read the hub's `docs/contracts/` + cross-cutting `plan.md` first.
+- This root holds only a map (`workspace.md`) naming the hub via its `hub:` field.
+  It is not a repository: do not scaffold local planning files here.
+- **Context sync:** use the hub's plan and checkpoint in place of root-local files.
+  Read `<hub>/vdesign/workspace.md` for topology, then its root `plan.md`,
+  `vdesign/checkpoint.md` and `docs/contracts/`.
 - Drive cross-cutting changes across repos in this one session; contracts change in the
   hub first, then propagate to the spokes.
 - **Git is per-repo:** commit changes in each repository separately. Never assume a

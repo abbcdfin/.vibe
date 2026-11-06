@@ -45,11 +45,12 @@ Hub mode is declared by a single manifest in the hub repo, e.g. `vdesign/workspa
 
 ```yaml
 mode: hub
-hub:    architecture/     # single source of truth
-spokes: [firmware/, mobile/, cloud/]
+hub: .
+spokes: [../firmware/, ../mobile/, ../cloud/]
 ```
 
-Topology is **data fed to generic rules**, never hardcoded into the rules themselves
+Repository manifest paths are relative to the repository root. Topology is
+**data fed to generic rules**, never hardcoded into the rules themselves
 (**Construct Engine #3**). Component-specific constraints (hardware limits, UI frameworks,
 etc.) do **not** belong here — they stay in each spoke's `vdesign/constraints.md` and
 `docs/`, exactly as in single mode.
@@ -58,7 +59,8 @@ etc.) do **not** belong here — they stay in each spoke's `vdesign/constraints.
 
 | Concept    | Single mode              | Hub mode — global (hub)          | Hub mode — local (spoke)          |
 |------------|--------------------------|----------------------------------|-----------------------------------|
-| Roadmap    | `vdesign/plan.md`        | hub `plan.md` (cross-stack)      | spoke `vdesign/active_plan.md`    |
+| Roadmap    | `vdesign/plan.md`        | hub `plan.md` (cross-stack)      | spoke `vdesign/plan.md`           |
+| Working board | `vdesign/active_plan.md` | hub `vdesign/active_plan.md` | spoke `vdesign/active_plan.md` |
 | Checkpoint | `vdesign/checkpoint.md`  | hub (cross-cutting sessions)     | spoke (its slice)                 |
 | Constraints| `vdesign/constraints.md` | hub (global)                     | spoke (local)                     |
 | Stable docs| `docs/`                  | hub `docs/` + **`docs/contracts/`** | spoke `docs/`                  |
@@ -107,7 +109,8 @@ hub: ./architecture   # read the hub's manifest for the authoritative topology
 
 This separates the coordination *location* (the root, where you launch) from the
 coordination *storage* (the hub repo, versioned). The root is a lens, not a store.
-`/vibe:init workspace`, run at the root, drops only this map file — nothing else.
+`/vibe:init workspace` is proposed, not implemented. The initializer supports
+`single`, `hub` and `spoke`; create the root map manually for validation.
 
 **Three launch scopes, all manifest-driven** (the hook reads the manifest in the
 launch cwd):

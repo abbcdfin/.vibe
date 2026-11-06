@@ -1,13 +1,11 @@
 # Agile Method Principles
 
-The **method** layer of the vibe framework: how work is sequenced, built, and verified
-once its structure is settled. `architectural-principles` governs how the system is
-arranged; this governs how it comes to exist. Both always apply; neither replaces the other.
+This skill governs sequencing and verification. The governance Lifecycle owns increment
+scope and completion; `architectural-principles` governs structure.
 
 ## Part 1 — The twelve principles behind the Agile Manifesto
 
-Quoted verbatim from <https://agilemanifesto.org/principles.html>. These are the
-commitments; Part 2 is how this framework discharges them.
+Quoted verbatim from <https://agilemanifesto.org/principles.html>.
 
 1. Our highest priority is to satisfy the customer through early and continuous delivery
    of valuable software.
@@ -31,95 +29,57 @@ commitments; Part 2 is how this framework discharges them.
 
 ### Where each already lives in this framework
 
-Most are discharged by machinery that exists. Read this map before adding anything new —
-the gap is usually smaller than it looks.
-
-| Principle | Discharged by |
+| Principles | Framework support |
 |---|---|
-| 1, 3, 7 — early, frequent, working software is the measure | **Build thin, then widen** (below); the Lifecycle's one-increment-at-a-time rule |
-| 2 — welcome late change | The Lifecycle's holding pen: an unnumbered DRAFT costs nothing to reorder, and an increment number is withheld until acceptance |
-| 4 — business and developers together daily | `product-owner` and `software-expert` as two roles with a declared seam, and Decision making rules 2–3 (ask with options rather than assume) |
-| 9 — technical excellence | `architectural-principles` #7 Resist Entropy |
-| 10 — maximize work not done | `architectural-principles` #6 Minimal Mechanism, YAGNI |
-| 12 — reflect and adjust | DONE collapses an increment into an outcome and verification summary; a rejected DRAFT is recorded with its reason |
-| 5, 6, 8, 11 — team, pace, conversation, self-organization | **Not framework concerns.** They govern how humans organize, not how an agent works. Do not simulate them |
-
-Principle 6 deserves a note in an agent context: the nearest honest equivalent is asking
-the user directly instead of inferring — Decision making rule 2. It is not a licence to
-substitute a long document for a short question.
+| 1, 3, 7 — frequent delivery of working software | Integrated slices and verified increment outcomes |
+| 2 — welcome change | Candidates and explicit acceptance of scope changes |
+| 4 — business and developers together | Product-owner and software-expert responsibilities; direct user decisions |
+| 9, 10 — quality and simplicity | Architectural principles: Resist Entropy and Minimal Mechanism |
+| 12 — reflect and adjust | Outcome summaries, verification and recorded rejection reasons |
+| 5, 6, 8, 11 — people and team organization | Human concerns; do not simulate them with agent ceremonies |
 
 ## Part 2 — Method rules
 
 ### Build thin, then widen
 
-Inside a software increment, make the narrowest end-to-end path work before making any
-part of it complete. Then widen, one case at a time, within its "done when". The
-governance Lifecycle defines acceptance, scope changes and the handling of findings.
-Configuration and documentation work use the activities and verification they need;
-they do not have to simulate software development phases.
+For a software increment spanning layers, make the narrowest path through every layer
+work first. Widen through integrated slices within its "done when". Completing entire
+components separately defers integration risk. Keep clean seams so later slices can
+extend the working path.
 
-- **An unhandled case must fail loudly.** Raise — `NotImplementedError`, an assertion, a
-  default branch that errors. Never return a plausible default, never a catch-all that
-  swallows, never coerce a bad value into a valid-looking one.
-- **The loud failures are the backlog.** This is the engine, not a style preference:
-  without them, "widen next" has no driver and coverage grows by guesswork. A faked case
-  is a missing case you can no longer see.
-- **Validate at the edge, assert inside.** Graceful handling belongs where untrusted input
-  enters — user input, network, a tool result. Inside your own code an invariant violation
-  is a bug, not a case to absorb. (This is why it does not contradict `agentic-principles`
-  §4 Graceful Recovery: a harness reporting a tool failure *is* edge handling.)
-- **Check:** "Does this branch exist because I designed for the case, or because I didn't?"
+Slice headings are optional. A single-component change, configuration update or
+documentation increment uses the activities and verification its outcome needs.
 
-### Thin and end-to-end over thick and partial
+- **Fail loudly on the unhandled case.** Raise an explicit error rather than invent a plausible
+  default, silently coerce data or swallow a failure. Visible failures identify what
+  needs widening; route findings by the governance Lifecycle's scope rules.
+- **Validate at the edge, assert inside.** Handle untrusted input at user, network and
+  tool boundaries. Internal invariant violations are bugs; do not disguise them as
+  valid results. Reporting a tool failure to an LLM is edge handling, not suppression.
 
-Where a software increment spans layers, its first slice runs the narrowest path through
-*every* layer; later slices thicken it up to its "done when". Work outside that boundary
-is a candidate for another increment unless the user accepts a scope change. Completing
-one component at a time defers all integration risk to the end, where it costs most.
-
-This pairs with "Simple Now, Flexible Later" (`architectural-principles`): the slice is
-the simple implementation, and clean seams are what let later slices thicken it by
-extension rather than rewrite.
+**Check:** Does this branch implement a supported case or conceal a missing one?
 
 ### Three things called "a prototype"
 
-"Prototype" says something was built early. It does not say whether it survives — the
-property every rule here turns on. A **spike** is a time-boxed build that answers one
-technical question and is then discarded (the XP sense).
-
-| | **Spike** | **Thin slice** | **Demo** |
+| | Spike | Thin slice | Demo |
 |---|---|---|---|
-| Purpose | Answer one technical question | Make the increment's first working, end-to-end version | Elicit what to build |
-| Lifespan | Throwaway by definition | Kept and grown | Throwaway |
-| Output | A finding | Running software | Requirements |
-| Place in development | Before an increment is accepted | How a BUILDING software increment proceeds | Before any DRAFT exists |
-| Owner | `software-expert` | `software-expert` | `product-owner` (IPD Concept) |
-| Home | `vdesign/utils/` | the production tree | — |
+| Purpose | Answer a technical question | Deliver a working path | Discover requirements |
+| Lifespan | Throwaway | Kept and grown | Throwaway |
+| Output | A finding | Integrated software | Requirements |
+| Place in development | Before an increment is accepted | How a BUILDING increment proceeds | Before any DRAFT exists |
+| Owner | software-expert | software-expert | product-owner |
+| Home | `vdesign/utils/` | Production tree | Temporary working material |
 
-A spike allowed to survive becomes a thin slice that never passed a gate. A thin slice
-mistaken for a spike gets abandoned with the work half-done.
+A spike is time-boxed and informs acceptance; a thin slice implements an accepted increment.
+Keeping a spike without acceptance bypasses the gate; discarding a thin slice abandons
+the implementation.
 
 ### Throwaway probes
 
-When a DRAFT can only be judged by building something, build the smallest thing that
-answers the question:
-
-- **Declare the question first,** with a stop condition. "Explore the API" is not a
-  question; "can we hold a frame under 16 ms on this device" is.
-- **It lives in `vdesign/utils/`**, exempt from the architectural standards — which is
-  exactly why it must not survive.
-- **Its output is a finding,** recorded with the DRAFT. The code is not the deliverable.
-- **No silent promotion.** To keep the code, accept an increment whose scope includes bringing
-  it to standard. Promotion requires the gate, never inertia.
-- **Fail loudly while probing.** A probe that stubs its hard cases with plausible values
-  answers nothing — the faked case is usually the one that decides the verdict.
-
-### When not to
-
-- **When the answer is derivable.** Decision making rule 1 first: consult `docs/`,
-  `constraints.md`, the README. A probe is for an unknown, not for unread context.
-- **As a substitute for a decision.** If the blocker is an unmade choice, make it or ask.
-  Building something is not a way to avoid deciding.
-- **Thin-slicing, when there are no layers to slice through** or an increment is genuinely one
-  component deep.
-- **Fail-loud at a trust boundary.** See "validate at the edge" above.
+- State one question and a stop condition before building. Record the finding with
+  the candidate; probe code is not the deliverable.
+- Keep the probe in `vdesign/utils/`. Build only what answers the question, with explicit
+  failures for unsupported cases. Probe code is exempt from the architectural standards;
+  that exemption is why it must not survive without promotion.
+- Keeping the code requires an accepted increment that brings it to production standard.
+- Do not probe for an answer already in project documents or to avoid an unmade decision.

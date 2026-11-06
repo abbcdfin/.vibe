@@ -36,9 +36,26 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   and anchors, and `git diff --check` pass. A peer review then added link repair before a
   proposal's deletion, the limits of ADR upkeep and pending marks for unbuilt design.
   Unreleased.
+- [x] 4. Framework consistency and concision — accepted by the user's cleanup request.
+  Done when: governance, roles, skills, initialization and current design documents agree;
+  redundant wording and document inconsistencies are removed while committed principle
+  defaults, the increment lifecycle and candidate arguments are preserved; installation
+  and migration steps remain usable; skill, plugin, link and adapter checks pass; the
+  core guidance is shorter. Policy changes require a separate acceptance decision.
+  Outcome: retained the consolidation and hub/spoke path fixes; restored committed
+  architectural and agentic references verbatim, proposal arguments and failure lists,
+  concision rules, rule-name indexes and lazy directory creation. Alternative defaults
+  are a separate candidate, with deny-by-default retained. The spine is 817 words and
+  the README 585, down from 1,264 and 1,589. No policy ADR was created.
+  Verified: four skills, two role definitions, local links and anchors, 18 adapter cases
+  with terminal newlines normalized, exact reference/draft preservation and whitespace
+  checks. `claude plugin validate .` passes; Antigravity validation passes with its
+  expected Claude-hook warning. Live pi validation was not run. Unreleased.
 
 ## Candidates
 
+- Principle defaults — consider the policy alternatives identified during cleanup;
+  committed references remain authoritative. [Proposal](proposals/principle-defaults.md).
 - Curated-context subagents — delegate a bounded task to a fresh subagent holding only
   its briefing. [Proposal](proposals/curated-subagents.md).
 - Hub-and-spoke mode — multi-repository workspaces; the `modes/` harness and

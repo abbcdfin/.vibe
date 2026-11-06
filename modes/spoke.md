@@ -5,7 +5,8 @@
 
 You are working inside a **spoke** repository of a multi-repository workspace.
 
-- This repo is a normal single-repo vibe project for its own component/slice.
+- This repo is a normal single-repo vibe project for its component, with its own
+  `vdesign/plan.md` roadmap and `vdesign/active_plan.md` working board.
 - The **hub** holds the authoritative cross-cutting plan and the shared contracts
   (`docs/contracts/`). Its location is the `hub:` field in this repo's
   `vdesign/workspace.md`.

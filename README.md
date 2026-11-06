@@ -1,172 +1,95 @@
 # Vibe
 
-An installable **vibe coding framework** for Claude Code, Antigravity CLI, OpenAI
-Codex CLI, and pi. Install it once and every project gets the same always-on
-engineering governance, selectable role identities, architectural & agentic
-principles, and a one-command project initializer — with nothing to copy into
-individual repositories.
+Engineering governance, roles and design principles for coding agents. Install once
+per tool; projects share the framework without copying it into their repositories.
 
-The design is **one source, N thin adapters**: `vibe.md` + `skills/` + `agents/`
-are written once, and each tool gets a small always-on injector that reads the
-*same* `vibe.md`. Adding a tool is just writing that adapter.
-
-| Tool | Confidence |
-|------|------------|
+| Host | Validation |
+|---|---|
 | Claude Code | Tested |
-| OpenAI Codex CLI | Tested (Codex 0.146.0) |
-| Antigravity CLI | Tested (agy CLI) |
-| pi | Best-effort |
+| OpenAI Codex CLI | Tested with 0.146.0 |
+| Antigravity CLI | Tested; staging path checked with 1.4.4 |
+| pi | Not tested on a live install |
 
-How each adapter works, and why: [architecture design](docs/architecture_design.md).
+## Components
 
-## What's in the plugin
+| Component | Source |
+|---|---|
+| Always-on governance | `vibe.md`, loaded by the host adapter |
+| Product and engineering roles | `agents/` |
+| Architectural, agentic and Agile principles | `skills/`, loaded on demand |
+| Project initializer | `skills/init/`, invoked as `/vibe:init` |
 
-| Component | Path | Loading |
-|-----------|------|---------|
-| **Governance spine** | `vibe.md` | **Always-on** — injected every session by a `SessionStart` hook (`hooks/`) |
-| **Role identities** | `agents/` (`software-expert`, `product-owner`) | Adopted by the main thread *or* delegated as subagents; each agent file is the single canonical role definition |
-| **Architectural principles** | `skills/architectural-principles/` | On-demand skill; full text in its `reference.md` |
-| **Agentic principles** | `skills/agentic-principles/` | On-demand skill; full text in its `reference.md` |
-| **Agile method principles** | `skills/agile-principles/` | On-demand skill; the twelve Agile Manifesto principles plus this framework's method rules |
-| **Project initializer** | `skills/init/` → `/vibe:init` (plugin-namespaced skill, identical on all tools) | Skill |
+After updating, apply any **Upgrade** steps since your installed version in the
+[changelog](CHANGELOG.md). Verify that governance is present in a new session and
+that skills are available where the host supports them.
 
 ## Install (Claude Code)
 
-This repository is both the plugin (at its root) and a single-plugin marketplace
-(`.claude-plugin/marketplace.json`). Pick one path:
-
-**A. Try it now, this session only** (no install):
+Try the local clone for one session:
 
 ```bash
 claude --plugin-dir /path/to/vibe
 ```
 
-**B. Install persistently from the git remote** (recommended):
+For persistent installation, run inside Claude Code:
 
-```
+```text
 /plugin marketplace add abbcdfin/.vibe
 /plugin install vibe@uc-labs
 /reload-plugins
 ```
 
-Or add the local clone instead of the remote:
+For a local marketplace, use `/path/to/vibe` instead of `abbcdfin/.vibe`.
 
-```
-/plugin marketplace add /path/to/vibe
-/plugin install vibe@uc-labs
-/reload-plugins
-```
-
-**Update** from a shell, then restart Claude Code (for a local clone, `git pull` first):
+To update, pull a local clone first, then run these shell commands and restart Claude Code:
 
 ```bash
 claude plugin marketplace update uc-labs
 claude plugin update vibe@uc-labs
 ```
 
-Then take any **Upgrade** step in [CHANGELOG.md](CHANGELOG.md) since your version.
+If governance is missing, check the `/plugin` Errors tab. As a hook-independent
+alternative, put this import in `~/.claude/CLAUDE.md`:
 
-**Verify:** start Claude Code in any repo — the vibe rules should be present in
-context, and `/vibe:init` should be available. Check the `/plugin` **Errors** tab if
-not.
-
-### Guaranteed always-on (recommended fallback)
-
-The `SessionStart` hook injects `vibe.md` via stdout, which is the documented path.
-Some Claude Code versions have had bugs dropping plugin-hook context. If you ever
-find the governance isn't loading, add a user-level import as a belt-and-braces
-guarantee — edit `~/.claude/CLAUDE.md` and add:
-
-```
+```text
 These are your operating rules for all coding work:
 @/absolute/path/to/vibe/vibe.md
 ```
 
-This is rock-solid always-on (user memory is always loaded) and keeps a single
-source of truth (`vibe.md`). Updating the framework is then just `git pull`.
-
 ## Install (Antigravity CLI)
 
-The same repository also carries an Antigravity CLI plugin. The tool-specific files
-sit alongside the Claude Code ones and read the **same** `vibe.md`:
-
-| Concern | Claude Code | Antigravity CLI |
-|---------|-------------|-----------------|
-| Manifest | `.claude-plugin/plugin.json` | `plugin.json` (root) |
-| Always-on hook | `hooks/hooks.json` → `SessionStart` (stdout) | `hooks.json` (root) → `PreInvocation` (JSON `injectSteps`/`ephemeralMessage`) |
-| Hook script | `hooks/inject-governance.sh` | `hooks/inject-governance-agy.sh` |
-| Skills / Agents | `skills/`, `agents/` | `skills/`, `agents/` (shared, same format) |
-
-Install locally (Antigravity documents local install only — no git/marketplace):
-
-```
+```bash
 agy plugin install /path/to/vibe
-agy plugin list          # confirm it's staged & enabled
+agy plugin list
 ```
 
-Plugins stage at `~/.gemini/config/plugins/vibe/` (Antigravity CLI 1.4.4). The staged copy
-does not follow your clone: to **update**, `git pull`, then run the same
-`agy plugin install /path/to/vibe` again — it replaces the staged version in place. Then
-take any **Upgrade** step in [CHANGELOG.md](CHANGELOG.md) since your version.
-
-> **Verified against Antigravity's hook contract.** The `PreInvocation` wiring
-> follows the authoritative hooks reference (`agy-customizations/docs/hooks.md`):
-> `PreInvocation` uses the **flat** handler-list structure (no `matcher`/`hooks`
-> wrapper — that's only for `PreToolUse`/`PostToolUse`), and the command returns
-> `{"injectSteps":[{"ephemeralMessage":"<spine>"}]}` on stdout. Two things worth
-> knowing:
-> 1. **No absolute path needed.** Antigravity runs the hook with cwd set to the
->    directory containing `hooks.json` (the plugin root), so `hooks.json` calls the
->    script by the relative path `./hooks/inject-governance-agy.sh` — robust to any
->    install location. The user's project isn't cwd; it arrives as `workspacePaths`
->    on stdin, which the mode harness reads; without it, the spine is injected alone.
-> 2. **`PreInvocation` re-injects** the spine each turn (Antigravity has no `SessionStart`). If that's too heavy, and Antigravity's `rules/` directory auto-loads, move the governance there as a lighter one-time load.
->
-> The initializer is available here: Antigravity's documented plugin dirs are
-> `skills/`/`agents/`/`rules/` (no `commands/`), and it namespaces plugin skills, so
-> the `init` skill is invoked as `/vibe:init` — identical to every other tool. See
-> [Initialize a project](#initialize-a-project).
+Antigravity 1.4.4 stages the plugin at `~/.gemini/config/plugins/vibe/`. To update,
+pull the clone and run `agy plugin install /path/to/vibe` again; the staged copy
+does not follow the clone automatically.
 
 ## Install (OpenAI Codex CLI)
 
-Tested against Codex **0.146.0**, end-to-end (plugin install → `SessionStart` hook
-fires → `vibe.md` injected). Codex delivers the full framework — skills **and** the
-always-on spine — from a single plugin, like Claude Code and Antigravity.
-
-**A. Plugin via marketplace (recommended).** The repo is its own Codex marketplace
-(`.agents/plugins/marketplace.json`) and plugin (`.codex-plugin/plugin.json`, which
-exposes `skills/` and bundles a `SessionStart` hook → `.codex-plugin/hooks.json` →
-`hooks/inject-governance-codex.sh`).
-
 ```bash
-codex plugin marketplace add /path/to/vibe   # or:  codex plugin marketplace add abbcdfin/.vibe
+codex plugin marketplace add /path/to/vibe
 codex plugin add vibe@uc-labs
 ```
 
-**Update** by installing again, then restart Codex. For a local clone, `git pull` first;
-for the Git marketplace, refresh its snapshot first:
+Use `abbcdfin/.vibe` instead of the local path for a Git marketplace. Start interactive
+Codex to review and trust the bundled hook; installing the plugin alone does not
+grant hook trust.
+
+To update, pull a local clone first. For a Git marketplace, refresh its snapshot,
+then reinstall and restart Codex:
 
 ```bash
 codex plugin marketplace upgrade uc-labs   # Git marketplace only
 codex plugin add vibe@uc-labs
 ```
 
-Then take any **Upgrade** step in [CHANGELOG.md](CHANGELOG.md) since your version.
+### Alternative setup
 
-> **One-time trust review.** Installing a plugin does **not** auto-trust its hooks —
-> Codex skips a bundled hook until you review and trust it (by hash). On first
-> interactive `codex` you'll be prompted to trust the vibe `SessionStart` hook;
-> approve it once and it fires every session thereafter. (For CI/automation,
-> `codex exec --dangerously-bypass-hook-trust` runs enabled hooks without the
-> prompt.) This trust step is the only difference from the Claude Code experience.
-
-The hook reads the same `vibe.md` as every other adapter and reuses the candidate
-mode harness (`hooks/lib-mode.sh`): single-repo injects the spine only; a workspace
-with a `mode:` manifest also appends the matching `modes/*.md`.
-
-**B. Standalone config hook (fallback).** If you'd rather register the hook yourself
-than trust a bundled one — or want it independent of the plugin system — add it to
-`~/.codex/config.toml` by hand (absolute path to your clone):
+Use one governance-loading path. To register the hook yourself, add this to
+`~/.codex/config.toml`, using the absolute clone path:
 
 ```toml
 [[hooks.SessionStart]]
@@ -176,84 +99,52 @@ command = '/path/to/vibe/hooks/inject-governance-codex.sh'
 timeout = 30
 ```
 
-Note the standalone `config.toml` schema keys events at the top level
-(`[[hooks.SessionStart]]`), which differs from the plugin `hooks.json` schema (events
-nested under `hooks:`) — the same `inject-governance-codex.sh` script, different wiring.
+Alternatively, load the spine as user instructions through `~/.codex/AGENTS.md`:
 
-**C. AGENTS.md (belt-and-braces).** Codex always loads `~/.codex/AGENTS.md` (no
-`@import`, unlike CLAUDE.md). For a hook-independent guarantee, symlink it to the
-single source: `ln -s /path/to/vibe/vibe.md ~/.codex/AGENTS.md`.
+```bash
+ln -s /path/to/vibe/vibe.md ~/.codex/AGENTS.md
+```
 
 ## Install (pi)
 
-> **Best-effort — not yet validated on a live pi install.** Built from pi's
-> published extension docs. pi loads extensions from `~/.pi/agent/extensions/`
-> (global) and `.pi/extensions/` (project), and supports git/npm packages via
-> `settings.json`. The adapter (`pi/vibe.ts`) subscribes to `before_agent_start`
-> and prepends the same `vibe.md` spine to the system prompt.
-
-Install from git (declared via this repo's `package.json` `"pi"` field):
+Add the package to `~/.pi/agent/settings.json`:
 
 ```json
-// ~/.pi/agent/settings.json
 { "packages": ["git:github.com/abbcdfin/.vibe@v0.9.0"] }
 ```
 
-Or drop it in globally without a package manager:
+Or install the extension from a local clone:
 
 ```bash
 mkdir -p ~/.pi/agent/extensions
 ln -s /path/to/vibe/pi/vibe.ts ~/.pi/agent/extensions/vibe.ts
 ```
 
-**Verify on your install:** confirm pi's current API still uses the
-`before_agent_start` event returning `{ systemPrompt }`; if it has drifted, adjust
-`pi/vibe.ts` accordingly. The candidate `modes/*.md` harness is **not** ported to
-pi — it gets the spine only. pi also reads `AGENTS.md` from `~/.pi/agent/`, so a
-symlink there (`ln -s /path/to/vibe/vibe.md ~/.pi/agent/AGENTS.md`) is the
-hook-independent fallback.
+Verify governance on your install. The extension loads the spine; it does not run
+the experimental workspace-mode harness. A user-instruction fallback is:
+
+```bash
+ln -s /path/to/vibe/vibe.md ~/.pi/agent/AGENTS.md
+```
 
 ## Initialize a project
 
-The initializer is a single plugin skill (`skills/init/`), driven by one **mode**
-argument (`single` | `hub` | `spoke`, default `single`). Because all three tools
-namespace plugin skills by the plugin name, it is invoked identically everywhere as
-**`/vibe:init`** — no per-tool split:
+On hosts with skill support, use `/vibe:init` or ask to initialize the project:
 
-```
-/vibe:init            # single-repo (default)
-/vibe:init single
-/vibe:init hub        # EXPERIMENTAL — multi-repo hub
-/vibe:init spoke      # EXPERIMENTAL — multi-repo spoke
+```text
+/vibe:init            # single repository
+/vibe:init hub        # experimental hub
+/vibe:init spoke      # experimental component repository
 ```
 
-You can also just ask in natural language ("bootstrap a hub workspace here") — the
-skill triggers on its description.
-
-- **single** — scaffolds `vdesign/` (plan, checkpoint, constraints, dev_env, utils) and
-  `docs/` in the current repo.
-- **hub / spoke** — implement the [hub-and-spoke proposal](vdesign/proposals/hub-and-spoke-mode.md),
-  a CANDIDATE pattern that is **not yet adopted**. Use for validation only.
-
-> **Skills have no positional `$1`.** The `init` skill (`skills/init/`) reads the mode
-> word (`single`/`hub`/`spoke`) out of your invocation text and defaults to `single`.
-> `SKILL.md` is a thin entry point over the shared procedure in
-> `skills/init/reference.md` — one source, three tools. The plugin namespace (`vibe:`)
-> keeps `/vibe:init` distinct from Claude's built-in bare `/init`.
-
-> **Candidate mode-aware harness.** The governance hooks read the workspace manifest in
-> the launch cwd (root `workspace.md`, or a repo's `vdesign/workspace.md`) and append the
-> matching **draft** module from `modes/` (`workspace.md` / `hub.md` / `spoke.md`). This
-> exists to *validate* the hub-and-spoke proposal — `modes/*.md` are DRAFT, not adopted
-> doctrine. Single-repo projects have no manifest, so nothing extra is injected.
+Single mode creates planning files in `vdesign/` and design stubs in `docs/`.
+Hub/spoke mode is a [candidate under validation](vdesign/proposals/hub-and-spoke-mode.md),
+not adopted doctrine. The shell adapters recognize workspace manifests and append the
+matching draft mode module; ordinary single-repository projects get the spine alone.
 
 ## Design
 
-What vibe provides is specified in [docs/product_specification.md](docs/product_specification.md),
-how it is built in [docs/architecture_design.md](docs/architecture_design.md), and why
-in the [decision records](docs/adr/). Work in progress and candidate proposals are in the
-[plan](vdesign/plan.md).
-
-## Releases
-
-What changed in each version, and any step an upgrade needs: [CHANGELOG.md](CHANGELOG.md).
+- [Product specification](docs/product_specification.md) — capabilities and scope.
+- [Architecture design](docs/architecture_design.md) — shared sources and host adapters.
+- [Decision records](docs/adr/) — choices and their rationale.
+- [Plan](vdesign/plan.md) — increments, candidates and current work.
