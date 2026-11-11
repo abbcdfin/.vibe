@@ -27,7 +27,9 @@
 5. **The install channel moves only at a release.** When consumers install from a
    branch, its tip is always a tagged release, so each version names one commit. Work on
    another branch; a release fast-forwards the channel, and a pre-push hook refuses
-   anything else. A `-dev` version is no substitute: updaters would receive it.
+   anything else. A `-dev` version is no substitute: updaters would receive it. A patch
+   that must ship without unreleased work is built on a branch from the release tag; the
+   channel fast-forwards to its tag, then merges into the working branch.
 
 ## Where and when
 
