@@ -19,6 +19,14 @@
    to match the manifests, with the message `v<version> — <summary>`. Push the branch and
    the tag together, to every remote. If a release or its notes prove wrong, cut the next
    patch.
+4. **Every build names its commit.** A build stamps `git describe --tags --long --dirty`,
+   so even a release build carries its hash (`v0.10.0-0-g4242320`). Keep the version that
+   tools compare plain SemVer; put the hash in a separate field or after `+`
+   (`0.10.0+g4242320`), never after `-`, which SemVer reads as a pre-release.
+5. **The install channel moves only at a release.** When consumers install from a
+   branch, its tip is always a tagged release, so each version names one commit. Work on
+   another branch; a release fast-forwards the channel, and a pre-push hook refuses
+   anything else. A `-dev` version is no substitute: updaters would receive it.
 
 ## Where and when
 

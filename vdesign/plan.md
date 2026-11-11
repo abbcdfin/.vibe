@@ -71,7 +71,8 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   its briefing. [Proposal](proposals/curated-subagents.md).
 - Hub-and-spoke mode — multi-repository workspaces; the `modes/` harness and
   `/vibe:init hub|spoke` exist to validate it. [Proposal](proposals/hub-and-spoke-mode.md).
-- Release rules — release notes, upgrade checks and tags; validation run 1 was v0.8.1.
+- Release rules — release notes, upgrade checks, tags, build identity and a
+  release-only install channel; validation run 1 was v0.8.1.
   [Proposal](proposals/release-rules.md).
 - Test-driven execution — a failing test as the contract for agentic work.
   [Proposal](proposals/tdd-execution.md).
