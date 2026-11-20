@@ -48,6 +48,16 @@ vibe states responsibilities and rules. A tool such as mctl chooses who plays a 
 protocol. The [curated-subagents candidate](curated-subagents.md) covers how to write
 the brief.
 
+**Applying a role to a launched session** (tested 2026-11-20 on Claude Code 2.1.328,
+Codex 0.153.2 and Antigravity 1.4.4). The tool reads `agents/<role>.md` from a path it
+is configured with, strips the header, prefixes "In this session you act as the
+following role." and passes the text by `--append-system-prompt-file` (Claude Code) or
+`-c developer_instructions=…` (Codex). Both sessions took the role and kept vibe's
+hook; Claude Code kept its default prompt, and Codex adds the text as a developer
+message beside base instructions it would not quote. `--agent` on Claude Code and
+Antigravity replaces the default prompt; an unframed role file reads as a subagent
+definition.
+
 ## Validation
 
 One mctl mission with an architect supervisor and implementer and tester workers.
@@ -56,10 +66,4 @@ their findings; the tester reports without fixing.
 
 ## Open questions
 
-1. How a Codex worker runs as its role. Codex defines roles as TOML configuration —
-   `[agents.<role>]` for the subagents it spawns, a `-p` profile or
-   `-c developer_instructions=…` for a session — so the launching tool passes the role
-   file's text. Untested. Claude Code is settled: `--agent vibe:<role>` replaces the
-   default system prompt (checked with 2.1.328), so a Claude worker gets its role by
-   `--append-system-prompt-file agents/<role>.md`.
-2. Whether the supervisor defaults to `architect`.
+1. Whether the supervisor defaults to `architect`.
