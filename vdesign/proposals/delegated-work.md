@@ -56,7 +56,10 @@ their findings; the tester reports without fixing.
 
 ## Open questions
 
-1. How a worker adopts its role on each host: Claude Code has `--agent vibe:<role>`;
-   Codex has no agent definitions, so the launching tool may put the role file in the
-   task text.
+1. How a worker runs as its role on each host. Claude Code reads `agents/<role>.md`
+   directly (`--agent vibe:<role>`). Codex defines roles as TOML configuration —
+   `[agents.<role>]` for the subagents it spawns, a `-p` profile or
+   `-c developer_instructions=…` for a session — so the launching tool passes the role
+   file's text. Untested: whether `--agent` accepts plugin-namespaced names, and whether
+   it replaces Claude Code's default system prompt.
 2. Whether the supervisor defaults to `architect`.
