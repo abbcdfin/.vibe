@@ -6,6 +6,20 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
+## Unreleased
+
+- Adopts the branching model in governance: `main` holds releases (moving only to a
+  tagged release by fast-forward from `dev`), `dev` integrates done increments and
+  non-increment planning, and each increment builds on `inc/<n>-<slug>` before merging
+  with `--no-ff`. Shared history (`main`, `dev`, tags) is never rewritten.
+- `/vibe:init` creates `dev` from `main` when absent and installs vibe's `pre-push` hook
+  into `.git/hooks/pre-push` only when none exists (reporting and leaving any existing
+  hook alone; skipping when there is no `.git/`, no commit, or no `main`).
+- **Upgrade:** in each existing project, create `dev` from `main` (`git branch dev main`),
+  work on `dev` (or `inc/<n>-<slug>` branches) instead of `main`, and install vibe's
+  `pre-push` hook from `skills/init/pre-push` into `.git/hooks/pre-push` (or run
+  `/vibe:init` to create `dev` and install the hook when none exists).
+
 ## v0.10.0 — 2026-11-06
 
 - Distinguishes living design documents from historical ADRs. Accepted but unbuilt

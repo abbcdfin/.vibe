@@ -20,6 +20,14 @@ Create `docs/design/`, `docs/adr/` and `vdesign/proposals/` only when writing th
 first document — not during initial scaffolding. Do not create `.vibe/`;
 the framework is installed as a plugin.
 
+Set up branching and the pre-push hook in the target repository: create `dev` from
+`main` when absent, and copy `pre-push` from this skill's directory (alongside
+`SKILL.md` and `reference.md`) into `.git/hooks/pre-push` as an executable only when
+none exists, reporting and leaving any existing hook alone. If there is no `.git/`, no
+commit yet, or no `main` branch, report that the branching rules expect `main` and skip
+creating `dev` and installing the hook without running `git init`, committing, or
+renaming a branch.
+
 Seed `plan.md` with:
 
 ```markdown
