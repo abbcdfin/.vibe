@@ -67,6 +67,8 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
 
 - Delegated work — architect, implementer and tester roles that check each other's work;
   delegation rules; a worker mode for delegated sessions. [Proposal](proposals/delegated-work.md).
+- Milestones — group increments under an outcome accepted as a whole, so a lead can run
+  toward it across increments. [Proposal](proposals/milestones.md).
 - Principle defaults — consider the policy alternatives identified during cleanup;
   committed references remain authoritative. [Proposal](proposals/principle-defaults.md).
 - Curated-context subagents — delegate a bounded task to a fresh subagent holding only
