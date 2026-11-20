@@ -32,10 +32,13 @@
    is widening scope and needs renewed acceptance; a finding becomes a candidate.
 3. **A milestone is DONE when its increments are DONE and its own "done when" is
    verified** end to end. Record its outcome and verification under its heading.
-4. **Running toward a milestone changes no gate.** An unattended run stops and reports
+4. **A goal names one or more accepted milestones, in order.** Each is verified DONE
+   before the next begins, so a failed check stops the run before later work builds on
+   it. The checkpoint names the goal's milestones and the one in progress, so a resumed
+   session continues them.
+5. **Running toward a goal changes no gate.** An unattended run stops and reports
    wherever the spine would ask the user: a hard-to-reverse choice, widening scope, or a
-   "done when" that cannot be met. The checkpoint names the milestone in progress, so a
-   resumed session continues it.
+   "done when" that cannot be met.
 
 Unchanged: one increment at a time, each on its own [branch](branching.md); a release
 is a separate event; IPD Decision Check Points remain separate gates.
@@ -45,7 +48,3 @@ is a separate event; IPD Decision Check Points remain separate gates.
 One milestone of at least two increments run under a goal in a real project. Record
 each stop and whether a gate caused it, and whether the end-to-end check caught
 anything the increments' checks did not.
-
-## Open questions
-
-1. Must milestones run one at a time, as increments do?
