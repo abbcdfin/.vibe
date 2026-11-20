@@ -55,18 +55,18 @@ Codex 0.153.2 and Antigravity 1.5.11; the recipe belongs to the launching tool).
 the role to the host's default instructions; never replace them. `--agent` on Claude
 Code and Antigravity replaces the default prompt, and Antigravity's agent format has
 no field to keep it. The tool writes the role body, header stripped and prefixed "In
-this session you act as the following role.", to `AGENTS.md` in a per-instance folder
-it owns outside the worktree, and passes it as:
+this session you act as the following role.", to `.mctl/<instance>/AGENTS.md` in the
+working directory, so each worktree carries its own roles, excluded through Git's
+`info/exclude`, and passes it as:
 
-- Claude Code: `--append-system-prompt-file <folder>/AGENTS.md`.
+- Claude Code: `--append-system-prompt-file .mctl/<instance>/AGENTS.md`.
 - Codex: `-c developer_instructions="<its text>"`.
-- Antigravity: `--add-dir <folder>`; an added folder's `AGENTS.md` is an always-on rule,
-  injected into the default prompt.
+- Antigravity: `--add-dir .mctl/<instance>`; an added folder's `AGENTS.md` is an
+  always-on rule, injected into the default prompt.
 
 Each session kept vibe's hook and took the role; Claude Code and Antigravity kept their
 default prompts, and Codex adds a developer message beside base instructions it would
-not quote. An unframed role file reads as a subagent definition. A folder inside the
-worktree also works if Git ignores it.
+not quote. An unframed role file reads as a subagent definition.
 
 ## Validation
 
