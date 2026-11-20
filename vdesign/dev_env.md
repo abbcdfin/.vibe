@@ -12,4 +12,4 @@
   Claude Code. Strict mode rejects this shared layout.
 - Work on `dev`. `main` is the install channel and moves only to a tagged release; the
   untracked `.git/hooks/pre-push` refuses any other push of `main`
-  ([release rules](proposals/release-rules.md), rule 5).
+  ([branching](proposals/branching.md), rule 1).

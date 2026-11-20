@@ -36,12 +36,9 @@
    raises any change to the plan before making it. Drafting the board is the
    implementer's detailed design; reviewing it catches a misread brief before code
    exists.
-4. **An increment branch.** Starting an increment, the delegating session creates its
-   branch from the integration branch that `dev_env.md` names: `main`, unless releases
-   keep `main` as the install channel. Workers work on that branch and commit before
-   handing back; uncommitted work is not handed back. At DONE the delegating session
-   verifies "done when" on the branch, records the outcome, merges with `--no-ff` so
-   the increment is one revertible commit, and deletes the branch.
+4. **Workers commit before handing back**, on the increment's
+   [branch](branching.md); uncommitted work is not handed back. The delegating session
+   creates the branch and merges it at DONE.
 5. **Worker mode.** `modes/worker.md`, appended when the launching tool sets
    `VIBE_MODE=worker`; `hooks/lib-mode.sh` reads the variable before any manifest. A
    worker skips the session workflow and initialization, stays within its brief, and

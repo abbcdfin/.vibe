@@ -24,26 +24,23 @@
    version that package managers and update checks compare plain SemVer; put the hash in
    a separate field or after `+` (`0.10.0+g4242320`), never after `-`, which SemVer reads
    as a pre-release.
-5. **The install channel moves only at a release.** When consumers install from a
-   branch, its tip is always a tagged release, so each version names one commit. Work on
-   another branch; a release fast-forwards the channel, and a pre-push hook refuses
-   anything else. A `-dev` version is no substitute: updaters would receive it. A patch
-   that must ship without unreleased work is built on a branch from the release tag; the
-   channel fast-forwards to its tag, then merges into the working branch.
+5. **Consumers install only releases.** They install from `main`, which moves only to a
+   tagged release ([branching](branching.md)), so each version names one commit. A
+   `-dev` version is no substitute: updaters would receive it.
 
 ## Where and when
 
 - **Where.** `CHANGELOG.md` sits at the root beside `README.md`, widening the front door to
   the root files written for consumers. A project's release decisions are stable, so one
-  ADR in `docs/` records them: the version scheme and what counts as breaking, the tagged
-  branch, the channels consumers install from and the push that publishes to each, and
-  where fixes for older lines go.
+  ADR in `docs/` records them: the version scheme and what counts as breaking, the
+  channels consumers install from and the push that publishes to each, and where fixes
+  for older lines go.
 - **When.** A release is an event, not a lifecycle state. It bundles increments already
   DONE, and publication adds the release to each increment's DONE summary in `plan.md`.
 
 ## Validation
 
-A real project's release made under all three rules, whether its check passes or catches
+A real project's release made under these rules, whether its check passes or catches
 a gap. **Run 1**, this repo's v0.8.1, did: the check caught three gaps in the notes (listed
 in the release commit) and produced rule 2's channel clause.
 

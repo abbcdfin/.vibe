@@ -76,6 +76,8 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
 - Release rules — release notes, upgrade checks, tags, build identity and a
   release-only install channel; validation run 1 was v0.8.1.
   [Proposal](proposals/release-rules.md).
+- Branching — `main` holds releases, `dev` integrates, and each increment builds on its
+  own branch merged at DONE. [Proposal](proposals/branching.md).
 - Test-driven execution — a failing test as the contract for agentic work.
   [Proposal](proposals/tdd-execution.md).
 - Validate increment planning in a real project — host project to be selected;
