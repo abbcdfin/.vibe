@@ -26,17 +26,20 @@
    or removing one is a breaking change with an **Upgrade** line.
 2. **Delegation rules**, in the spine. The delegating session briefs a bounded task,
    verifies the result itself — a worker's claim of completion is not evidence — and
-   keeps ownership of the plan, checkpoint and decisions. For a non-trivial task the
-   brief may require **plan first**: the worker returns a detailed plan — steps, files,
-   risks and how it will verify — and stops; the delegating session approves or
-   corrects it; the worker implements only the approved plan and raises any deviation
-   before making it. The plan travels in the answer; an increment-sized brief may ask
-   for it as the board.
-3. **Worker mode.** `modes/worker.md`, appended when the launching tool sets
+   keeps ownership of `plan.md`, the checkpoint and decisions.
+3. **The implementer owns the board.** When an increment's build is delegated, the
+   implementer drafts `vdesign/active_plan.md` — slices and commit-sized tasks, each
+   with how it will be verified — and stops. The delegating session approves or
+   corrects the board; the implementer then builds by it, checking off tasks, and
+   raises any change to the plan before making it. Drafting the board is the
+   implementer's detailed design; reviewing it catches a misread brief before code
+   exists.
+4. **Worker mode.** `modes/worker.md`, appended when the launching tool sets
    `VIBE_MODE=worker`; `hooks/lib-mode.sh` reads the variable before any manifest. A
-   worker skips the session workflow and initialization, stays within its brief, edits
-   `vdesign/`, design documents and ADRs only when the brief says so, and reports
-   out-of-scope findings in its answer for the delegating session to record.
+   worker skips the session workflow and initialization, stays within its brief, and
+   reports out-of-scope findings in its answer for the delegating session to record.
+   In `vdesign/` it edits only its board; design documents and ADRs only when the brief
+   says so.
 
 ## Boundary with tools
 
