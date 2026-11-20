@@ -19,6 +19,14 @@ changes a feature, and a patch fixes one.
   work on `dev` (or `inc/<n>-<slug>` branches) instead of `main`, and install vibe's
   `pre-push` hook from `skills/init/pre-push` into `.git/hooks/pre-push` (or run
   `/vibe:init` to create `dev` and install the hook when none exists).
+- Replaces `software-expert` with three distinct roles in `agents/`: `architect` (system
+  design, ADRs, increment planning; no production code), `implementer` (builds to the
+  brief and commits) and `tester` (verifies against "done when" with evidence; reports
+  defects without fixing them). `product-owner` is unchanged in scope and now hands off
+  to the new roles.
+- **Upgrade:** wherever a project or tool names `software-expert` (for example
+  `--agent vibe:software-expert`, a `CLAUDE.md`, or an `mctl.toml`), replace it with the
+  matching role: `architect`, `implementer` or `tester`.
 
 ## v0.10.0 — 2026-11-06
 
