@@ -88,12 +88,13 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   step; each role loads as a subagent on Claude Code and Antigravity; both plugin
   validators pass.
 - [ ] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
-  Done when: the spine states when to delegate, what a brief carries, that the
-  delegating session verifies results and owns `plan.md`, the checkpoint and decisions,
-  that the implementer drafts the board and stops for review, and that workers commit on
-  the increment's branch before handing back. In a scratch project, a delegated
-  implementer drafts the board and stops, then builds by the approved board and commits
-  on the branch. The adapters inject `vibe.md` unchanged.
+  Done when: the spine states when to delegate, what a brief carries, what a report
+  returns, that the delegating session verifies results and owns `plan.md`, the
+  checkpoint and decisions, that the implementer drafts the board and stops for review,
+  and that workers commit on the increment's branch before handing back. In a scratch
+  project, a delegated implementer drafts the board and stops, then builds by the
+  approved board, commits on the branch and reports as the spine requires. The adapters
+  inject `vibe.md` unchanged. Widened by the user on 2026-11-21 to include the report.
 - [ ] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `modes/worker.md` holds the worker rules; `hooks/lib-mode.sh` selects it
   when `VIBE_MODE=worker`, before any manifest; the Claude Code, Codex and Antigravity
