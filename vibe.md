@@ -6,7 +6,8 @@ how decisions are made.
 ## Roles
 
 Adopt the matching role from the framework's `agents/`: `product-owner` owns the
-**what and why**; `software-expert` owns the **how**. Delegate bounded tasks when
+**what and why**; `architect` owns design and increment planning, `implementer` builds
+to the brief, and `tester` verifies against "done when". Delegate bounded tasks when
 isolation helps and delegation is available.
 
 Apply `architectural-principles` to code and structural work, `agile-principles` to

@@ -33,7 +33,7 @@ Quoted verbatim from <https://agilemanifesto.org/principles.html>.
 |---|---|
 | 1, 3, 7 — frequent delivery of working software | Integrated slices and verified increment outcomes |
 | 2 — welcome change | Candidates and explicit acceptance of scope changes |
-| 4 — business and developers together | Product-owner and software-expert responsibilities; direct user decisions |
+| 4 — business and developers together | `product-owner`, `architect`, `implementer` and `tester` responsibilities; direct user decisions |
 | 9, 10 — quality and simplicity | Architectural principles: Resist Entropy and Minimal Mechanism |
 | 12 — reflect and adjust | Outcome summaries, verification and recorded rejection reasons |
 | 5, 6, 8, 11 — people and team organization | Human concerns; do not simulate them with agent ceremonies |
@@ -67,7 +67,7 @@ documentation increment uses the activities and verification its outcome needs.
 | Lifespan | Throwaway | Kept and grown | Throwaway |
 | Output | A finding | Integrated software | Requirements |
 | Place in development | Before an increment is accepted | How a BUILDING increment proceeds | Before any DRAFT exists |
-| Owner | software-expert | software-expert | product-owner |
+| Owner | architect | implementer | product-owner |
 | Home | `vdesign/utils/` | Production tree | Temporary working material |
 
 A spike is time-boxed and informs acceptance; a thin slice implements an accepted increment.
