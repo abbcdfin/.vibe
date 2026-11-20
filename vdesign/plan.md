@@ -81,7 +81,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   unborn `main` and no `.git/`. The Claude Code adapter delivers `vibe.md` byte for byte,
   Codex and Antigravity without its final newline as before; both plugin validators pass;
   local links resolve and `git diff --check` is clean. pi was not run.
-- [ ] 7. Roles — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+- [/] 7. Roles — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `agents/` holds `architect`, `implementer` and `tester` with the
   responsibilities ADR 0006 gives them, and `software-expert` is gone; no shipped file,
   design document or README names it; the changelog carries the rename as an Upgrade
