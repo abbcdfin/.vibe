@@ -49,14 +49,21 @@ protocol. The [curated-subagents candidate](curated-subagents.md) covers how to 
 the brief.
 
 **Applying a role to a launched session** (tested 2026-11-20 on Claude Code 2.1.328,
-Codex 0.153.2 and Antigravity 1.4.4). The tool reads `agents/<role>.md` from a path it
-is configured with, strips the header, prefixes "In this session you act as the
-following role." and passes the text by `--append-system-prompt-file` (Claude Code) or
-`-c developer_instructions=…` (Codex). Both sessions took the role and kept vibe's
-hook; Claude Code kept its default prompt, and Codex adds the text as a developer
-message beside base instructions it would not quote. `--agent` on Claude Code and
-Antigravity replaces the default prompt; an unframed role file reads as a subagent
-definition.
+Codex 0.153.2 and Antigravity 1.5.11; the recipe belongs to the launching tool). Add
+the role to the host's default instructions; never replace them. `--agent` on Claude
+Code and Antigravity replaces the default prompt, and Antigravity's agent format has
+no field to keep it. The tool writes the role body, header stripped and prefixed "In
+this session you act as the following role.", to `.mctl/<instance>/AGENTS.md` in the
+working directory, excluded through `.git/info/exclude`, and passes it as:
+
+- Claude Code: `--append-system-prompt-file .mctl/<instance>/AGENTS.md`.
+- Codex: `-c developer_instructions="<its text>"`.
+- Antigravity: `--add-dir .mctl/<instance>`; an added folder's `AGENTS.md` is an
+  always-on rule, injected into the default prompt.
+
+Each session kept vibe's hook and took the role; Claude Code and Antigravity kept their
+default prompts, and Codex adds a developer message beside base instructions it would
+not quote. An unframed role file reads as a subagent definition.
 
 ## Validation
 
