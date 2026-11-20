@@ -7,10 +7,10 @@ The shipped text is the product; its authoritative sources are:
 
 - **Governance** — [`vibe.md`](../vibe.md): artifacts, the increment lifecycle and its
   branches ([ADR 0005](adr/0005-branching.md)), session workflow and decisions.
-- **Roles** — [`agents/`](../agents/): product-owner for what and why, software-expert
-  for engineering execution; adopted on the main thread or delegated. **Pending
-  (increments 7–8, [ADR 0006](adr/0006-delegated-work.md)):** architect, implementer
-  and tester replace software-expert, under delegation rules in the governance.
+- **Roles** — [`agents/`](../agents/): product-owner for what and why, architect for
+  design and increment planning, implementer for building to the brief, tester for
+  verification ([ADR 0006](adr/0006-delegated-work.md)); adopted on the main thread or
+  delegated. **Pending (increment 8):** delegation rules in the governance.
 - **Principles** — each skill's `reference.md`: architectural structure, Agile method
   and agentic-system design.
 - **Initializer** — [`skills/init/reference.md`](../skills/init/reference.md): project

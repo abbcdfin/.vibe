@@ -81,12 +81,22 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   unborn `main` and no `.git/`. The Claude Code adapter delivers `vibe.md` byte for byte,
   Codex and Antigravity without its final newline as before; both plugin validators pass;
   local links resolve and `git diff --check` is clean. pi was not run.
-- [/] 7. Roles — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+- [x] 7. Roles — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `agents/` holds `architect`, `implementer` and `tester` with the
   responsibilities ADR 0006 gives them, and `software-expert` is gone; no shipped file,
   design document or README names it; the changelog carries the rename as an Upgrade
   step; each role loads as a subagent on Claude Code and Antigravity; both plugin
   validators pass.
+  Outcome: `architect`, `implementer` and `tester` (100–107 words each) replace
+  `software-expert`; `product-owner`, the spine's Roles and the Agile reference name
+  them, and the changelog's Unreleased entry carries the Upgrade step. Built by a
+  delegated developer from a reviewed board.
+  Verified: each role, `product-owner` included, loads through `claude --plugin-dir`
+  as `vibe:<role>` and answers with its own limits, and `vibe:software-expert` is
+  reported missing; on Antigravity each loads from a scratch workspace plugin, which
+  exposes plugin agents unprefixed. No shipped file or README names `software-expert`;
+  both plugin validators pass; the adapters deliver `vibe.md` as before; local links
+  resolve and `git diff --check` is clean. pi was not run.
 - [ ] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: the spine states when to delegate, what a brief carries, what a report
   returns, that the delegating session verifies results and owns `plan.md`, the
