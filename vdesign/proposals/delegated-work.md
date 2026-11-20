@@ -26,7 +26,12 @@
    or removing one is a breaking change with an **Upgrade** line.
 2. **Delegation rules**, in the spine. The delegating session briefs a bounded task,
    verifies the result itself — a worker's claim of completion is not evidence — and
-   keeps ownership of the plan, checkpoint and decisions.
+   keeps ownership of the plan, checkpoint and decisions. For a non-trivial task the
+   brief may require **plan first**: the worker returns a detailed plan — steps, files,
+   risks and how it will verify — and stops; the delegating session approves or
+   corrects it; the worker implements only the approved plan and raises any deviation
+   before making it. The plan travels in the answer; an increment-sized brief may ask
+   for it as the board.
 3. **Worker mode.** `modes/worker.md`, appended when the launching tool sets
    `VIBE_MODE=worker`; `hooks/lib-mode.sh` reads the variable before any manifest. A
    worker skips the session workflow and initialization, stays within its brief, edits
