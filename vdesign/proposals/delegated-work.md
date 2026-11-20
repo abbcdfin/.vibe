@@ -32,6 +32,8 @@
    keep exploratory, cross-cutting or under-specified work. The brief carries the task,
    its "done when", the seams to reuse (utilities, layer, conventions) and why its
    constraints hold; a task that cannot be briefed concisely is not yet specified. The
+   report returns, for each item of the brief's contract, the commit and the evidence
+   (command and result); then what was not run, and findings outside scope. The
    delegating session verifies the result itself — a worker's claim of completion is
    not evidence — and keeps ownership of `plan.md`, the checkpoint and decisions.
 3. **The implementer owns the board.** When an increment's build is delegated, the
