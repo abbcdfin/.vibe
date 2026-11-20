@@ -65,8 +65,8 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
 
 ## Candidates
 
-- Delegated work — architect, implementer and tester roles; delegation rules; a worker
-  mode for delegated sessions. [Proposal](proposals/delegated-work.md).
+- Delegated work — architect, implementer and tester roles that check each other's work;
+  delegation rules; a worker mode for delegated sessions. [Proposal](proposals/delegated-work.md).
 - Principle defaults — consider the policy alternatives identified during cleanup;
   committed references remain authoritative. [Proposal](proposals/principle-defaults.md).
 - Curated-context subagents — delegate a bounded task to a fresh subagent holding only
