@@ -97,7 +97,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   exposes plugin agents unprefixed. No shipped file or README names `software-expert`;
   both plugin validators pass; the adapters deliver `vibe.md` as before; local links
   resolve and `git diff --check` is clean. pi was not run.
-- [ ] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+- [/] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: the spine states when to delegate, what a brief carries, what a report
   returns, that the delegating session verifies results and owns `plan.md`, the
   checkpoint and decisions, that the implementer drafts the board and stops for review,
