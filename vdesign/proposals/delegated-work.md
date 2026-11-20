@@ -1,6 +1,8 @@
 # Proposal: Delegated Work
 
-> **Status: CANDIDATE — not adopted.** The current roles and spine remain authoritative.
+> **Status: ACCEPTED** as increments 7–9 in
+> [ADR 0006](../../docs/adr/0006-delegated-work.md); deleted when increment 9 is DONE.
+> Until each is built, the current roles and spine remain authoritative.
 
 ## Motivation
 
@@ -26,9 +28,12 @@
 
    Role names are vibe's interface: tools such as mctl reference them by name. Renaming
    or removing one is a breaking change with an **Upgrade** line.
-2. **Delegation rules**, in the spine. The delegating session briefs a bounded task,
-   verifies the result itself — a worker's claim of completion is not evidence — and
-   keeps ownership of `plan.md`, the checkpoint and decisions.
+2. **Delegation rules**, in the spine. Delegate a leaf task with an explicit contract;
+   keep exploratory, cross-cutting or under-specified work. The brief carries the task,
+   its "done when", the seams to reuse (utilities, layer, conventions) and why its
+   constraints hold; a task that cannot be briefed concisely is not yet specified. The
+   delegating session verifies the result itself — a worker's claim of completion is
+   not evidence — and keeps ownership of `plan.md`, the checkpoint and decisions.
 3. **The implementer owns the board.** When an increment's build is delegated, the
    implementer drafts `vdesign/active_plan.md` — slices and commit-sized tasks, each
    with how it will be verified — and stops. The delegating session approves or
@@ -50,8 +55,7 @@
 
 vibe states responsibilities and rules. A tool such as mctl chooses who plays a role
 (backend, model, permissions), enforces limits, and documents only its own tools and
-protocol. The [curated-subagents candidate](curated-subagents.md) covers how to write
-the brief.
+protocol.
 
 **Applying a role to a launched session** (tested 2026-11-20 on Claude Code 2.1.328,
 Codex 0.153.2 and Antigravity 1.5.11; the recipe belongs to the launching tool). Add
@@ -77,7 +81,9 @@ One mctl mission on an increment branch, with an architect supervisor and implem
 and tester workers.
 Workers stay within their briefs and create no planning files; the supervisor records
 their findings; the tester reports without fixing. Record what the board review and the
-tester caught that the implementer did not.
+tester caught that the implementer did not, and watch for a worker duplicating what
+it could not see, delegation too small to repay the brief, and a brief that drops the
+why.
 
 ## Open questions
 

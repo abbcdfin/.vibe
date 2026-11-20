@@ -62,24 +62,45 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   none, so nothing moved. Verified: the Claude Code, Codex and Antigravity hooks inject
   `vibe.md` unchanged, the hub manifest still appends its module, 31 files' local links
   resolve, `git diff --check` is clean and both plugin validators pass. Released in v0.10.0.
+- [ ] 6. Branching — accepted in [ADR 0005](../docs/adr/0005-branching.md).
+  Done when: the spine's Lifecycle carries branching rules 1–4 and the release-rules
+  candidate takes rule 5; the initializer creates `dev` when absent and installs vibe's
+  pre-push hook only when the clone has none; the hook refuses an untagged push of `main`
+  and passes a tagged one and other branches; this repository runs the shipped hook; the
+  changelog carries the upgrade steps; the adapters inject `vibe.md` unchanged; local
+  links resolve; both plugin validators pass.
+- [ ] 7. Roles — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+  Done when: `agents/` holds `architect`, `implementer` and `tester` with the
+  responsibilities ADR 0006 gives them, and `software-expert` is gone; no shipped file,
+  design document or README names it; the changelog carries the rename as an Upgrade
+  step; each role loads as a subagent on Claude Code and Antigravity; both plugin
+  validators pass.
+- [ ] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+  Done when: the spine states when to delegate, what a brief carries, that the
+  delegating session verifies results and owns `plan.md`, the checkpoint and decisions,
+  that the implementer drafts the board and stops for review, and that workers commit on
+  the increment's branch before handing back. In a scratch project, a delegated
+  implementer drafts the board and stops, then builds by the approved board and commits
+  on the branch. The adapters inject `vibe.md` unchanged.
+- [ ] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+  Done when: `modes/worker.md` holds the worker rules; `hooks/lib-mode.sh` selects it
+  when `VIBE_MODE=worker`, before any manifest; the Claude Code, Codex and Antigravity
+  hooks deliver the spine and the worker module with the variable, and their current
+  output without it; a Claude Code worker launched with the variable and a role in a
+  scratch project completes a small brief without creating `vdesign/` or `docs/`; pi's
+  behaviour is recorded; the mctl mission pilot is a candidate.
 
 ## Candidates
 
-- Delegated work — architect, implementer and tester roles that check each other's work;
-  delegation rules; a worker mode for delegated sessions. [Proposal](proposals/delegated-work.md).
 - Milestones — group increments under an outcome accepted as a whole, so a lead can run
   toward it across increments. [Proposal](proposals/milestones.md).
 - Principle defaults — consider the policy alternatives identified during cleanup;
   committed references remain authoritative. [Proposal](proposals/principle-defaults.md).
-- Curated-context subagents — delegate a bounded task to a fresh subagent holding only
-  its briefing. [Proposal](proposals/curated-subagents.md).
 - Hub-and-spoke mode — multi-repository workspaces; the `modes/` harness and
   `/vibe:init hub|spoke` exist to validate it. [Proposal](proposals/hub-and-spoke-mode.md).
 - Release rules — release notes, upgrade checks, tags, build identity and a
   release-only install channel; validation run 1 was v0.8.1.
   [Proposal](proposals/release-rules.md).
-- Branching — `main` holds releases, `dev` integrates, and each increment builds on its
-  own branch merged at DONE. [Proposal](proposals/branching.md).
 - Test-driven execution — a failing test as the contract for agentic work.
   [Proposal](proposals/tdd-execution.md).
 - Validate increment planning in a real project — host project to be selected;

@@ -6,9 +6,12 @@ installed once per host rather than copied into every project.
 The shipped text is the product; its authoritative sources are:
 
 - **Governance** — [`vibe.md`](../vibe.md): artifacts, increment lifecycle, session
-  workflow and decisions.
+  workflow and decisions. **Pending (increment 6, [ADR 0005](adr/0005-branching.md)):**
+  branches — `main` for releases, `dev` for integration, a branch per increment.
 - **Roles** — [`agents/`](../agents/): product-owner for what and why, software-expert
-  for engineering execution; adopted on the main thread or delegated.
+  for engineering execution; adopted on the main thread or delegated. **Pending
+  (increments 7–8, [ADR 0006](adr/0006-delegated-work.md)):** architect, implementer
+  and tester replace software-expert, under delegation rules in the governance.
 - **Principles** — each skill's `reference.md`: architectural structure, Agile method
   and agentic-system design.
 - **Initializer** — [`skills/init/reference.md`](../skills/init/reference.md): project

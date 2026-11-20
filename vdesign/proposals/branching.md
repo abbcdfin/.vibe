@@ -1,8 +1,9 @@
 # Proposal: Branching
 
-> **Status: CANDIDATE — not adopted.** Graduation target: rules 1–4 in the spine's
-> Lifecycle; rule 5 beside the [release rules](release-rules.md) in their **Releasing**
-> section.
+> **Status: ACCEPTED** as increment 6 in
+> [ADR 0005](../../docs/adr/0005-branching.md); deleted when it is DONE. Graduation
+> target: rules 1–4 in the spine's Lifecycle; rule 5 into the
+> [release rules](release-rules.md).
 
 ## Motivation
 

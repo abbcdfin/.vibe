@@ -26,7 +26,9 @@ configuration schemas differ, as shown in the [installation instructions](../REA
 adapters append the matching draft `modes/<mode>.md` after the spine
 ([ADR 0001](adr/0001-mode-specific-rules-via-injection.md)). Without a manifest, only
 the spine is injected. These modes remain candidates under validation; pi does not
-run the harness.
+run the harness. **Pending (increment 9, [ADR 0006](adr/0006-delegated-work.md)):**
+`VIBE_MODE=worker`, set by a launching tool, selects `modes/worker.md` before any
+manifest.
 
 Claude Code and Codex use the session working directory. Antigravity runs hooks from
 the plugin directory and selects the workspace from its payload; absent a workspace,
