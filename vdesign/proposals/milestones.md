@@ -40,8 +40,9 @@
    wherever the spine would ask the user: a hard-to-reverse choice, widening scope, or a
    "done when" that cannot be met.
 
-Unchanged: one increment at a time, each on its own [branch](branching.md); a release
-is a separate event; IPD Decision Check Points remain separate gates.
+Unchanged: one increment at a time, each on its own
+[branch](../../docs/adr/0005-branching.md); a release is a separate event; IPD Decision
+Check Points remain separate gates.
 
 ## Validation
 

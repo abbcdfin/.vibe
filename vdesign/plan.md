@@ -62,13 +62,25 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   none, so nothing moved. Verified: the Claude Code, Codex and Antigravity hooks inject
   `vibe.md` unchanged, the hub manifest still appends its module, 31 files' local links
   resolve, `git diff --check` is clean and both plugin validators pass. Released in v0.10.0.
-- [/] 6. Branching — accepted in [ADR 0005](../docs/adr/0005-branching.md).
+- [x] 6. Branching — accepted in [ADR 0005](../docs/adr/0005-branching.md).
   Done when: the spine's Lifecycle carries branching rules 1–4 and the release-rules
   candidate takes rule 5; the initializer creates `dev` when absent and installs vibe's
   pre-push hook only when the clone has none; the hook refuses an untagged push of `main`
   and passes a tagged one and other branches; this repository runs the shipped hook; the
   changelog carries the upgrade steps; the adapters inject `vibe.md` unchanged; local
   links resolve; both plugin validators pass.
+  Outcome: the spine's Lifecycle carries the branching model (841 → 921 words); the
+  release-rules candidate takes the patch rule as rule 6; the initializer creates `dev`
+  and installs the shipped `skills/init/pre-push` when no hook exists, and reports and
+  skips without `.git/`, a commit or `main`. Built by a delegated developer from a
+  reviewed board.
+  Verified: the hook against a scratch bare remote (untagged `main` refused, also beside
+  `dev`; tagged `main`, `dev` and `inc/*` pass); a real `/vibe:init` through
+  `claude --plugin-dir` created `dev` and installed a byte-identical hook; the
+  developer's run of the initializer's steps passed seven cases, including no `main`, an
+  unborn `main` and no `.git/`. The Claude Code adapter delivers `vibe.md` byte for byte,
+  Codex and Antigravity without its final newline as before; both plugin validators pass;
+  local links resolve and `git diff --check` is clean. pi was not run.
 - [ ] 7. Roles — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `agents/` holds `architect`, `implementer` and `tester` with the
   responsibilities ADR 0006 gives them, and `software-expert` is gone; no shipped file,

@@ -10,6 +10,5 @@
   which checks were executed; availability is not a project constraint.
 - Antigravity's warning about `hooks/hooks.json` is expected: that file belongs to
   Claude Code. Strict mode rejects this shared layout.
-- Work on `dev`. `main` is the install channel and moves only to a tagged release; the
-  untracked `.git/hooks/pre-push` refuses any other push of `main`
-  ([branching](proposals/branching.md), rule 1).
+- `.git/hooks/pre-push` is the initializer's `skills/init/pre-push`; Git does not track
+  it ([ADR 0005](../docs/adr/0005-branching.md)).
