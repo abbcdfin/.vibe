@@ -30,13 +30,14 @@
    branched from the release tag. `main` fast-forwards to the patch's tag, which then
    merges into `dev`.
 
-Initialization creates `dev` from `main` when it is absent.
+Initialization creates `dev` from `main` when it is absent, and copies vibe's pre-push
+hook into `.git/hooks/` when the clone has none, reporting an existing one instead. The
+hook lives in vibe, so it is versioned once rather than in each project; setting
+`core.hooksPath` was rejected because it disables a clone's other hooks. The hook is
+local and `--no-verify` skips it, so where the server allows, also protect `main`
+against force-push and deletion; servers cannot check for a tag.
 
 ## Validation
 
 One increment in this repository run under all five rules: its branch, the DONE merge
 and a release that fast-forwards `main`.
-
-## Open questions
-
-1. Should initialization install the pre-push hook, which Git does not track?
