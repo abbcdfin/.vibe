@@ -62,7 +62,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   none, so nothing moved. Verified: the Claude Code, Codex and Antigravity hooks inject
   `vibe.md` unchanged, the hub manifest still appends its module, 31 files' local links
   resolve, `git diff --check` is clean and both plugin validators pass. Released in v0.10.0.
-- [ ] 6. Branching — accepted in [ADR 0005](../docs/adr/0005-branching.md).
+- [/] 6. Branching — accepted in [ADR 0005](../docs/adr/0005-branching.md).
   Done when: the spine's Lifecycle carries branching rules 1–4 and the release-rules
   candidate takes rule 5; the initializer creates `dev` when absent and installs vibe's
   pre-push hook only when the clone has none; the hook refuses an untagged push of `main`
