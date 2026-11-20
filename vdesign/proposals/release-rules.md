@@ -27,6 +27,9 @@
 5. **Consumers install only releases.** They install from `main`, which moves only to a
    tagged release ([branching](branching.md)), so each version names one commit. A
    `-dev` version is no substitute: updaters would receive it.
+6. **Patches.** A fix that must ship without unreleased work goes on `fix/<slug>`,
+   branched from the release tag. `main` fast-forwards to the patch's tag, which then
+   merges into `dev`.
 
 ## Where and when
 

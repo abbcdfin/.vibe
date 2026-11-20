@@ -63,6 +63,9 @@ An **increment** is a bounded, verifiable product change. It defines an outcome;
 design, development and validation are activities used as needed.
 
 Increments advance DRAFT → ACCEPTED → BUILDING → DONE, without skipping states.
+`main` moves only to a tagged release by fast-forward from `dev`, which always works;
+commit non-increment planning (candidates, proposals, the checkpoint) straight to `dev`,
+and never rewrite `main`, `dev` or tags (rebase only unshared commits).
 
 - **DRAFT** — list the candidate unnumbered under `## Candidates` in `plan.md`; link to
   a proposal in `vdesign/proposals/` when it needs a longer argument.
@@ -70,16 +73,20 @@ Increments advance DRAFT → ACCEPTED → BUILDING → DONE, without skipping st
   number the increment in `plan.md`, with its **"done when"** written there or linked
   to `docs/`, and any features it delivers. Record a proposal's decision in `docs/`;
   retain the proposal until DONE. IPD Decision Check Points remain separate gates.
-- **BUILDING `[/]`** — one increment at a time. Its `active_plan.md` points to "done
-  when" without copying it. Use commit-sized task checkboxes; add optional **slice**
-  headings for integration points. Software slices leave the product working and
-  integrated; other work ends with a verifiable deliverable.
-- **DONE `[x]`** — verify "done when", reconcile design documents with the result, and
-  record the outcome and verification in `plan.md`. Repoint surviving proposal links to
-  the design document, ADR or Git revision, then delete the board and that increment's
-  proposal. Checked tasks alone do not establish completion; DONE does not wait for release.
+- **BUILDING `[/]`** — one increment at a time: mark it BUILDING on `dev`, branch
+  `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each task
+  as you check it off. Its `active_plan.md` points to "done when" without copying it. Use
+  commit-sized task checkboxes; add optional **slice** headings for integration points.
+  Software slices leave the product working and integrated; other work ends with a
+  verifiable deliverable.
+- **DONE `[x]`** — merge `dev` into the increment branch, verify "done when" there,
+  reconcile design documents with the result, and record the outcome and verification in
+  `plan.md`. Repoint surviving proposal links to the design document, ADR or Git
+  revision, delete the board and that increment's proposal, then merge into `dev` with
+  `--no-ff` and delete the branch. Checked tasks alone do not establish completion; DONE
+  does not wait for release.
 - **REJECTED** — keep the candidate and any proposal; record the verdict and reason on
-  the candidate line and atop the proposal.
+  the candidate line and atop the proposal, and delete any increment branch.
 
 Group increments under headings, never nest them. Slices and tasks use plain
 checkboxes. Infer feature progress from delivered increments.
