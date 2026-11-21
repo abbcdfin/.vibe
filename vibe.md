@@ -14,15 +14,15 @@ sequencing and verification, and `agentic-principles` when designing agentic sys
 
 ## Delegation
 
-- **When.** Delegate leaf tasks with an explicit contract; keep exploratory, cross-cutting
-  or under-specified work.
+- **When.** Delegate leaf tasks with an explicit contract; keep exploratory,
+  cross-cutting or under-specified work.
 - **Brief.** Give the task, "done when", seams to reuse (utilities, layer, conventions)
   and why constraints hold; if it will not brief concisely, specify it first.
 - **Board.** On a delegated build, the implementer drafts and commits `active_plan.md`,
   stops for review, then builds by the approved board and raises any change first.
-- **Handback.** Commit all work on the increment's branch before handing back; never
-  return uncommitted work. Report each contract item's commit and evidence (command and
-  result), then what was not run and out-of-scope findings.
+- **Handback.** Commit all work on the increment's branch before handing back. Report
+  each contract item's commit and evidence (command and result), then what was not run
+  and out-of-scope findings.
 - **Ownership.** The delegating session creates and merges the branch, verifies results
   itself (completion claims are not evidence), and owns `plan.md`, the checkpoint and
   decisions.
@@ -92,8 +92,9 @@ and never rewrite `main`, `dev` or tags (rebase only unshared commits).
   `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each task
   as you check it off. Its `active_plan.md` points to "done when" without copying it
   (when delegated, see Delegation). Use commit-sized task checkboxes, each naming how it
-  will be verified; add optional **slice** headings for integration points. Software slices leave the product working
-  and integrated; other work ends with a verifiable deliverable.
+  will be verified; add optional **slice** headings for integration points. Software
+  slices leave the product working and integrated; other work ends with a verifiable
+  deliverable.
 - **DONE `[x]`** — merge `dev` into the increment branch, verify "done when" there,
   reconcile design documents with the result, and record the outcome and verification in
   `plan.md`. Repoint surviving proposal links to the design document, ADR or Git
