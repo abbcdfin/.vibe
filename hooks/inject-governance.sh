@@ -17,8 +17,7 @@ SPINE="$ROOT/vibe.md"
 
 cat "$SPINE"
 
-# CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).
-# Appends a draft modes/<mode>.md based on the workspace manifest in the launch cwd.
+# Mode-aware injection: VIBE_MODE=worker is adopted; workspace manifests remain candidates.
 # shellcheck source=lib-mode.sh
 . "$ROOT/hooks/lib-mode.sh"
 _mode="$(vibe_detect_mode "$PWD")"

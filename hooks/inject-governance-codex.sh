@@ -22,7 +22,7 @@ SPINE="$ROOT/vibe.md"
 
 FULL="$(cat "$SPINE")"
 
-# CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).
+# Mode-aware injection: VIBE_MODE=worker is adopted; workspace manifests remain candidates.
 # shellcheck source=lib-mode.sh
 . "$ROOT/hooks/lib-mode.sh"
 _mode="$(vibe_detect_mode "$PWD")"
