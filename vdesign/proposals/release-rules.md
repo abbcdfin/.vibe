@@ -1,6 +1,8 @@
 # Proposal: Release Rules
 
-> **Status: CANDIDATE — not adopted.** Graduation target: a **Releasing** section in
+> **Status: ACCEPTED** as increment 11 in
+> [ADR 0008](../../docs/adr/0008-release-rules.md), which answers the open questions;
+> deleted when it is DONE. Graduation target: a **Releasing** section in
 > `skills/agile-principles/reference.md`, and `CHANGELOG.md` named in the spine's "Where
 > things live". The rules stay out of the spine: only projects that publish versions need
 > them (ADR 0001's reasoning).
@@ -46,9 +48,3 @@
 A real project's release made under these rules, whether its check passes or catches
 a gap. **Run 1**, this repo's v0.8.1, did: the check caught three gaps in the notes (listed
 in the release commit) and produced rule 2's channel clause.
-
-## Open questions
-
-1. Does the agent run the upgrade check, or a human? In run 1 the agent did; the human
-   gated publishing.
-2. Prescribe a changelog format, such as Keep a Changelog, or leave it to each project?

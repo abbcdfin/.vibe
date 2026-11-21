@@ -1,8 +1,8 @@
 # Proposal: Milestones
 
-> **Status: CANDIDATE — not adopted.** Graduation target: the spine's Lifecycle, the
-> initializer's `plan.md` seed, and an ADR extending
-> [ADR 0002](../../docs/adr/0002-increments-as-progress-units.md).
+> **Status: ACCEPTED** as increment 10 in [ADR 0007](../../docs/adr/0007-milestones.md);
+> deleted when it is DONE. Graduation target: the spine's Lifecycle and the
+> initializer's `plan.md` seed.
 
 ## Motivation
 

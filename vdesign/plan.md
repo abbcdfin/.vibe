@@ -140,18 +140,28 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   neither `vdesign/` nor `docs/`; a control run without the variable did the same, so
   that run does not discriminate. shellcheck, both plugin validators, local links and
   `git diff --check` pass. pi was not run.
+- [ ] 10. Milestones — accepted in [ADR 0007](../docs/adr/0007-milestones.md).
+  Done when: the spine's Lifecycle defines a milestone as a heading in `plan.md` with
+  its own "done when", accepted with the increments listed under it and DONE when they
+  are and its end-to-end check passes; a goal names accepted milestones in order, the
+  checkpoint names the goal and the milestone in progress, and running toward a goal
+  changes no gate. The initializer's `plan.md` seed shows a milestone heading. In a
+  scratch project, a Claude Code session given a goal over a two-increment milestone
+  builds both in order, each on its own branch, verifies the milestone and stops. The
+  adapters inject `vibe.md` unchanged; both plugin validators pass.
+- [ ] 11. Release rules — accepted in [ADR 0008](../docs/adr/0008-release-rules.md).
+  Done when: `skills/agile-principles/reference.md` has a Releasing section carrying the
+  rules, with the agent running the upgrade check, the user approving publication and no
+  prescribed changelog format; the spine names `CHANGELOG.md` in "Where things live";
+  the adapters inject `vibe.md` unchanged; local links resolve; both plugin validators
+  pass.
 
 ## Candidates
 
-- Milestones — group increments under an outcome accepted as a whole, so a lead can run
-  toward it across increments. [Proposal](proposals/milestones.md).
 - Principle defaults — consider the policy alternatives identified during cleanup;
   committed references remain authoritative. [Proposal](proposals/principle-defaults.md).
 - Hub-and-spoke mode — multi-repository workspaces; the `modes/` harness and
   `/vibe:init hub|spoke` exist to validate it. [Proposal](proposals/hub-and-spoke-mode.md).
-- Release rules — release notes, upgrade checks, tags, build identity and a
-  release-only install channel; validation run 1 was v0.8.1.
-  [Proposal](proposals/release-rules.md).
 - Test-driven execution — a failing test as the contract for agentic work.
   [Proposal](proposals/tdd-execution.md).
 - Mission pilot — one mctl mission on an increment branch, with an architect supervisor
