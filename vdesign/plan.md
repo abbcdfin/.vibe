@@ -201,8 +201,8 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   rule; the lead's review restored eight places where shortening had changed meaning.
   Built by a delegated developer from a reviewed board.
   Verified: 32 adapter cases on the `jq` and `python3` paths deliver `vibe.md` byte for
-  byte, append worker and hub modules in one layout and warn on an unknown value. Against
-  the final spine, in scratch projects through `claude --plugin-dir`, a delegated
+  byte, append worker and hub modules in one layout and warn on an unknown value.
+  Against the final spine, in scratch projects through `claude --plugin-dir`, a delegated
   implementer committed only its board and stopped, then built by it and reported each
   task's commit and evidence; a worker completed its brief without creating `vdesign/`
   or `docs/`, and sessions saw the worker module only with the variable; a goal over a
