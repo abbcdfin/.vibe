@@ -111,7 +111,7 @@ ln -s /path/to/vibe/vibe.md ~/.codex/AGENTS.md
 Add the package to `~/.pi/agent/settings.json`:
 
 ```json
-{ "packages": ["git:github.com/abbcdfin/.vibe@v0.10.0"] }
+{ "packages": ["git:github.com/abbcdfin/.vibe@v0.11.0"] }
 ```
 
 Or install the extension from a local clone:

@@ -81,6 +81,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   unborn `main` and no `.git/`. The Claude Code adapter delivers `vibe.md` byte for byte,
   Codex and Antigravity without its final newline as before; both plugin validators pass;
   local links resolve and `git diff --check` is clean. pi was not run.
+  Released in v0.11.0.
 - [x] 7. Roles — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `agents/` holds `architect`, `implementer` and `tester` with the
   responsibilities ADR 0006 gives them, and `software-expert` is gone; no shipped file,
@@ -97,6 +98,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   exposes plugin agents unprefixed. No shipped file or README names `software-expert`;
   both plugin validators pass; the adapters deliver `vibe.md` as before; local links
   resolve and `git diff --check` is clean. pi was not run.
+  Released in v0.11.0.
 - [x] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: the spine states when to delegate, what a brief carries, what a report
   returns, that the delegating session verifies results and owns `plan.md`, the
@@ -117,6 +119,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   broken script. The Claude Code adapter delivers `vibe.md` byte for byte, Codex and
   Antigravity without its final newline as before; both plugin validators pass; local
   links resolve and `git diff --check` is clean. pi was not run.
+  Released in v0.11.0.
 - [x] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `modes/worker.md` holds the worker rules; `hooks/lib-mode.sh` selects it
   when `VIBE_MODE=worker`, before any manifest; the Claude Code, Codex and Antigravity
@@ -140,6 +143,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   neither `vdesign/` nor `docs/`; a control run without the variable did the same, so
   that run does not discriminate. shellcheck, both plugin validators, local links and
   `git diff --check` pass. pi was not run.
+  Released in v0.11.0.
 - [x] 10. Milestones — accepted in [ADR 0007](../docs/adr/0007-milestones.md).
   Done when: the spine's Lifecycle defines a milestone as a heading in `plan.md` with
   its own "done when", accepted with the increments listed under it and DONE when they
@@ -163,6 +167,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   invocations pass when run independently. The adapters deliver `vibe.md` as before;
   both plugin validators pass; local links resolve and `git diff --check` is clean. pi
   was not run.
+  Released in v0.11.0.
 - [x] 11. Release rules — accepted in [ADR 0008](../docs/adr/0008-release-rules.md).
   Done when: `skills/agile-principles/reference.md` has a Releasing section carrying the
   rules, with the agent running the upgrade check, the user approving publication and no
@@ -177,6 +182,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   from its description. The adapters deliver `vibe.md` as before; both plugin
   validators pass, including the skill's frontmatter; local links resolve and
   `git diff --check` is clean. pi was not run.
+  Released in v0.11.0.
 - [x] 12. Release review and concision — accepted by the user on 2026-11-21 from the
   v0.11.0 content review.
   Done when: the spine says only tasks use plain checkboxes; Delegation's board rule
@@ -209,6 +215,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   variable; a goal over a two-increment milestone ran both in order on their branches,
   verified M1 on `dev` and stopped. Both plugin validators pass with no version warning;
   shellcheck, local links and `git diff --check` are clean. pi was not run.
+  Released in v0.11.0.
 
 ## Candidates
 

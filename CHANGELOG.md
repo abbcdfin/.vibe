@@ -6,7 +6,7 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
-## Unreleased
+## v0.11.0 — 2026-11-21
 
 - Adopts the branching model in governance: `main` holds releases (moving only to a
   tagged release by fast-forward from `dev`), `dev` integrates done increments and
@@ -16,9 +16,9 @@ changes a feature, and a patch fixes one.
   into `.git/hooks/pre-push` only when none exists (reporting and leaving any existing
   hook alone; skipping when there is no `.git/`, no commit, or no `main`).
 - **Upgrade:** in each existing project, create `dev` from `main` (`git branch dev main`),
-  work on `dev` (or `inc/<n>-<slug>` branches) instead of `main`, and install vibe's
-  `pre-push` hook from `skills/init/pre-push` into `.git/hooks/pre-push` (or run
-  `/vibe:init` to create `dev` and install the hook when none exists).
+  work on `dev` (or `inc/<n>-<slug>` branches) instead of `main`, and copy the plugin's
+  `skills/init/pre-push` into `.git/hooks/pre-push` (or run `/vibe:init` to create `dev`
+  and install the hook when none exists).
 - Replaces `software-expert` with three distinct roles in `agents/`: `architect` (system
   design, ADRs, increment planning; no production code), `implementer` (builds to the
   brief and commits) and `tester` (verifies against "done when" with evidence; reports
