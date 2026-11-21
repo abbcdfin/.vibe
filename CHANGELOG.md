@@ -42,6 +42,11 @@ changes a feature, and a patch fixes one.
   its own "done when", is accepted with them and is verified on `dev` once they are
   DONE; a goal runs accepted milestones in order without changing any gate.
   `/vibe:init`'s plan seed shows the heading.
+- Adds release rules to `agile-principles` for projects that publish versions: notes in
+  the release commit, an upgrade check by the agent with the user approving
+  publication, annotated tags never moved once pushed, builds that name their commit,
+  installs only from releases, and patches from the release tag. Governance names
+  `CHANGELOG.md` and routes releasing to the skill.
 
 ## v0.10.0 — 2026-11-06
 

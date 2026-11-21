@@ -163,12 +163,20 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   invocations pass when run independently. The adapters deliver `vibe.md` as before;
   both plugin validators pass; local links resolve and `git diff --check` is clean. pi
   was not run.
-- [/] 11. Release rules — accepted in [ADR 0008](../docs/adr/0008-release-rules.md).
+- [x] 11. Release rules — accepted in [ADR 0008](../docs/adr/0008-release-rules.md).
   Done when: `skills/agile-principles/reference.md` has a Releasing section carrying the
   rules, with the agent running the upgrade check, the user approving publication and no
   prescribed changelog format; the spine names `CHANGELOG.md` in "Where things live";
   the adapters inject `vibe.md` unchanged; local links resolve; both plugin validators
   pass.
+  Outcome: the Agile reference's Releasing section carries the six rules, where and when
+  to release, and ADR 0008's answers; the skill's description now triggers on cutting a
+  release. The spine names `CHANGELOG.md` and routes releasing to `agile-principles`
+  (1,147 → 1,155 words). Built by a delegated developer from a reviewed board.
+  Verified: a Haiku session asked about cutting a release named `vibe:agile-principles`
+  from its description. The adapters deliver `vibe.md` as before; both plugin
+  validators pass, including the skill's frontmatter; local links resolve and
+  `git diff --check` is clean. pi was not run.
 
 ## Candidates
 

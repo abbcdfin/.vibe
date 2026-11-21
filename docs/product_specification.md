@@ -13,8 +13,8 @@ The shipped text is the product; its authoritative sources are:
   verification ([ADR 0006](adr/0006-delegated-work.md)); adopted on the main thread or
   delegated, a delegated session running in worker mode.
 - **Principles** — each skill's `reference.md`: architectural structure, Agile method
-  and agentic-system design. **Pending (increment 11,
-  [ADR 0008](adr/0008-release-rules.md)):** release rules in the Agile reference.
+  with release rules ([ADR 0008](adr/0008-release-rules.md)) and agentic-system
+  design.
 - **Initializer** — [`skills/init/reference.md`](../skills/init/reference.md): project
   planning files and design stubs, preserving existing content; the `dev` branch and the
   pre-push hook.
