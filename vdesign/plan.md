@@ -202,13 +202,13 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   Built by a delegated developer from a reviewed board.
   Verified: 32 adapter cases on the `jq` and `python3` paths deliver `vibe.md` byte for
   byte, append worker and hub modules in one layout and warn on an unknown value.
-  Against the final spine, in scratch projects through `claude --plugin-dir`, a delegated
-  implementer committed only its board and stopped, then built by it and reported each
-  task's commit and evidence; a worker completed its brief without creating `vdesign/`
-  or `docs/`, and sessions saw the worker module only with the variable; a goal over a
-  two-increment milestone ran both in order on their branches, verified M1 on `dev` and
-  stopped. Both plugin validators pass with no version warning; shellcheck, local links
-  and `git diff --check` are clean. pi was not run.
+  Against the final spine, in scratch projects through `claude --plugin-dir`, a
+  delegated implementer committed only its board and stopped, then built by it and
+  reported each task's commit and evidence; a worker completed its brief without
+  creating `vdesign/` or `docs/`, and sessions saw the worker module only with the
+  variable; a goal over a two-increment milestone ran both in order on their branches,
+  verified M1 on `dev` and stopped. Both plugin validators pass with no version warning;
+  shellcheck, local links and `git diff --check` are clean. pi was not run.
 
 ## Candidates
 
