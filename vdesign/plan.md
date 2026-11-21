@@ -182,7 +182,8 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   Done when: the spine says only tasks use plain checkboxes; Delegation's board rule
   names a delegated increment build; the checkpoint may be updated when a goal starts;
   the Agile skill's method index names its reference's rules; every host manifest
-  describes the current framework and carries version 0.11.0; the README lists worker
+  describes the current framework and carries the same version as the others; the
+  README lists worker
   mode among its components and mentions `dev` and the pre-push hook under
   initialization; the draft mode modules and the initializer say "session workflow";
   the initializer states the v0.8.0 rename itself; the hub board links
