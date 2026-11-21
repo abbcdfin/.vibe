@@ -91,8 +91,8 @@ and never rewrite `main`, `dev` or tags (rebase only unshared commits).
 - **BUILDING `[/]`** — one increment at a time: mark it BUILDING on `dev`, branch
   `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each task
   as you check it off. Its `active_plan.md` points to "done when" without copying it
-  (when delegated, see Delegation). Use commit-sized task checkboxes; add optional
-  **slice** headings for integration points. Software slices leave the product working
+  (when delegated, see Delegation). Use commit-sized task checkboxes, each naming how it
+  will be verified; add optional **slice** headings for integration points. Software slices leave the product working
   and integrated; other work ends with a verifiable deliverable.
 - **DONE `[x]`** — merge `dev` into the increment branch, verify "done when" there,
   reconcile design documents with the result, and record the outcome and verification in
