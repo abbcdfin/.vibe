@@ -19,8 +19,9 @@ systems.
   cross-cutting or under-specified work.
 - **Brief.** Give the task, "done when", seams to reuse (utilities, layer, conventions)
   and why constraints hold; if it will not brief concisely, specify it first.
-- **Board.** On a delegated build, the implementer drafts and commits `active_plan.md`,
-  stops for review, then builds by the approved board and raises any change first.
+- **Board.** On a delegated increment build, the implementer drafts and commits
+  `active_plan.md`, stops for review, then builds by the approved board and raises any
+  change first.
 - **Handback.** Commit all work on the increment's branch before handing back. Report
   each contract item's commit and evidence (command and result), then what was not run
   and out-of-scope findings.
@@ -70,10 +71,10 @@ Inside `vdesign/`:
 | `constraints.md` | Project-specific technical and business limits |
 | `dev_env.md` | Development setup, toolchains, local paths and environment overrides |
 
-Update the checkpoint only on instruction, an increment or milestone reaching DONE, or
-a release. Default to `uv` for Python unless `dev_env.md` says otherwise. Runtime
-configuration belongs in the architecture design or constraints; local overrides
-reference that source.
+Update the checkpoint only on instruction, starting a goal, an increment or milestone
+reaching DONE, or a release. Default to `uv` for Python unless `dev_env.md` says
+otherwise. Runtime configuration belongs in the architecture design or constraints; local
+overrides reference that source.
 
 ## Lifecycle
 
@@ -114,8 +115,8 @@ carries no checkbox and has its own "done when"; once its increments are DONE, v
 it end to end on `dev` and record `Outcome` and `Verified` lines under the heading. A
 **goal** names accepted milestones in order — each DONE before the next begins — with
 the goal and active milestone noted in `checkpoint.md`; running toward a goal changes
-no gate (stop wherever governance would ask the user). Slices and tasks use plain
-checkboxes. Infer feature progress from delivered increments.
+no gate (stop wherever governance would ask the user). Tasks use plain checkboxes.
+Infer feature progress from delivered increments.
 
 **Build thin, then widen.** For software, make the narrowest end-to-end path work first.
 Unhandled cases fail loudly and drive widening within "done when".
