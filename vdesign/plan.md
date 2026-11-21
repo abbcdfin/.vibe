@@ -117,7 +117,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   broken script. The Claude Code adapter delivers `vibe.md` byte for byte, Codex and
   Antigravity without its final newline as before; both plugin validators pass; local
   links resolve and `git diff --check` is clean. pi was not run.
-- [ ] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+- [/] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `modes/worker.md` holds the worker rules; `hooks/lib-mode.sh` selects it
   when `VIBE_MODE=worker`, before any manifest; the Claude Code, Codex and Antigravity
   hooks deliver the spine and the worker module with the variable, and their current
