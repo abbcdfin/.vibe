@@ -38,6 +38,10 @@ changes a feature, and a patch fixes one.
   the Claude Code, Codex and Antigravity hooks append `modes/worker.md`, so the session
   works inside its brief instead of running the session workflow or initializing the
   project. Other values are ignored with a warning; pi delivers the spine alone.
+- Adds milestones and goals: a milestone heading in `plan.md` groups increments under
+  its own "done when", is accepted with them and is verified on `dev` once they are
+  DONE; a goal runs accepted milestones in order without changing any gate.
+  `/vibe:init`'s plan seed shows the heading.
 
 ## v0.10.0 — 2026-11-06
 

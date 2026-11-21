@@ -68,9 +68,10 @@ Inside `vdesign/`:
 | `constraints.md` | Project-specific technical and business limits |
 | `dev_env.md` | Development setup, toolchains, local paths and environment overrides |
 
-Update the checkpoint only on instruction, an increment reaching DONE, or a release.
-Default to `uv` for Python unless `dev_env.md` says otherwise. Runtime configuration
-belongs in the architecture design or constraints; local overrides reference that source.
+Update the checkpoint only on instruction, an increment or milestone reaching DONE, or
+a release. Default to `uv` for Python unless `dev_env.md` says otherwise. Runtime
+configuration belongs in the architecture design or constraints; local overrides
+reference that source.
 
 ## Lifecycle
 
@@ -86,8 +87,10 @@ and never rewrite `main`, `dev` or tags (rebase only unshared commits).
   a proposal in `vdesign/proposals/` when it needs a longer argument.
 - **ACCEPTED `[ ]`** — `product-owner` prepares acceptance; the user decides. Only now
   number the increment in `plan.md`, with its **"done when"** written there or linked
-  to `docs/`, and any features it delivers. Record a proposal's decision in `docs/`;
-  retain the proposal until DONE. IPD Decision Check Points remain separate gates.
+  to `docs/`, and any features it delivers. Accepting a milestone accepts and numbers
+  its listed increments; adding one later widens scope. Record a proposal's decision in
+  `docs/`; retain the proposal until DONE. IPD Decision Check Points remain separate
+  gates.
 - **BUILDING `[/]`** — one increment at a time: mark it BUILDING on `dev`, branch
   `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each task
   as you check it off. Its `active_plan.md` points to "done when" without copying it
@@ -104,7 +107,12 @@ and never rewrite `main`, `dev` or tags (rebase only unshared commits).
 - **REJECTED** — keep the candidate and any proposal; record the verdict and reason on
   the candidate line and atop the proposal, and delete any increment branch.
 
-Group increments under headings, never nest them. Slices and tasks use plain
+Group increments under headings, never nest them. An optional **milestone** heading
+carries no checkbox and has its own "done when"; once its increments are DONE, verify
+it end to end on `dev` and record `Outcome` and `Verified` lines under the heading. A
+**goal** names accepted milestones in order — each DONE before the next begins — with
+the goal and active milestone noted in `checkpoint.md`; running toward a goal changes
+no gate (stop wherever governance would ask the user). Slices and tasks use plain
 checkboxes. Infer feature progress from delivered increments.
 
 **Build thin, then widen.** For software, make the narrowest end-to-end path work first.

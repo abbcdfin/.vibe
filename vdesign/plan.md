@@ -140,7 +140,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   neither `vdesign/` nor `docs/`; a control run without the variable did the same, so
   that run does not discriminate. shellcheck, both plugin validators, local links and
   `git diff --check` pass. pi was not run.
-- [/] 10. Milestones — accepted in [ADR 0007](../docs/adr/0007-milestones.md).
+- [x] 10. Milestones — accepted in [ADR 0007](../docs/adr/0007-milestones.md).
   Done when: the spine's Lifecycle defines a milestone as a heading in `plan.md` with
   its own "done when", accepted with the increments listed under it and DONE when they
   are and its end-to-end check passes; a goal names accepted milestones in order, the
@@ -149,6 +149,20 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   scratch project, a Claude Code session given a goal over a two-increment milestone
   builds both in order, each on its own branch, verifies the milestone and stops. The
   adapters inject `vibe.md` unchanged; both plugin validators pass.
+  Outcome: the spine's Lifecycle defines milestone headings with their own "done when",
+  verified on `dev` once their increments are DONE, and goals as ordered milestones
+  that change no gate; ACCEPTED numbers a milestone's increments, and its DONE
+  triggers a checkpoint update (1,059 → 1,147 words). The initializer's seed shows the
+  heading and `product-owner` prepares milestones. Built by a delegated developer from
+  a reviewed board.
+  Verified: in a scratch project through `claude --plugin-dir`, a Sonnet session given
+  "Goal: milestone M1" built both increments in order, each marked BUILDING on `dev`,
+  built on its own branch, merged with `--no-ff` and deleted; it then verified M1 on
+  `dev`, including a README requirement neither increment's check covered, recorded M1's
+  outcome under its heading and stopped without touching `main`. The tests and all four
+  invocations pass when run independently. The adapters deliver `vibe.md` as before;
+  both plugin validators pass; local links resolve and `git diff --check` is clean. pi
+  was not run.
 - [ ] 11. Release rules — accepted in [ADR 0008](../docs/adr/0008-release-rules.md).
   Done when: `skills/agile-principles/reference.md` has a Releasing section carrying the
   rules, with the agent running the upgrade check, the user approving publication and no
@@ -173,3 +187,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   applying a role is in `git show 3740b6a:vdesign/proposals/delegated-work.md`.
 - Validate increment planning in a real project — host project to be selected;
   [pilot criteria](../docs/adr/0002-increments-as-progress-units.md#validation-still-pending).
+  Include one milestone of at least two increments run under a goal
+  ([ADR 0007](../docs/adr/0007-milestones.md)): record each stop and whether a gate
+  caused it, and whether the end-to-end check caught what the increments' checks did
+  not.

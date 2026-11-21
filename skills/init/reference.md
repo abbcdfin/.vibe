@@ -37,6 +37,12 @@ Seed `plan.md` with:
 
 ## Increments
 
+<!-- Optional milestone:
+### M1 — <outcome>
+
+Done when: <end-to-end check>.
+-->
+
 ## Candidates
 ```
 
