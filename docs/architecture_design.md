@@ -22,17 +22,17 @@ configuration schemas differ, as shown in the [installation instructions](../REA
 
 ## Mode harness
 
-`hooks/lib-mode.sh` selects root `workspace.md` before `vdesign/workspace.md`. Shell
-adapters append the matching draft `modes/<mode>.md` after the spine
-([ADR 0001](adr/0001-mode-specific-rules-via-injection.md)). Without a manifest, only
-the spine is injected. These modes remain candidates under validation; pi does not
-run the harness. **Pending (increment 9, [ADR 0006](adr/0006-delegated-work.md)):**
-`VIBE_MODE=worker`, set by a launching tool, selects `modes/worker.md` before any
-manifest.
+`hooks/lib-mode.sh` selects the module the shell adapters append after the spine
+([ADR 0001](adr/0001-mode-specific-rules-via-injection.md)). `VIBE_MODE=worker`, set by
+a launching tool, selects `modes/worker.md` ([ADR 0006](adr/0006-delegated-work.md))
+before any manifest; any other value is ignored with a warning on stderr. Otherwise root
+`workspace.md`, then `vdesign/workspace.md`, selects a candidate `modes/<mode>.md`;
+without a manifest, only the spine is injected. pi delivers the spine alone.
 
-Claude Code and Codex use the session working directory. Antigravity runs hooks from
-the plugin directory and selects the workspace from its payload; absent a workspace,
-it injects the spine alone.
+Claude Code and Codex read manifests from the session working directory. Antigravity
+runs hooks from the plugin directory and reads manifests only from its payload's
+workspace; without one it injects the spine alone, plus the worker module in worker
+mode.
 
 ## Repository layout
 

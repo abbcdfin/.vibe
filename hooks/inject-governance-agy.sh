@@ -17,8 +17,8 @@
 # Working directory: Antigravity sets cwd to the directory containing hooks.json
 # (the plugin root), so the plugin's own files are addressed relative to "..".
 # The user's project is NOT cwd here — it arrives as `workspacePaths` on stdin,
-# which is what the mode harness keys off. cwd is never a fallback: it is the plugin
-# root, so a payload without a workspace gets the spine alone.
+# which manifest detection keys off. cwd is never a fallback: absent a workspace,
+# only VIBE_MODE=worker appends a module; otherwise the spine alone is injected.
 set -euo pipefail
 
 # Capture the stdin JSON payload (contains workspacePaths, conversationId, ...).
@@ -42,13 +42,11 @@ except Exception: pass' 2>/dev/null
 }
 WS="$(printf '%s' "$_stdin" | _first_ws || true)"
 
-# CANDIDATE mode-aware injection (validation harness for the hub-and-spoke proposal).
+# Mode-aware injection: VIBE_MODE=worker is adopted; workspace manifests remain candidates.
 # shellcheck source=lib-mode.sh
 . "$ROOT/hooks/lib-mode.sh"
-_mode=""
-if [ -n "$WS" ]; then
-  _mode="$(vibe_detect_mode "$WS")"
-else
+_mode="$(vibe_detect_mode "$WS")"
+if [ -z "$WS" ] && [ -z "$_mode" ]; then
   echo "vibe: no workspacePaths in the PreInvocation payload; mode modules skipped" >&2
 fi
 _module="$(vibe_mode_module "$ROOT" "${_mode:-}")"

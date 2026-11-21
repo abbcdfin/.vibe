@@ -21,7 +21,9 @@ per tool; projects share the framework without copying it into their repositorie
 
 After updating, apply any **Upgrade** steps since your installed version in the
 [changelog](CHANGELOG.md). Verify that governance is present in a new session and
-that skills are available where the host supports them.
+that skills are available where the host supports them. A tool launching a delegated
+session sets `VIBE_MODE=worker`, so the session works inside its brief instead of
+running the session workflow.
 
 ## Install (Claude Code)
 
@@ -120,8 +122,9 @@ mkdir -p ~/.pi/agent/extensions
 ln -s /path/to/vibe/pi/vibe.ts ~/.pi/agent/extensions/vibe.ts
 ```
 
-Verify governance on your install. The extension loads the spine; it does not run
-the experimental workspace-mode harness. A user-instruction fallback is:
+Verify governance on your install. The extension loads the spine alone; worker mode
+(`VIBE_MODE=worker`) and the experimental workspace-mode harness do not apply on pi.
+A user-instruction fallback is:
 
 ```bash
 ln -s /path/to/vibe/vibe.md ~/.pi/agent/AGENTS.md

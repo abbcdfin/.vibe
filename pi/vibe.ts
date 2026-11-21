@@ -16,8 +16,8 @@ import { dirname, join } from "node:path";
 // drifted, the two things to check are: (1) the event name `before_agent_start`
 // and (2) that its handler returns `{ systemPrompt }`. See README (Install — pi).
 //
-// NOTE: the candidate mode-aware injection (modes/*.md) that the bash hooks add
-// is not ported here — it is an unadopted validation harness. pi gets the spine.
+// NOTE: pi delivers the spine alone; worker mode (VIBE_MODE=worker) and the candidate
+// workspace modes are not ported here.
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SPINE = join(HERE, "..", "vibe.md");
