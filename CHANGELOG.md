@@ -34,6 +34,10 @@ changes a feature, and a patch fixes one.
   delegating session verifies results and owns `plan.md`, the checkpoint and decisions.
   Every board task now names how it will be verified, and `/vibe:init`'s board template
   shows it.
+- Adds worker mode: a tool launching a delegated session sets `VIBE_MODE=worker`, and
+  the Claude Code, Codex and Antigravity hooks append `modes/worker.md`, so the session
+  works inside its brief instead of running the session workflow or initializing the
+  project. Other values are ignored with a warning; pi delivers the spine alone.
 
 ## v0.10.0 — 2026-11-06
 

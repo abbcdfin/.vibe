@@ -117,13 +117,29 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   broken script. The Claude Code adapter delivers `vibe.md` byte for byte, Codex and
   Antigravity without its final newline as before; both plugin validators pass; local
   links resolve and `git diff --check` is clean. pi was not run.
-- [/] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+- [x] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `modes/worker.md` holds the worker rules; `hooks/lib-mode.sh` selects it
   when `VIBE_MODE=worker`, before any manifest; the Claude Code, Codex and Antigravity
   hooks deliver the spine and the worker module with the variable, and their current
   output without it; a Claude Code worker launched with the variable and a role in a
   scratch project completes a small brief without creating `vdesign/` or `docs/`; pi's
   behaviour is recorded; the mctl mission pilot is a candidate.
+  Outcome: `modes/worker.md` (110 words) replaces the session workflow with working
+  inside the brief and limits a worker's `vdesign/` edits to its board;
+  `hooks/lib-mode.sh` selects it on `VIBE_MODE=worker` before any manifest and ignores
+  other values with a warning, and the Antigravity hook applies it without a workspace.
+  pi delivers the spine alone, as the README, the architecture design and `pi/vibe.ts`
+  record. Built by a delegated developer from a reviewed board.
+  Verified: against `dev`'s hooks, all three adapters' stdout and stderr are unchanged
+  without the variable, plain and with a hub manifest; with it they deliver the spine
+  and the worker module, which wins over a manifest, Antigravity also without a
+  workspace or `jq`; an unknown value warns and changes nothing. Claude Code and
+  Antigravity sessions quoted the module only when launched with the variable; Codex was
+  checked at the script level. A Sonnet worker given the variable and the implementer
+  role completed a small brief in a scratch project, committed on its branch and created
+  neither `vdesign/` nor `docs/`; a control run without the variable did the same, so
+  that run does not discriminate. shellcheck, both plugin validators, local links and
+  `git diff --check` pass. pi was not run.
 
 ## Candidates
 
@@ -138,5 +154,12 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   [Proposal](proposals/release-rules.md).
 - Test-driven execution — a failing test as the contract for agentic work.
   [Proposal](proposals/tdd-execution.md).
+- Mission pilot — one mctl mission on an increment branch, with an architect supervisor
+  and implementer and tester workers, once mctl references roles by name and sets
+  `VIBE_MODE=worker`. Record what the board review and the tester caught that the
+  implementer did not; watch for workers leaving their briefs or duplicating what they
+  could not see, delegation too small to repay its brief, and briefs that drop the why.
+  Open: whether the supervisor defaults to `architect`. The tested per-host recipe for
+  applying a role is in `git show 3740b6a:vdesign/proposals/delegated-work.md`.
 - Validate increment planning in a real project — host project to be selected;
   [pilot criteria](../docs/adr/0002-increments-as-progress-units.md#validation-still-pending).

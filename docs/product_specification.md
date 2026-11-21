@@ -11,14 +11,14 @@ The shipped text is the product; its authoritative sources are:
 - **Roles** — [`agents/`](../agents/): product-owner for what and why, architect for
   design and increment planning, implementer for building to the brief, tester for
   verification ([ADR 0006](adr/0006-delegated-work.md)); adopted on the main thread or
-  delegated.
+  delegated, a delegated session running in worker mode.
 - **Principles** — each skill's `reference.md`: architectural structure, Agile method
   and agentic-system design.
 - **Initializer** — [`skills/init/reference.md`](../skills/init/reference.md): project
   planning files and design stubs, preserving existing content; the `dev` branch and the
   pre-push hook.
-- **Workspace modes** — [`modes/`](../modes/) and hub/spoke initialization: candidates
-  for multi-repository work, not adopted doctrine.
+- **Modes** — [`modes/`](../modes/): worker mode for delegated sessions; workspace modes
+  and hub/spoke initialization are candidates for multi-repository work.
 
 See the [README](../README.md) for supported hosts and installation, and the
 [changelog](../CHANGELOG.md) for releases and upgrade steps.
