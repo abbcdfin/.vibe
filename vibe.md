@@ -4,9 +4,9 @@ These rules govern this session.
 
 ## Roles
 
-Adopt the matching role from `agents/`: `product-owner` owns **what and why**;
-`architect` owns design and increment planning; `implementer` builds to the brief;
-`tester` verifies against "done when".
+Adopt the matching role from the framework's `agents/`: `product-owner` owns **what
+and why**; `architect` owns design and increment planning; `implementer` builds to the
+brief; `tester` verifies against "done when".
 
 Apply `architectural-principles` to code and structure, `agile-principles` to
 sequencing, verification and releasing, and `agentic-principles` to agentic systems.
@@ -34,7 +34,8 @@ In messages, documents and code:
 - Model the system before changing it; reuse its names and propagate conceptual changes.
 - State outcomes and evidence; name the file, value or trade-off that matters.
 - Cut preamble, request restatement and narration of upcoming steps.
-- Earn length by content, not effort; keep each fact in one place and cut repetition.
+- Earn length by content, not effort; keep each fact in one place and cut repetition
+  and sentences that add no information.
 
 ## Where things live
 
@@ -42,18 +43,19 @@ Place artifacts by volatility: `vdesign/` holds active process, `docs/` durable
 outcomes, `README.md` the vision, summary and quick start, and `CHANGELOG.md` what each
 release changed for consumers.
 
-- **Design documents** live with the current design: `docs/product_specification.md`
-  (features, workflows, rationale) and `docs/architecture_design.md` (structure,
-  mechanisms). Deeper topic designs go in `docs/design/<topic>.md`, linked from the
-  global document they refine. Mark accepted, unbuilt parts **pending** with their
+- **Design documents** describe the current design and change with it:
+  `docs/product_specification.md` (features, workflows, rationale) and
+  `docs/architecture_design.md` (structure, mechanisms). A feature, component or
+  subsystem that needs more gets `docs/design/<topic>.md`, linked from the global
+  document it refines. Mark accepted, unbuilt parts **pending** with their
   increment; remove the mark at DONE.
 - **Decision records** (`docs/adr/NNNN-<slug>.md`) preserve context, choice, rejected
-  alternatives and consequences when alternatives were weighed and reversal is hard;
-  otherwise record rationale in the design document. Supersede with a later ADR; upkeep
-  may change only status, supersession links and references, never the original decision
-  or reasoning.
+  alternatives and consequences. Write one when alternatives were weighed and reversal
+  is hard; otherwise record rationale in the design document. Supersede with a later
+  ADR; upkeep may change only status, supersession links and references, never the
+  original decision or reasoning.
 
-Keep filenames descriptive and other `docs/` files flat; add directories and an index
+Keep filenames descriptive and `docs/` otherwise flat; add directories and an index
 past roughly five files.
 
 | `vdesign/` | Purpose |
@@ -73,8 +75,8 @@ reference that source.
 
 ## Lifecycle
 
-An **increment** is a bounded, verifiable product change defining an outcome; use
-design, development and validation as needed.
+An **increment** is a bounded, verifiable product change defining an outcome; design,
+development and validation are activities used as needed.
 
 Increments advance DRAFT → ACCEPTED → BUILDING → DONE without skipping states. `main`
 moves only to a tagged release by fast-forward from `dev`, which always works; commit
@@ -92,14 +94,15 @@ rewrite `main`, `dev` or tags (rebase only unshared commits).
   `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each
   task as checked off. `active_plan.md` links "done when" without copying it (when
   delegated, see Delegation), using commit-sized task checkboxes naming how each is
-  verified and optional **slice** headings for integration points. Software slices stay
-  working and integrated; other work ends with a verifiable deliverable.
+  verified and optional **slice** headings for integration points. Software slices
+  leave the product working and integrated; other work ends with a verifiable
+  deliverable.
 - **DONE `[x]`** — merge `dev` into the increment branch, verify "done when" there,
   reconcile design documents and record outcome and verification in `plan.md`. Repoint
   surviving proposal links to the design document, ADR or Git revision, delete the board
-  and proposal, merge into `dev` with `--no-ff` and delete the branch. Checked tasks do
-  not establish completion; DONE does not wait for release.
-- **REJECTED** — keep the candidate and proposal; record verdict and reason on the
+  and that increment's proposal, merge into `dev` with `--no-ff` and delete the branch.
+  Checked tasks alone do not establish completion; DONE does not wait for release.
+- **REJECTED** — keep the candidate and any proposal; record verdict and reason on the
   candidate line and atop the proposal, and delete any increment branch.
 
 Group increments under headings, never nest them. An optional **milestone** heading has
