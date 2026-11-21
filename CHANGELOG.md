@@ -47,6 +47,12 @@ changes a feature, and a patch fixes one.
   publication, annotated tags never moved once pushed, builds that name their commit,
   installs only from releases, and patches from the release tag. Governance names
   `CHANGELOG.md` and routes releasing to the skill.
+- Shortens governance by about a hundred words without changing a rule, and corrects it:
+  only tasks use checkboxes (slices are headings), the board rule applies to a
+  delegated increment build, and a goal starting may update the checkpoint. A worker
+  edits no `vdesign/` file but its board.
+- The plugin manifests describe the current framework, and Antigravity's carries a
+  version. The Codex and Antigravity hooks now deliver `vibe.md` with its final newline.
 
 ## v0.10.0 — 2026-11-06
 

@@ -177,7 +177,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   from its description. The adapters deliver `vibe.md` as before; both plugin
   validators pass, including the skill's frontmatter; local links resolve and
   `git diff --check` is clean. pi was not run.
-- [/] 12. Release review and concision — accepted by the user on 2026-11-21 from the
+- [x] 12. Release review and concision — accepted by the user on 2026-11-21 from the
   v0.11.0 content review.
   Done when: the spine says only tasks use plain checkboxes; Delegation's board rule
   names a delegated increment build; the checkpoint may be updated when a goal starts;
@@ -192,6 +192,23 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   The spine is shorter with every rule kept in it, checked rule by rule, and the
   increment 8, 9 and 10 behaviour checks pass again against it. Both plugin validators
   pass without a missing-version warning; local links resolve.
+  Outcome: the review's corrections landed in the spine, `modes/worker.md`, the Agile
+  index, the draft modes and the initializer; the five manifests share one current
+  description (Codex's without roles, which it does not load) and Antigravity's gains a
+  version; the README and the architecture design describe worker mode, initialization
+  and per-host role discovery; the Codex and Antigravity hooks keep `vibe.md`'s final
+  newline. The spine went from 1,155 to 1,054 words with every rule kept, mapped rule by
+  rule; the lead's review restored eight places where shortening had changed meaning.
+  Built by a delegated developer from a reviewed board.
+  Verified: 32 adapter cases on the `jq` and `python3` paths deliver `vibe.md` byte for
+  byte, append worker and hub modules in one layout and warn on an unknown value. Against
+  the final spine, in scratch projects through `claude --plugin-dir`, a delegated
+  implementer committed only its board and stopped, then built by it and reported each
+  task's commit and evidence; a worker completed its brief without creating `vdesign/`
+  or `docs/`, and sessions saw the worker module only with the variable; a goal over a
+  two-increment milestone ran both in order on their branches, verified M1 on `dev` and
+  stopped. Both plugin validators pass with no version warning; shellcheck, local links
+  and `git diff --check` are clean. pi was not run.
 
 ## Candidates
 
