@@ -1,7 +1,7 @@
 {
   "name": "vibe",
   "version": "0.10.0",
-  "description": "Installable vibe coding framework — always-on engineering governance for AI coding agents. This file exists so pi can git-install the extension; the Claude Code and Antigravity manifests live in .claude-plugin/plugin.json and plugin.json.",
+  "description": "Vibe coding framework: always-on engineering governance, roles (product-owner, architect, implementer, tester), architectural, agentic and Agile principles (including releasing), project initialization and worker mode.",
   "private": true,
   "repository": "https://github.com/abbcdfin/.vibe",
   "author": "Jian Zhang",

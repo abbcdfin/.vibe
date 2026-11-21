@@ -8,7 +8,7 @@
     {
       "name": "vibe",
       "source": ".",
-      "description": "Vibe coding framework: always-on engineering governance, role identities, architectural & agentic principles, and project initialization (single-repo or hub-and-spoke)."
+      "description": "Vibe coding framework: always-on engineering governance, roles (product-owner, architect, implementer, tester), architectural, agentic and Agile principles (including releasing), project initialization and worker mode."
     }
   ]
 }

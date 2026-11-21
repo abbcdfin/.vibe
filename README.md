@@ -18,12 +18,11 @@ per tool; projects share the framework without copying it into their repositorie
 | Product and engineering roles | `agents/` |
 | Architectural, agentic and Agile principles | `skills/`, loaded on demand |
 | Project initializer | `skills/init/`, invoked as `/vibe:init` |
+| Worker mode | `modes/worker.md`, enabled when a launching tool sets `VIBE_MODE=worker` |
 
 After updating, apply any **Upgrade** steps since your installed version in the
 [changelog](CHANGELOG.md). Verify that governance is present in a new session and
-that skills are available where the host supports them. A tool launching a delegated
-session sets `VIBE_MODE=worker`, so the session works inside its brief instead of
-running the session workflow.
+that skills are available where the host supports them.
 
 ## Install (Claude Code)
 
@@ -140,10 +139,13 @@ On hosts with skill support, use `/vibe:init` or ask to initialize the project:
 /vibe:init spoke      # experimental component repository
 ```
 
-Single mode creates planning files in `vdesign/` and design stubs in `docs/`.
-Hub/spoke mode is a [candidate under validation](vdesign/proposals/hub-and-spoke-mode.md),
-not adopted doctrine. The shell adapters recognize workspace manifests and append the
-matching draft mode module; ordinary single-repository projects get the spine alone.
+Single mode creates planning files in `vdesign/` and design stubs in `docs/`, creates
+`dev` from `main` when absent, and installs vibe's `pre-push` hook into
+`.git/hooks/pre-push` when none exists. Hub/spoke mode is a
+[candidate under validation](vdesign/proposals/hub-and-spoke-mode.md), not adopted
+doctrine. The shell adapters append `modes/worker.md` when `VIBE_MODE=worker` is set,
+otherwise recognize workspace manifests for the draft mode modules; ordinary
+single-repository projects get the spine alone.
 
 ## Design
 

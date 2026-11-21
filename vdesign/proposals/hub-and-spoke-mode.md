@@ -33,8 +33,8 @@ Multi-repo is **not a new model** — it is the existing `vdesign/` (volatile) +
   own `vdesign/` and `docs/` scoped to its slice.
 
 The **hub is itself a vibe project** whose "code" is contracts and the cross-cutting plan
-instead of an application. This reuse keeps identities, principles, and proposals entirely
-mode-independent — only *where artifacts live* and *the context-sync order* change.
+instead of an application. This reuse keeps roles, principles, and proposals entirely
+mode-independent — only *where artifacts live* and *the session-workflow order* change.
 
 ## The mode knob (topology as data)
 
@@ -71,14 +71,14 @@ to interfaces: cross-boundary data structures are defined **once** in the hub's
 
 ## Workflow changes
 
-Only the **Context Sync** step becomes scope-aware:
+Only the **Session workflow** step becomes scope-aware:
 
 * **Single mode** — read local `vdesign/plan.md` + `checkpoint.md` (unchanged).
 * **Hub mode** — read the **hub's global plan + contracts first**, then the **active spoke's**
   local `vdesign/`. Cross-boundary changes originate in the hub; local changes stay in the
   spoke.
 
-Everything else in `vibe.md` (identities, principles, decision-making ladder) is untouched.
+Everything else in `vibe.md` (roles, principles, decision-making ladder) is untouched.
 
 ## The workspace root (coordinator launch)
 
@@ -138,7 +138,7 @@ a replacement.
 
 **Resolved by [ADR 0001](../../docs/adr/0001-mode-specific-rules-via-injection.md):**
 mode awareness is delivered as **always-on hook-injected governance**, not left to a
-discretionary read. The `SessionStart` hook reads the workspace manifest in the launch
+discretionary read. The governance hook reads the workspace manifest in the launch
 cwd (the root `workspace.md`, or a repo's `vdesign/workspace.md`) and appends the
 matching `modes/*.md` module to the injected spine. Validation should still confirm
 this holds up in practice, but the mechanism is decided.
@@ -156,7 +156,7 @@ depend on one shared contract**. (One spoke, or two unrelated spokes, proves not
    spokes. *Tests schemas-first + auto-propagation.*
 2. **Purely local change** — a task confined to one spoke. *Tests that the agent stays local
    and does not over-consult the hub (cost).*
-3. **Cross-cutting feature** — one feature spanning hub + both spokes. *Tests context-sync
+3. **Cross-cutting feature** — one feature spanning hub + both spokes. *Tests session-workflow
    order and that nothing is duplicated across scopes.*
 
 Run task 3 **twice** — once launched inside a repo, and once from the **workspace root**
@@ -167,7 +167,7 @@ routes to the hub.
 
 * **Source drift** — the agent edits the shared contract *from within a spoke* locally
   instead of at the hub. (Primary risk; defeats single-source.)
-* **Over-consultation** — global context-sync fires for trivial local work; overhead exceeds
+* **Over-consultation** — global session workflow fires for trivial local work; overhead exceeds
   benefit.
 * **Stale manifest** — a `workspace.md` (hub or root map) drifts out of sync with the
   actual repos, or the root map points at the wrong hub.
