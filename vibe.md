@@ -69,9 +69,9 @@ Inside `vdesign/`:
 | `dev_env.md` | Development setup, toolchains, local paths and environment overrides |
 
 Update the checkpoint only on instruction, an increment or milestone reaching DONE, or
-a release.
-Default to `uv` for Python unless `dev_env.md` says otherwise. Runtime configuration
-belongs in the architecture design or constraints; local overrides reference that source.
+a release. Default to `uv` for Python unless `dev_env.md` says otherwise. Runtime
+configuration belongs in the architecture design or constraints; local overrides
+reference that source.
 
 ## Lifecycle
 
@@ -87,9 +87,10 @@ and never rewrite `main`, `dev` or tags (rebase only unshared commits).
   a proposal in `vdesign/proposals/` when it needs a longer argument.
 - **ACCEPTED `[ ]`** — `product-owner` prepares acceptance; the user decides. Only now
   number the increment in `plan.md`, with its **"done when"** written there or linked
-  to `docs/`, and any features it delivers. Accepting a milestone accepts and numbers its
-  listed increments; adding one later widens scope. Record a proposal's decision in
-  `docs/`; retain the proposal until DONE. IPD Decision Check Points remain separate gates.
+  to `docs/`, and any features it delivers. Accepting a milestone accepts and numbers
+  its listed increments; adding one later widens scope. Record a proposal's decision in
+  `docs/`; retain the proposal until DONE. IPD Decision Check Points remain separate
+  gates.
 - **BUILDING `[/]`** — one increment at a time: mark it BUILDING on `dev`, branch
   `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each task
   as you check it off. Its `active_plan.md` points to "done when" without copying it
