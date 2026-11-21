@@ -48,7 +48,7 @@ Once an increment enters BUILDING, create `vdesign/active_plan.md` with:
 
 Done when: [increment <number> in the plan](plan.md#increments).
 
-- [ ] <task>
+- [ ] <task> — verify: <how>
 ```
 
 Add slice headings only when integration points help organize the work.
