@@ -6,9 +6,8 @@ installed once per host rather than copied into every project.
 The shipped text is the product; its authoritative sources are:
 
 - **Governance** — [`vibe.md`](../vibe.md): artifacts, delegation, the increment
-  lifecycle and its branches ([ADR 0005](adr/0005-branching.md)), session workflow and
-  decisions. **Pending (increment 10, [ADR 0007](adr/0007-milestones.md)):** milestones
-  and goals.
+  lifecycle and its branches ([ADR 0005](adr/0005-branching.md)), milestones and goals
+  ([ADR 0007](adr/0007-milestones.md)), session workflow and decisions.
 - **Roles** — [`agents/`](../agents/): product-owner for what and why, architect for
   design and increment planning, implementer for building to the brief, tester for
   verification ([ADR 0006](adr/0006-delegated-work.md)); adopted on the main thread or
