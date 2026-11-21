@@ -87,6 +87,10 @@ codex plugin marketplace upgrade uc-labs   # Git marketplace only
 codex plugin add vibe@uc-labs
 ```
 
+Then start interactive Codex and trust vibe's hook again; Codex does not carry hook
+trust over to a new plugin version. Until you do, sessions run without governance and
+report `hook: SessionStart Failed`.
+
 ### Alternative setup
 
 Use one governance-loading path. To register the hook yourself, add this to
