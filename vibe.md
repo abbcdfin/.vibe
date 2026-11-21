@@ -10,7 +10,8 @@ Adopt the matching role from the framework's `agents/`: `product-owner` owns the
 to the brief, and `tester` verifies against "done when".
 
 Apply `architectural-principles` to code and structural work, `agile-principles` to
-sequencing and verification, and `agentic-principles` when designing agentic systems.
+sequencing, verification and releasing, and `agentic-principles` when designing agentic
+systems.
 
 ## Delegation
 
@@ -40,7 +41,8 @@ For messages, documents and code:
 ## Where things live
 
 Place artifacts by volatility: `vdesign/` holds active process, `docs/` durable
-outcomes, and `README.md` the vision, summary and quick start.
+outcomes, `README.md` the vision, summary and quick start, and `CHANGELOG.md` what each
+release changed for consumers.
 
 - **Design documents** describe the current design and change with it. Two global ones
   sit at the root of `docs/`: `product_specification.md` covers features, workflows and
