@@ -140,7 +140,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   neither `vdesign/` nor `docs/`; a control run without the variable did the same, so
   that run does not discriminate. shellcheck, both plugin validators, local links and
   `git diff --check` pass. pi was not run.
-- [ ] 10. Milestones — accepted in [ADR 0007](../docs/adr/0007-milestones.md).
+- [/] 10. Milestones — accepted in [ADR 0007](../docs/adr/0007-milestones.md).
   Done when: the spine's Lifecycle defines a milestone as a heading in `plan.md` with
   its own "done when", accepted with the increments listed under it and DONE when they
   are and its end-to-end check passes; a goal names accepted milestones in order, the
