@@ -1,6 +1,6 @@
 {
   "name": "vibe",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Vibe coding framework: always-on engineering governance, architectural, agentic and Agile principles (including releasing), project initialization and worker mode. Codex does not load plugin roles.",
   "author": { "name": "Jian Zhang" },
   "repository": "https://github.com/abbcdfin/.vibe",

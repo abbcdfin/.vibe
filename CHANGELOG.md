@@ -6,6 +6,14 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
+## v0.11.1 — 2026-11-21
+
+- Corrects the README's Codex update steps: Codex does not carry hook trust over to a
+  new plugin version, so after every update sessions run without governance (reporting
+  `hook: SessionStart Failed`) until vibe's hook is trusted again.
+- **Upgrade:** after updating Codex, start interactive Codex and trust vibe's hook
+  again.
+
 ## v0.11.0 — 2026-11-21
 
 - Adopts the branching model in governance: `main` holds releases (moving only to a
