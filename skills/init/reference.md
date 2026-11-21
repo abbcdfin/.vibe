@@ -2,8 +2,10 @@
 
 Use the directory the user identified, otherwise the current directory. Ask only if
 the target or a conflicting edit is unresolved. Create missing artifacts; preserve
-existing content. If `vdesign/env.md` exists, apply the framework changelog's v0.8.0
-Upgrade instructions instead of creating a second environment file.
+existing content. If `vdesign/env.md` exists, rename it to `vdesign/dev_env.md` instead
+of creating a second file, moving runtime configuration or deployment targets to
+`docs/architecture_design.md` and imposed limits to `vdesign/constraints.md` (keeping
+only local override values in `dev_env.md`).
 
 ## Mode: `single` (default)
 
@@ -63,7 +65,7 @@ Add slice headings only when integration points help organize the work.
 
 Scaffold the single-mode structure, but put the roadmap at root `plan.md` instead of
 `vdesign/plan.md`. The board remains `vdesign/active_plan.md`; its "done when" link
-points to `../plan.md`. Also create:
+points to `../plan.md#increments`. Also create:
 
 - `vdesign/workspace.md`:
 
@@ -88,8 +90,8 @@ mode: spoke
 hub: ../architecture/
 ```
 
-Use the supplied hub path; confirm it if unresolved. Explain that context sync reads
-the hub's global plan and contracts before the spoke's local planning files.
+Use the supplied hub path; confirm it if unresolved. Explain that the session workflow
+reads the hub's global plan and contracts before the spoke's local planning files.
 
 ## After scaffolding
 

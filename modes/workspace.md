@@ -8,7 +8,7 @@ repositories. You can see and edit all of them in this one session.
 
 - This root holds only a map (`workspace.md`) naming the hub via its `hub:` field.
   It is not a repository: do not scaffold local planning files here.
-- **Context sync:** use the hub's plan and checkpoint in place of root-local files.
+- **Session workflow:** use the hub's plan and checkpoint in place of root-local files.
   Read `<hub>/vdesign/workspace.md` for topology, then its root `plan.md`,
   `vdesign/checkpoint.md` and `docs/contracts/`.
 - Drive cross-cutting changes across repos in this one session; contracts change in the

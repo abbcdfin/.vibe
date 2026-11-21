@@ -10,7 +10,7 @@ cross-cutting concerns.
   contracts/schemas in `docs/contracts/` (the seams between components).
 - **Define cross-boundary data structures HERE, once.** Spokes consume them; they must
   never re-invent them locally.
-- **Context sync:** use root `plan.md` in place of the spine's `vdesign/plan.md`; read
+- **Session workflow:** use root `plan.md` in place of the spine's `vdesign/plan.md`; read
   `vdesign/checkpoint.md` and `docs/contracts/`. Consult local spoke planning files only
   when coordinating that spoke.
 - The authoritative spoke list is the `spokes:` field in `vdesign/workspace.md`.
