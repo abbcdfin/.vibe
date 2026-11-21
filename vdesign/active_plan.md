@@ -13,7 +13,7 @@ Done when: [increment 12 in the plan](plan.md#increments).
 
 ## Slice 3 — Adapters
 
-- [ ] **Preserve `vibe.md`'s final newline in Codex and Antigravity hooks** — update `hooks/inject-governance-codex.sh` and `hooks/inject-governance-agy.sh` so all three shell hooks deliver `vibe.md` byte for byte and append mode modules with identical layout (both `jq` and `python3` paths) — verify: run `bash -n hooks/*.sh`, `shellcheck -x -P hooks hooks/*.sh` via `uvx`, and adapter matrix (plain byte-for-byte equal to `vibe.md`, `VIBE_MODE=worker` and hub manifest byte-for-byte equal to Claude Code's layout, `VIBE_MODE=bogus` warns on stderr and matches plain/hub, Antigravity with/without `workspacePaths` and with/without `jq`).
+- [x] **Preserve `vibe.md`'s final newline in Codex and Antigravity hooks** — update `hooks/inject-governance-codex.sh` and `hooks/inject-governance-agy.sh` so all three shell hooks deliver `vibe.md` byte for byte and append mode modules with identical layout (both `jq` and `python3` paths) — verify: run `bash -n hooks/*.sh`, `shellcheck -x -P hooks hooks/*.sh` via `uvx`, and adapter matrix (plain byte-for-byte equal to `vibe.md`, `VIBE_MODE=worker` and hub manifest byte-for-byte equal to Claude Code's layout, `VIBE_MODE=bogus` warns on stderr and matches plain/hub, Antigravity with/without `workspacePaths` and with/without `jq`).
 
 ## Slice 4 — Spine concision
 

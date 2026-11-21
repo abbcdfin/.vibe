@@ -20,24 +20,23 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SPINE="$ROOT/vibe.md"
 [ -f "$SPINE" ] || { printf '{"continue":true}'; exit 0; }
 
-FULL="$(cat "$SPINE")"
-
 # Mode-aware injection: VIBE_MODE=worker is adopted; workspace manifests remain candidates.
 # shellcheck source=lib-mode.sh
 . "$ROOT/hooks/lib-mode.sh"
 _mode="$(vibe_detect_mode "$PWD")"
 _module="$(vibe_mode_module "$ROOT" "${_mode:-}")"
-if [ -n "$_module" ]; then
-  FULL="$FULL
 
----
-
-$(cat "$_module")"
-fi
+_emit_payload() {
+  cat "$SPINE"
+  if [ -n "$_module" ]; then
+    printf '\n\n---\n\n'
+    cat "$_module"
+  fi
+}
 
 if command -v jq >/dev/null 2>&1; then
-  printf '%s' "$FULL" | jq -Rs \
+  _emit_payload | jq -Rs \
     '{continue: true, hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: .}}'
 else
-  FULL="$FULL" python3 -c 'import json,os;print(json.dumps({"continue":True,"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":os.environ["FULL"]}}))'
+  _emit_payload | python3 -c 'import json,sys;print(json.dumps({"continue":True,"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":sys.stdin.read()}}))'
 fi
