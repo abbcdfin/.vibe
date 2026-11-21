@@ -1,24 +1,22 @@
 # Vibe Operating Governance
 
-These rules govern this session: where artifacts live, how increments advance, and
-how decisions are made.
+These rules govern this session.
 
 ## Roles
 
-Adopt the matching role from the framework's `agents/`: `product-owner` owns the
-**what and why**; `architect` owns design and increment planning, `implementer` builds
-to the brief, and `tester` verifies against "done when".
+Adopt the matching role from `agents/`: `product-owner` owns **what and why**;
+`architect` owns design and increment planning; `implementer` builds to the brief;
+`tester` verifies against "done when".
 
-Apply `architectural-principles` to code and structural work, `agile-principles` to
-sequencing, verification and releasing, and `agentic-principles` when designing agentic
-systems.
+Apply `architectural-principles` to code and structure, `agile-principles` to
+sequencing, verification and releasing, and `agentic-principles` to agentic systems.
 
 ## Delegation
 
 - **When.** Delegate leaf tasks with an explicit contract; keep exploratory,
   cross-cutting or under-specified work.
-- **Brief.** Give the task, "done when", seams to reuse (utilities, layer, conventions)
-  and why constraints hold; if it will not brief concisely, specify it first.
+- **Brief.** State the task, "done when", seams to reuse (utilities, layer, conventions)
+  and why constraints hold; specify first if it will not brief concisely.
 - **Board.** On a delegated increment build, the implementer drafts and commits
   `active_plan.md`, stops for review, then builds by the approved board and raises any
   change first.
@@ -31,13 +29,12 @@ systems.
 
 ## Output discipline
 
-For messages, documents and code:
+In messages, documents and code:
 
-- Model the system before changing it. Reuse its names; propagate conceptual changes.
-- State the outcome and evidence. Name the file, value or trade-off that matters.
-- Cut preamble, restatement of the request, and narration of what you are about to do.
-- Length must be earned by content, never by effort spent.
-- Keep each fact in one place. Remove repetition and sentences that add no information.
+- Model the system before changing it; reuse its names and propagate conceptual changes.
+- State outcomes and evidence; name the file, value or trade-off that matters.
+- Cut preamble, request restatement and narration of upcoming steps.
+- Earn length by content, not effort; keep each fact in one place and cut repetition.
 
 ## Where things live
 
@@ -45,86 +42,81 @@ Place artifacts by volatility: `vdesign/` holds active process, `docs/` durable
 outcomes, `README.md` the vision, summary and quick start, and `CHANGELOG.md` what each
 release changed for consumers.
 
-- **Design documents** describe the current design and change with it. Two global ones
-  sit at the root of `docs/`: `product_specification.md` covers features, workflows and
-  business rationale; `architecture_design.md` covers structure and mechanisms. A
-  feature, component or subsystem that needs more gets `docs/design/<topic>.md`, linked
-  from the global document it refines. Mark accepted but unbuilt parts **pending**,
-  naming their increment; remove the mark at DONE.
-- **Decision records**, `docs/adr/NNNN-<slug>.md`, preserve a decision's context, choice,
-  rejected alternatives and consequences. Write an ADR when alternatives were weighed
-  and the choice is hard to reverse; otherwise put the rationale in the design document.
-  Supersede decisions with a later ADR. Upkeep may change only status, supersession links
-  and references, never the original decision or reasoning.
+- **Design documents** live with the current design: `docs/product_specification.md`
+  (features, workflows, rationale) and `docs/architecture_design.md` (structure,
+  mechanisms). Deeper topic designs go in `docs/design/<topic>.md`, linked from the
+  global document they refine. Mark accepted, unbuilt parts **pending** with their
+  increment; remove the mark at DONE.
+- **Decision records** (`docs/adr/NNNN-<slug>.md`) preserve context, choice, rejected
+  alternatives and consequences when alternatives were weighed and reversal is hard;
+  otherwise record rationale in the design document. Supersede with a later ADR; upkeep
+  may change only status, supersession links and references, never the original decision
+  or reasoning.
 
-Keep filenames descriptive and `docs/` otherwise flat; add directories and an index
-when it outgrows roughly five files. Put throwaway scripts in `vdesign/utils/`.
+Keep filenames descriptive and other `docs/` files flat; add directories and an index
+past roughly five files.
 
-Inside `vdesign/`:
-
-| Artifact | Purpose |
+| `vdesign/` | Purpose |
 |---|---|
 | `plan.md` | Increments, outcomes and unnumbered candidates |
 | `proposals/` | Arguments too long for a candidate line |
 | `active_plan.md` | Tasks and optional slices for the BUILDING increment |
 | `checkpoint.md` | Handoff context; always include "Next Steps" |
 | `constraints.md` | Project-specific technical and business limits |
-| `dev_env.md` | Development setup, toolchains, local paths and environment overrides |
+| `dev_env.md` | Development setup, toolchains, local paths and local overrides |
+| `utils/` | Throwaway scripts and probes |
 
 Update the checkpoint only on instruction, starting a goal, an increment or milestone
-reaching DONE, or a release. Default to `uv` for Python unless `dev_env.md` says
-otherwise. Runtime configuration belongs in the architecture design or constraints; local
-overrides reference that source.
+reaching DONE, or a release. Default to `uv` for Python unless `dev_env.md` overrides
+it. Put runtime configuration in the architecture design or constraints; local overrides
+reference that source.
 
 ## Lifecycle
 
-An **increment** is a bounded, verifiable product change. It defines an outcome;
-design, development and validation are activities used as needed.
+An **increment** is a bounded, verifiable product change defining an outcome; use
+design, development and validation as needed.
 
-Increments advance DRAFT → ACCEPTED → BUILDING → DONE, without skipping states.
-`main` moves only to a tagged release by fast-forward from `dev`, which always works;
-commit non-increment planning (candidates, proposals, the checkpoint) straight to `dev`,
-and never rewrite `main`, `dev` or tags (rebase only unshared commits).
+Increments advance DRAFT → ACCEPTED → BUILDING → DONE without skipping states. `main`
+moves only to a tagged release by fast-forward from `dev`, which always works; commit
+non-increment planning (candidates, proposals, checkpoint) straight to `dev`, and never
+rewrite `main`, `dev` or tags (rebase only unshared commits).
 
-- **DRAFT** — list the candidate unnumbered under `## Candidates` in `plan.md`; link to
-  a proposal in `vdesign/proposals/` when it needs a longer argument.
-- **ACCEPTED `[ ]`** — `product-owner` prepares acceptance; the user decides. Only now
-  number the increment in `plan.md`, with its **"done when"** written there or linked
-  to `docs/`, and any features it delivers. Accepting a milestone accepts and numbers
-  its listed increments; adding one later widens scope. Record a proposal's decision in
-  `docs/`; retain the proposal until DONE. IPD Decision Check Points remain separate
-  gates.
-- **BUILDING `[/]`** — one increment at a time: mark it BUILDING on `dev`, branch
-  `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each task
-  as you check it off. Its `active_plan.md` points to "done when" without copying it
-  (when delegated, see Delegation). Use commit-sized task checkboxes, each naming how it
-  will be verified; add optional **slice** headings for integration points. Software
-  slices leave the product working and integrated; other work ends with a verifiable
-  deliverable.
+- **DRAFT** — list unnumbered under `## Candidates` in `plan.md`; link a proposal in
+  `vdesign/proposals/` if it needs a longer argument.
+- **ACCEPTED `[ ]`** — `product-owner` prepares acceptance; the user decides. Only then
+  number the increment in `plan.md` with its **"done when"** (inline or linked in
+  `docs/`) and delivered features. Accepting a milestone accepts and numbers its listed
+  increments; adding one later widens scope. Record proposal decisions in `docs/`,
+  keeping the proposal until DONE. IPD Decision Check Points stay separate gates.
+- **BUILDING `[/]`** — one increment at a time: mark BUILDING on `dev`, branch
+  `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each
+  task as checked off. `active_plan.md` links "done when" without copying it (when
+  delegated, see Delegation), using commit-sized task checkboxes naming how each is
+  verified and optional **slice** headings for integration points. Software slices stay
+  working and integrated; other work ends with a verifiable deliverable.
 - **DONE `[x]`** — merge `dev` into the increment branch, verify "done when" there,
-  reconcile design documents with the result, and record the outcome and verification in
-  `plan.md`. Repoint surviving proposal links to the design document, ADR or Git
-  revision, delete the board and that increment's proposal, then merge into `dev` with
-  `--no-ff` and delete the branch. Checked tasks alone do not establish completion; DONE
-  does not wait for release.
-- **REJECTED** — keep the candidate and any proposal; record the verdict and reason on
-  the candidate line and atop the proposal, and delete any increment branch.
+  reconcile design documents and record outcome and verification in `plan.md`. Repoint
+  surviving proposal links to the design document, ADR or Git revision, delete the board
+  and proposal, merge into `dev` with `--no-ff` and delete the branch. Checked tasks do
+  not establish completion; DONE does not wait for release.
+- **REJECTED** — keep the candidate and proposal; record verdict and reason on the
+  candidate line and atop the proposal, and delete any increment branch.
 
-Group increments under headings, never nest them. An optional **milestone** heading
-carries no checkbox and has its own "done when"; once its increments are DONE, verify
-it end to end on `dev` and record `Outcome` and `Verified` lines under the heading. A
-**goal** names accepted milestones in order — each DONE before the next begins — with
-the goal and active milestone noted in `checkpoint.md`; running toward a goal changes
-no gate (stop wherever governance would ask the user). Tasks use plain checkboxes.
-Infer feature progress from delivered increments.
+Group increments under headings, never nest them. An optional **milestone** heading has
+no checkbox and its own "done when"; once its increments are DONE, verify it end to end
+on `dev` and record `Outcome` and `Verified` under the heading. A **goal** runs accepted
+milestones in order — each DONE before the next begins — with the goal and active
+milestone in `checkpoint.md`; running toward a goal changes no gate (stop wherever
+governance asks the user). Tasks use plain checkboxes; infer feature progress from
+delivered increments.
 
 **Build thin, then widen.** For software, make the narrowest end-to-end path work first.
 Unhandled cases fail loudly and drive widening within "done when".
 
 **Scope and findings.** Widening scope requires renewed acceptance. Record out-of-scope
-findings when found: a scoped inline TODO for a code location, an unnumbered candidate
-for a whole workstream. Resolve or record every open finding before deleting the board;
-deferral never satisfies an unmet "done when".
+findings immediately (scoped inline TODO for code, unnumbered candidate for a
+workstream). Resolve or record all open findings before deleting the board; deferral
+never satisfies "done when".
 
 ## Session workflow
 
@@ -133,11 +125,11 @@ Read `vdesign/plan.md` and `vdesign/checkpoint.md` before acting; run `/vibe:ini
 
 ## Decision making
 
-1. **Consult first.** Check `docs/`, `vdesign/constraints.md`, the plan and README. Proceed
-   when the answer is derivable.
-2. **Ask before assuming.** Ask about unresolved choices that are hard to reverse:
-   architecture, data models, UX flows, technology, or unclear artifact placement.
-   An answer already given to the same question stands; do not ask again.
-3. **Offer options.** Give concrete choices and their trade-offs.
-4. **Record the decision.** Put the choice and rationale in the appropriate design
-   document or ADR before proceeding.
+1. **Consult first.** Check `docs/`, `vdesign/constraints.md`, `plan.md` and `README.md`;
+   proceed if derivable.
+2. **Ask before assuming.** Ask on unresolved, hard-to-reverse choices (architecture,
+   data models, UX flows, technology, unclear artifact placement); do not re-ask
+   answered questions.
+3. **Offer options.** Give concrete choices and trade-offs.
+4. **Record the decision.** Write choice and rationale in the design document or ADR
+   before proceeding.
