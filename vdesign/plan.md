@@ -177,13 +177,35 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   from its description. The adapters deliver `vibe.md` as before; both plugin
   validators pass, including the skill's frontmatter; local links resolve and
   `git diff --check` is clean. pi was not run.
+- [ ] 12. Release review and concision — accepted by the user on 2026-11-21 from the
+  v0.11.0 content review.
+  Done when: the spine says only tasks use plain checkboxes; Delegation's board rule
+  names a delegated increment build; the checkpoint may be updated when a goal starts;
+  the Agile skill's method index names its reference's rules; every host manifest
+  describes the current framework and carries version 0.11.0; the README lists worker
+  mode among its components and mentions `dev` and the pre-push hook under
+  initialization; the draft mode modules and the initializer say "session workflow";
+  the initializer states the v0.8.0 rename itself; the hub board links
+  `../plan.md#increments`; the architecture design records how each host exposes roles;
+  candidate proposals use current terms; every adapter delivers `vibe.md` byte for byte.
+  The spine is shorter with every rule kept in it, checked rule by rule, and the
+  increment 8, 9 and 10 behaviour checks pass again against it. Both plugin validators
+  pass without a missing-version warning; local links resolve.
 
 ## Candidates
 
 - Principle defaults — consider the policy alternatives identified during cleanup;
-  committed references remain authoritative. [Proposal](proposals/principle-defaults.md).
+  committed references remain authoritative. The v0.11.0 review found the Boy Scout
+  Rule contradicting the spine's scope rule, and a default to always generate a
+  Dockerfile, Makefile and CI. [Proposal](proposals/principle-defaults.md).
 - Hub-and-spoke mode — multi-repository workspaces; the `modes/` harness and
-  `/vibe:init hub|spoke` exist to validate it. [Proposal](proposals/hub-and-spoke-mode.md).
+  `/vibe:init hub|spoke` exist to validate it. Decide whether to schedule validation or
+  withdraw the draft modules from the shipped hooks.
+  [Proposal](proposals/hub-and-spoke-mode.md).
+- Tighter pre-push hook — accept only an annotated `v*` tag, and refuse `main` when its
+  tag is neither in the push nor on the remote; today any local tag passes.
+- `uv` outside the spine — the Python-specific default rides in every session; move it
+  to `dev_env.md` guidance or the initializer.
 - Test-driven execution — a failing test as the contract for agentic work.
   [Proposal](proposals/tdd-execution.md).
 - Mission pilot — one mctl mission on an increment branch, with an architect supervisor
