@@ -177,7 +177,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   from its description. The adapters deliver `vibe.md` as before; both plugin
   validators pass, including the skill's frontmatter; local links resolve and
   `git diff --check` is clean. pi was not run.
-- [ ] 12. Release review and concision — accepted by the user on 2026-11-21 from the
+- [/] 12. Release review and concision — accepted by the user on 2026-11-21 from the
   v0.11.0 content review.
   Done when: the spine says only tasks use plain checkboxes; Delegation's board rule
   names a delegated increment build; the checkpoint may be updated when a goal starts;
