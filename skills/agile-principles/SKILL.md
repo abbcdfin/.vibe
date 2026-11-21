@@ -18,6 +18,6 @@ Method names:
 - Build thin, then widen
 - Fail loudly on the unhandled case
 - Validate at the edge, assert inside
-- Thin and end-to-end over thick and partial
 - Spike, thin slice and demo
+- Throwaway probes
 - Releasing

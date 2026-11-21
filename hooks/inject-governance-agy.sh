@@ -28,8 +28,6 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SPINE="$ROOT/vibe.md"
 [ -f "$SPINE" ] || { printf '{"injectSteps":[]}'; exit 0; }
 
-FULL="$(cat "$SPINE")"
-
 # Resolve the user's workspace from the payload, with jq or, failing that, python3.
 _first_ws() {
   if command -v jq >/dev/null 2>&1; then
@@ -50,16 +48,17 @@ if [ -z "$WS" ] && [ -z "$_mode" ]; then
   echo "vibe: no workspacePaths in the PreInvocation payload; mode modules skipped" >&2
 fi
 _module="$(vibe_mode_module "$ROOT" "${_mode:-}")"
-if [ -n "$_module" ]; then
-  FULL="$FULL
 
----
-
-$(cat "$_module")"
-fi
+_emit_payload() {
+  cat "$SPINE"
+  if [ -n "$_module" ]; then
+    printf '\n\n---\n\n'
+    cat "$_module"
+  fi
+}
 
 if command -v jq >/dev/null 2>&1; then
-  printf '%s' "$FULL" | jq -Rs '{injectSteps: [{ephemeralMessage: .}]}'
+  _emit_payload | jq -Rs '{injectSteps: [{ephemeralMessage: .}]}'
 else
-  FULL="$FULL" python3 -c 'import json,os;print(json.dumps({"injectSteps":[{"ephemeralMessage":os.environ["FULL"]}]}))'
+  _emit_payload | python3 -c 'import json,sys;print(json.dumps({"injectSteps":[{"ephemeralMessage":sys.stdin.read()}]}))'
 fi

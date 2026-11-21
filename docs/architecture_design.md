@@ -13,8 +13,11 @@ Historical choices are recorded in [ADRs](adr/).
 | pi | `before_agent_start`; returned `systemPrompt` | `pi/vibe.ts` |
 
 Every adapter reads `vibe.md`. Governance is loaded by the adapter because skills are
-on demand. Hosts expose roles and skills through their supported discovery mechanisms;
-the pi extension itself loads only the spine.
+on demand. Role and skill discovery differs by host: Claude Code loads `agents/`
+namespaced as `vibe:<role>` and `skills/`; Antigravity CLI loads `agents/` unprefixed
+and `skills/`; OpenAI Codex CLI loads `skills/` and hooks from
+`.codex-plugin/plugin.json` but not plugin `agents/`, so a launching tool supplies a
+role itself; the pi extension loads only the spine.
 
 The JSON shell adapters use `jq`, falling back to `python3`. Codex can register the
 same script through either a bundled plugin hook or a standalone config hook; their

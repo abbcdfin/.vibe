@@ -3,7 +3,7 @@
 > **Status: CANDIDATE — not adopted.** This is a proposal awaiting validation, not an
 > active framework rule. Do **not** treat it as doctrine. It must be run manually on at
 > least one real task and receive user acceptance before it graduates into the
-> framework (e.g. a `workflows/` file referenced by `vibe.md`).
+> framework (e.g. a skill or mode module referenced by `vibe.md`).
 
 ## Motivation
 
@@ -37,7 +37,7 @@ These are phases of this optional workflow, not the roadmap's increment units.
 |-------|-----|---------------|------------------|
 | 1. Architecture & Design | You + main agent | Collaborative, exploratory | Scratchpad in `vdesign/`; optional MCP forks for second opinions |
 | 2. Contract & Test Definition | You + main agent | Focus on interface/tests | Write the **failing** tests; drop inline `// TODO` stubs. Locked contract lands in `docs/` |
-| 3. Implementation Execution | Fresh isolated subagent | Pristine, single-task | Reads the TODO + tests, writes code, runs tests to green, exits |
+| 3. Implementation Execution | Fresh isolated implementer | Pristine, single-task | Reads the TODO + tests, writes code, runs tests to green, exits |
 | 4. Verification | You | System-wide view | Static-analysis scripts + human review |
 
 Naming note: phase 1's scratchpad maps onto **`vdesign/`** (volatile) and the locked
@@ -46,9 +46,9 @@ reintroduces the "one fact, many places" problem.
 
 ## Guardrails (non-negotiable for autonomous runs)
 
-1. **Tests are frozen for the implementation subagent.** The phase-3 subagent may write
+1. **Tests are frozen for the implementer.** The phase-3 worker may write
    code, run tests, and read results — it **must not modify the test files**. If the
-   laborer can edit the test to make it pass, the entire verifiability guarantee
+   implementer can edit the test to make it pass, the entire verifiability guarantee
    collapses. Enforce this in tooling (read-only test paths), not just by instruction.
 
 2. **Phase 4 (human verification) is mandatory, not a rubber stamp.** Green tests prove
@@ -57,7 +57,7 @@ reintroduces the "one fact, many places" problem.
 
 ## Known failure modes to watch during validation
 
-* **The laborer games the test** — writes code that satisfies the literal assertion rather
+* **The implementer games the test** — writes code that satisfies the literal assertion rather
   than solving the problem. (Guardrail 1 limits the worst case; phase 4 catches the rest.)
 * **Garbage-in-garbage-out** — weak phase-2 tests yield green-but-wrong code. The real
   intellectual work moves to contract definition; it cannot be done lazily.
