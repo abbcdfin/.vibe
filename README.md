@@ -21,9 +21,9 @@ per tool; projects share the framework without copying it into their repositorie
 
 After updating, apply any **Upgrade** steps since your installed version in the
 [changelog](CHANGELOG.md). Verify that governance is present in a new session and
-that skills are available where the host supports them. For a delegated session, a
-launching tool sets `VIBE_MODE=worker` so the shell adapters append `modes/worker.md`
-after the spine.
+that skills are available where the host supports them. A tool launching a delegated
+session sets `VIBE_MODE=worker`, so the session works inside its brief instead of
+running the session workflow.
 
 ## Install (Claude Code)
 
