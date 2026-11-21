@@ -93,9 +93,9 @@ DONE summary in `plan.md`. Record a project's stable release decisions in one AD
 from and the push that publishes to each, and where fixes for older lines go.
 
 - **Notes land in the release commit** — the commit the tag points at. `CHANGELOG.md`
-  sits at the root beside `README.md` and says what changed for consumers; a breaking
-  or behavioural change adds migration steps, as an **Upgrade** line in its entry or,
-  if longer, a guide in `docs/`. No changelog format is prescribed.
+  says what changed for consumers; a breaking or behavioural change adds migration
+  steps, as an **Upgrade** line in its entry or, if longer, a guide in `docs/`. No
+  changelog format is prescribed.
 - **Check the notes against a real upgrade before publishing.** The agent starts from
   the version consumers actually run and follows only the notes; a missing step is a
   defect. A release is published by the first push consumers can install from, which
@@ -115,5 +115,4 @@ from and the push that publishes to each, and where fixes for older lines go.
   `-dev` version is no substitute: updaters would receive it.
 - **Patches branch from the release tag.** A fix that must ship without unreleased work
   goes on `fix/<slug>`, branched from the release tag; `main` fast-forwards to the
-  patch's tag, which then merges into `dev` (preserving the governance Lifecycle's
-  no-rewrite rule).
+  patch's tag, which then merges into `dev`.

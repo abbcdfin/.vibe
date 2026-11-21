@@ -1,11 +1,10 @@
 ---
 name: agile-principles
 description: >-
-  Apply when sequencing, building, verifying or releasing increments, cutting a release,
-  choosing an end-to-end slice, or deciding whether to use a throwaway probe. Covers the
-  twelve Agile Manifesto principles, build thin then widen, fail loudly on unhandled
-  cases, the spike/slice/demo distinction and release rules. Complements
-  architectural-principles.
+  Apply when sequencing, building or verifying increments, cutting a release, choosing
+  an end-to-end slice, or deciding whether to use a throwaway probe. Covers the twelve
+  Agile Manifesto principles, build thin then widen, fail loudly on unhandled cases, the
+  spike/slice/demo distinction and release rules. Complements architectural-principles.
 ---
 
 # Agile Method Principles
