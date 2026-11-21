@@ -163,7 +163,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   invocations pass when run independently. The adapters deliver `vibe.md` as before;
   both plugin validators pass; local links resolve and `git diff --check` is clean. pi
   was not run.
-- [ ] 11. Release rules — accepted in [ADR 0008](../docs/adr/0008-release-rules.md).
+- [/] 11. Release rules — accepted in [ADR 0008](../docs/adr/0008-release-rules.md).
   Done when: `skills/agile-principles/reference.md` has a Releasing section carrying the
   rules, with the agent running the upgrade check, the user approving publication and no
   prescribed changelog format; the spine names `CHANGELOG.md` in "Where things live";
