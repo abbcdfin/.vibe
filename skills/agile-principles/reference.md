@@ -1,7 +1,7 @@
 # Agile Method Principles
 
-This skill governs sequencing and verification. The governance Lifecycle owns increment
-scope and completion; `architectural-principles` governs structure.
+This skill governs sequencing, verification and releasing. The governance Lifecycle owns
+increment scope and completion; `architectural-principles` governs structure.
 
 ## Part 1 — The twelve principles behind the Agile Manifesto
 
@@ -31,7 +31,7 @@ Quoted verbatim from <https://agilemanifesto.org/principles.html>.
 
 | Principles | Framework support |
 |---|---|
-| 1, 3, 7 — frequent delivery of working software | Integrated slices and verified increment outcomes |
+| 1, 3, 7 — frequent delivery of working software | Integrated slices, verified increment outcomes and repeatable releases (Releasing below) |
 | 2 — welcome change | Candidates and explicit acceptance of scope changes |
 | 4 — business and developers together | `product-owner`, `architect`, `implementer` and `tester` responsibilities; direct user decisions |
 | 9, 10 — quality and simplicity | Architectural principles: Resist Entropy and Minimal Mechanism |
@@ -83,3 +83,37 @@ the implementation.
   that exemption is why it must not survive without promotion.
 - Keeping the code requires an accepted increment that brings it to production standard.
 - Do not probe for an answer already in project documents or to avoid an unmade decision.
+
+### Releasing
+
+For projects that publish versions. A release is an event, not a lifecycle state: it
+bundles increments already DONE, and publication adds the release to each increment's
+DONE summary in `plan.md`. Record a project's stable release decisions in one ADR in
+`docs/`: the version scheme and what counts as breaking, the channels consumers install
+from and the push that publishes to each, and where fixes for older lines go.
+
+- **Notes land in the release commit** — the commit the tag points at. `CHANGELOG.md`
+  sits at the root beside `README.md` and says what changed for consumers; a breaking
+  or behavioural change adds migration steps, as an **Upgrade** line in its entry or,
+  if longer, a guide in `docs/`. No changelog format is prescribed.
+- **Check the notes against a real upgrade before publishing.** The agent starts from
+  the version consumers actually run and follows only the notes; a missing step is a
+  defect. A release is published by the first push consumers can install from, which
+  may be a branch rather than the tag — check a scratch install through a copy of that
+  channel, then confirm on a real one. The user approves publication.
+- **Tag the release commit, and never move a pushed tag.** Use an annotated tag named
+  `v<version>` to match manifests, with the message `v<version> — <summary>`. Push the
+  branch and the tag together to every remote. If a release or its notes prove wrong,
+  cut the next patch.
+- **Every build names its commit.** Stamp `git describe --tags --long --dirty`, so even
+  a release build carries its hash (`v0.10.0-0-g4242320`). Keep manifest versions that
+  package managers and update checks compare plain SemVer; put the hash in a separate
+  field or after `+` (`0.10.0+g4242320`), never after `-`, which SemVer reads as a
+  pre-release.
+- **Consumers install only releases.** They install from `main`, which moves only to a
+  tagged release (see the governance Lifecycle), so each version names one commit. A
+  `-dev` version is no substitute: updaters would receive it.
+- **Patches branch from the release tag.** A fix that must ship without unreleased work
+  goes on `fix/<slug>`, branched from the release tag; `main` fast-forwards to the
+  patch's tag, which then merges into `dev` (preserving the governance Lifecycle's
+  no-rewrite rule).
