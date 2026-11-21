@@ -27,6 +27,13 @@ changes a feature, and a patch fixes one.
 - **Upgrade:** wherever a project or tool names `software-expert` (for example
   `--agent vibe:software-expert`, a `CLAUDE.md`, or an `mctl.toml`), replace it with the
   matching role: `architect`, `implementer` or `tester`.
+- Adds delegation rules to governance: delegate leaf tasks with an explicit contract;
+  the brief carries the task, "done when", the seams to reuse and why its constraints
+  hold; a delegated implementer drafts the board and stops for review; workers commit on
+  the increment's branch and report each contract item's commit and evidence; the
+  delegating session verifies results and owns `plan.md`, the checkpoint and decisions.
+  Every board task now names how it will be verified, and `/vibe:init`'s board template
+  shows it.
 
 ## v0.10.0 — 2026-11-06
 

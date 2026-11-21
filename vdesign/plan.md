@@ -97,7 +97,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   exposes plugin agents unprefixed. No shipped file or README names `software-expert`;
   both plugin validators pass; the adapters deliver `vibe.md` as before; local links
   resolve and `git diff --check` is clean. pi was not run.
-- [/] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
+- [x] 8. Delegation rules — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: the spine states when to delegate, what a brief carries, what a report
   returns, that the delegating session verifies results and owns `plan.md`, the
   checkpoint and decisions, that the implementer drafts the board and stops for review,
@@ -105,6 +105,18 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   project, a delegated implementer drafts the board and stops, then builds by the
   approved board, commits on the branch and reports as the spine requires. The adapters
   inject `vibe.md` unchanged. Widened by the user on 2026-11-21 to include the report.
+  Outcome: the spine's Delegation section gives when to delegate, the brief, the board
+  review, the handback report and commit, and the delegating session's ownership;
+  BUILDING has every board task name its verification, as the initializer's template
+  now does (934 → 1,059 words). Built by a delegated developer from a reviewed board.
+  Verified: in a scratch project through `claude --plugin-dir`, a Sonnet implementer
+  given the framed role and a brief that did not mention the board committed only its
+  board and stopped; told the board was approved, it committed each task on the branch,
+  left `plan.md`, the checkpoint and `dev` alone, and reported each task's commit and
+  evidence, then what was not run and a finding; its test passed and failed against a
+  broken script. The Claude Code adapter delivers `vibe.md` byte for byte, Codex and
+  Antigravity without its final newline as before; both plugin validators pass; local
+  links resolve and `git diff --check` is clean. pi was not run.
 - [ ] 9. Worker mode — accepted in [ADR 0006](../docs/adr/0006-delegated-work.md).
   Done when: `modes/worker.md` holds the worker rules; `hooks/lib-mode.sh` selects it
   when `VIBE_MODE=worker`, before any manifest; the Claude Code, Codex and Antigravity
