@@ -52,3 +52,11 @@ documents ([constraints](../vdesign/constraints.md)).
 The spine owns artifacts, lifecycle and decisions. Roles own responsibilities; skill
 entry points route to authoritative references. The README owns installation steps;
 this document owns adapter mechanisms.
+
+Verification follows a run-once, review-first rule (`skills/agile-principles/reference.md`,
+refining [ADR 0006](adr/0006-delegated-work.md)'s "delegating session verifies results"
+without a new ADR because the rule is easy to reverse): re-executing checks another role
+already reported on the same commit spends tokens while repeating the same blind spots,
+whereas reviewing reported command, result and commit evidence against the diff catches
+logic gaps, untested edge cases and missing coverage. Reruns are reserved for missing,
+stale, contradicted or previously unrunnable evidence, using the narrowest decisive check.
