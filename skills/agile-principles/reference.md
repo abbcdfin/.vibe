@@ -88,6 +88,15 @@ the implementation.
 
 - **Run each check once, where the work is done.** The role doing the work reports the
   command, its observed result and the commit it ran on.
+- **Cadence: covering checks per change, one full run at DONE.** Tasks and slices run
+  only the checks covering what they change. The full suite runs once per increment, by
+  the session that owns DONE, after merging `dev` into the increment branch and before
+  merging into `dev` (if DONE bookkeeping reconciles design documents or deletes the
+  board or proposal afterward, verify those edits too, or run the full suite after them
+  so it covers the exact tree merging into `dev`). Milestone verification adds
+  end-to-end checks on `dev` without another full run.
+- **Judge scope per project.** The role running a check judges which checks cover a
+  change and what the full suite is for the project; these rules prescribe no commands.
 - **Verify by review.** Later verifiers check that each piece of evidence proves its
   "done when" item and read the diff for logic gaps and untested edge cases, adding only
   the checks that are missing.
