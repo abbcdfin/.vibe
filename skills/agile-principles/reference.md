@@ -84,6 +84,25 @@ the implementation.
 - Keeping the code requires an accepted increment that brings it to production standard.
 - Do not probe for an answer already in project documents or to avoid an unmade decision.
 
+### Verifying
+
+- **Run each check once, where the work is done.** The role doing the work runs the
+  check and reports the command, its observed result and the commit it ran on. A bare
+  claim of completion is not evidence.
+- **Verify by review first.** Later verifiers check that the reported evidence actually
+  proves its "done when" item and read the diff for logic gaps, edge cases and missing
+  coverage, running only the checks that are missing rather than repeating checks already
+  evidenced.
+- **Rerun only on an exception.** Rerun an already-reported check only when its evidence
+  is:
+  - missing;
+  - stale (relevant code or files changed since the reported commit, including a merge
+    of `dev` that touched them);
+  - contradicted by the diff; or
+  - could not run in the environment where the work was done.
+- **Narrowest decisive check.** When an exception requires a rerun, run the smallest
+  check that settles the doubt rather than repeating the full suite.
+
 ### Releasing
 
 For projects that publish versions. A release is an event, not a lifecycle state: it
