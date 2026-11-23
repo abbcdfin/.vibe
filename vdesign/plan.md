@@ -216,6 +216,20 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   verified M1 on `dev` and stopped. Both plugin validators pass with no version warning;
   shellcheck, local links and `git diff --check` are clean. pi was not run.
   Released in v0.11.0.
+- [ ] 13. Verification by review — accepted by the user on 2026-11-23, to stop roles
+  rerunning checks another role already ran.
+  Done when: `skills/agile-principles/reference.md` has a Verifying section: a check
+  runs once, where the work is done, and is reported as command, result and commit;
+  later verifiers check that the evidence proves its "done when" item and read the diff
+  for logic gaps, adding only the missing checks; they rerun only when evidence is
+  missing, stale, contradicted by the diff or could not run where the work was done, and
+  then the narrowest decisive check. The spine's Delegation says in one sentence that the
+  delegating session reviews reported evidence rather than rerunning it; `agents/tester.md`
+  reviews evidence first and spends execution on unproven logic, edge and failure cases;
+  the architecture design records the rationale. In scratch projects, a session verifying
+  a handback with current evidence finds a planted logic defect without rerunning the
+  reported checks, and with stale evidence reruns only the decisive check. The adapters
+  deliver `vibe.md` byte for byte; both plugin validators pass; local links resolve.
 
 ## Candidates
 
