@@ -25,7 +25,8 @@ sequencing, verification and releasing, and `agentic-principles` to agentic syst
   and out-of-scope findings.
 - **Ownership.** The delegating session creates and merges the branch, verifies results
   itself (completion claims are not evidence), and owns `plan.md`, the checkpoint and
-  decisions.
+  decisions. Review reported evidence and the diff rather than rerunning checks (see
+  `agile-principles` for rerun exceptions).
 
 ## Output discipline
 
