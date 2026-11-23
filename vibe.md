@@ -24,9 +24,10 @@ sequencing, verification and releasing, and `agentic-principles` to agentic syst
   each contract item's commit and evidence (command and result), then what was not run
   and out-of-scope findings.
 - **Ownership.** The delegating session creates and merges the branch, verifies results
-  itself by reviewing reported evidence and the diff rather than rerunning checks
-  (completion claims are not evidence; `agile-principles` gives the exceptions), and owns
-  `plan.md`, the checkpoint and decisions.
+  itself by reviewing reported evidence and the diff, rerunning only on an exception and
+  only the checks covering what changed or is in doubt (completion claims are not
+  evidence; `agile-principles` lists the exceptions), and owns `plan.md`, the checkpoint
+  and decisions.
 
 ## Output discipline
 

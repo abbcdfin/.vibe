@@ -93,8 +93,8 @@ the implementation.
   the checks that are missing.
 - **Rerun only on an exception:** the evidence is missing; it is stale, because relevant
   files changed since its commit (including a merge of `dev` that touched them); the diff
-  contradicts it; or the check could not run where the work was done. Then run the
-  narrowest check that settles the doubt, not the full suite.
+  contradicts it; or the check could not run where the work was done. Then run only the
+  checks covering what changed or is in doubt, not the full suite.
 
 ### Releasing
 
