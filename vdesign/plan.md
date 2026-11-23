@@ -217,19 +217,29 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   shellcheck, local links and `git diff --check` are clean. pi was not run.
   Released in v0.11.0.
 - [/] 13. Verification by review — accepted by the user on 2026-11-23, to stop roles
-  rerunning checks another role already ran.
+  rerunning checks another role already ran; widened the same day to set when the full
+  suite runs.
   Done when: `skills/agile-principles/reference.md` has a Verifying section: a check
   runs once, where the work is done, and is reported as command, result and commit;
   later verifiers check that the evidence proves its "done when" item and read the diff
   for logic gaps, adding only the missing checks; they rerun only when evidence is
   missing, stale, contradicted by the diff or could not run where the work was done, and
-  then the narrowest decisive check. The spine's Delegation says in one sentence that the
-  delegating session reviews reported evidence rather than rerunning it; `agents/tester.md`
-  reviews evidence first and spends execution on unproven logic, edge and failure cases;
-  the architecture design records the rationale. In scratch projects, a session verifying
-  a handback with current evidence finds a planted logic defect without rerunning the
-  reported checks, and with stale evidence reruns only the decisive check. The adapters
-  deliver `vibe.md` byte for byte; both plugin validators pass; local links resolve.
+  then only the checks covering what changed or is in doubt. Tasks and slices run the
+  checks covering what they change; the full suite runs once per increment, by the
+  session that owns DONE, after merging `dev` into the increment branch and before
+  merging it into `dev`; milestone verification adds end-to-end checks without another
+  full run. The role running a check judges which checks cover a change and what the
+  full suite is; vibe names no commands. The spine's Lifecycle carries the cadence
+  (BUILDING and DONE) and Delegation's Ownership the review rule in one sentence;
+  `agents/implementer.md` runs the covering checks, not the full suite;
+  `agents/tester.md` reviews evidence first and spends execution on unproven logic, edge
+  and failure cases; the architecture design records the rationale. In scratch projects,
+  each in at least 4 of 5 Sonnet runs: a session verifying a slice handback with current
+  evidence finds a planted logic defect and reruns none of the reported checks; with
+  stale evidence it reruns only the checks covering the change; completing the increment
+  it runs the full suite once, after merging `dev` and before merging into `dev`. The
+  adapters deliver `vibe.md` byte for byte; both plugin validators pass; local links
+  resolve.
 
 ## Candidates
 
