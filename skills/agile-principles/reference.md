@@ -86,22 +86,15 @@ the implementation.
 
 ### Verifying
 
-- **Run each check once, where the work is done.** The role doing the work runs the
-  check and reports the command, its observed result and the commit it ran on. A bare
-  claim of completion is not evidence.
-- **Verify by review first.** Later verifiers check that the reported evidence actually
-  proves its "done when" item and read the diff for logic gaps, edge cases and missing
-  coverage, running only the checks that are missing rather than repeating checks already
-  evidenced.
-- **Rerun only on an exception.** Rerun an already-reported check only when its evidence
-  is:
-  - missing;
-  - stale (relevant code or files changed since the reported commit, including a merge
-    of `dev` that touched them);
-  - contradicted by the diff; or
-  - could not run in the environment where the work was done.
-- **Narrowest decisive check.** When an exception requires a rerun, run the smallest
-  check that settles the doubt rather than repeating the full suite.
+- **Run each check once, where the work is done.** The role doing the work reports the
+  command, its observed result and the commit it ran on.
+- **Verify by review.** Later verifiers check that each piece of evidence proves its
+  "done when" item and read the diff for logic gaps and untested edge cases, adding only
+  the checks that are missing.
+- **Rerun only on an exception:** the evidence is missing; it is stale, because relevant
+  files changed since its commit (including a merge of `dev` that touched them); the diff
+  contradicts it; or the check could not run where the work was done. Then run the
+  narrowest check that settles the doubt, not the full suite.
 
 ### Releasing
 

@@ -53,10 +53,9 @@ The spine owns artifacts, lifecycle and decisions. Roles own responsibilities; s
 entry points route to authoritative references. The README owns installation steps;
 this document owns adapter mechanisms.
 
-Verification follows a run-once, review-first rule (`skills/agile-principles/reference.md`,
-refining [ADR 0006](adr/0006-delegated-work.md)'s "delegating session verifies results"
-without a new ADR because the rule is easy to reverse): re-executing checks another role
-already reported on the same commit spends tokens while repeating the same blind spots,
-whereas reviewing reported command, result and commit evidence against the diff catches
-logic gaps, untested edge cases and missing coverage. Reruns are reserved for missing,
-stale, contradicted or previously unrunnable evidence, using the narrowest decisive check.
+Verification runs each check once, where the work is done; later verifiers review the
+reported evidence and the diff ([Agile reference](../skills/agile-principles/reference.md#verifying)).
+Rerunning a check another role ran on the same commit costs tokens and repeats its
+blind spots, while asking whether the evidence proves the claim catches logic gaps and
+missing cases. The rule refines [ADR 0006](adr/0006-delegated-work.md)'s "delegating
+session verifies results" and is easy to reverse, so it needs no ADR.
