@@ -6,6 +6,21 @@ line names any further step a release needs. Versions follow
 [Semantic Versioning](https://semver.org/) in its 0.x form: a minor version adds or
 changes a feature, and a patch fixes one.
 
+## v0.12.0 — 2026-11-23
+
+- Adds verification by review: a check runs once, where the work is done, and is
+  reported as command, result and commit. Later verifiers, the tester and the
+  delegating session, check that the evidence proves its "done when" item and read the
+  diff for logic gaps, rerunning only when evidence is missing, stale, contradicted by
+  the diff or could not run where the work was done.
+- Sets when the full suite runs: tasks and slices run the checks covering what they
+  change; the session that owns DONE runs the full suite once, after merging `dev` into
+  the increment branch and before merging into `dev`; a milestone adds end-to-end checks
+  without another full run. The role running a check judges which checks cover a change
+  and what the full suite is.
+- Board tasks name the checks covering them, and the implementer runs those rather
+  than the full suite.
+
 ## v0.11.1 — 2026-11-21
 
 - Corrects the README's Codex update steps: Codex does not carry hook trust over to a

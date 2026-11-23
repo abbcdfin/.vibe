@@ -10,8 +10,9 @@ mode ([ADR 0006](../docs/adr/0006-delegated-work.md)), milestones
 ([ADR 0007](../docs/adr/0007-milestones.md)) and release rules
 ([ADR 0008](../docs/adr/0008-release-rules.md)), then the release review and
 concision. [v0.11.1](../CHANGELOG.md#v0111--2026-11-21) adds the Codex hook re-trust
-step that v0.11.0's update notes missed. Increment 13, verification by review and the
-full-suite cadence, is unreleased; it changes the spine, so it needs a minor release.
+step that v0.11.0's update notes missed, and
+[v0.12.0](../CHANGELOG.md#v0120--2026-11-23) publishes increment 13: verification by
+review and the full-suite cadence.
 
 ## Next Steps
 

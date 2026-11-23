@@ -255,6 +255,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   lead's single full run at DONE: 21 adapter cases byte for byte on the `jq` and
   `python3` paths, both plugin validators, shellcheck, 67 local links and
   `git diff --check`. pi was not run.
+  Released in v0.12.0.
 
 ## Candidates
 
