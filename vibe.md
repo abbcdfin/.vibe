@@ -24,8 +24,9 @@ sequencing, verification and releasing, and `agentic-principles` to agentic syst
   each contract item's commit and evidence (command and result), then what was not run
   and out-of-scope findings.
 - **Ownership.** The delegating session creates and merges the branch, verifies results
-  itself (completion claims are not evidence), and owns `plan.md`, the checkpoint and
-  decisions.
+  itself by reviewing reported evidence and the diff, rerunning only on an exception
+  (completion claims are not evidence; `agile-principles` lists the exceptions), and
+  owns `plan.md`, the checkpoint and decisions.
 
 ## Output discipline
 
@@ -93,25 +94,26 @@ rewrite `main`, `dev` or tags (rebase only unshared commits).
 - **BUILDING `[/]`** — one increment at a time: mark BUILDING on `dev`, branch
   `inc/<n>-<slug>`, and carry the board, work and DONE record there, committing each
   task as checked off. `active_plan.md` links "done when" without copying it (when
-  delegated, see Delegation), using commit-sized task checkboxes naming how each is
-  verified and optional **slice** headings for integration points. Software slices
+  delegated, see Delegation), using commit-sized task checkboxes naming the checks
+  covering each and optional **slice** headings for integration points. Software slices
   leave the product working and integrated; other work ends with a verifiable
   deliverable.
-- **DONE `[x]`** — merge `dev` into the increment branch, verify "done when" there,
-  reconcile design documents and record outcome and verification in `plan.md`. Repoint
-  surviving proposal links to the design document, ADR or Git revision, delete the board
-  and that increment's proposal, merge into `dev` with `--no-ff` and delete the branch.
-  Checked tasks alone do not establish completion; DONE does not wait for release.
+- **DONE `[x]`** — merge `dev` into the increment branch, run the full suite once, verify
+  "done when" there, reconcile design documents and record outcome and verification in
+  `plan.md`. Repoint surviving proposal links to the design document, ADR or Git
+  revision, delete the board and that increment's proposal, merge into `dev` with
+  `--no-ff` and delete the branch. Checked tasks alone do not establish completion; DONE
+  does not wait for release.
 - **REJECTED** — keep the candidate and any proposal; record verdict and reason on the
   candidate line and atop the proposal, and delete any increment branch.
 
 Group increments under headings, never nest them. An optional **milestone** heading has
 no checkbox and its own "done when"; once its increments are DONE, verify it end to end
-on `dev` and record `Outcome` and `Verified` under the heading. A **goal** runs accepted
-milestones in order — each DONE before the next begins — with the goal and active
-milestone in `checkpoint.md`; running toward a goal changes no gate (stop wherever
-governance asks the user). Tasks use plain checkboxes; infer feature progress from
-delivered increments.
+on `dev` without another full run and record `Outcome` and `Verified` under the heading.
+A **goal** runs accepted milestones in order — each DONE before the next begins — with
+the goal and active milestone in `checkpoint.md`; running toward a goal changes no gate
+(stop wherever governance asks the user). Tasks use plain checkboxes; infer feature
+progress from delivered increments.
 
 **Build thin, then widen.** For software, make the narrowest end-to-end path work first.
 Unhandled cases fail loudly and drive widening within "done when".

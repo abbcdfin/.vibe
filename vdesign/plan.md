@@ -216,7 +216,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   verified M1 on `dev` and stopped. Both plugin validators pass with no version warning;
   shellcheck, local links and `git diff --check` are clean. pi was not run.
   Released in v0.11.0.
-- [/] 13. Verification by review — accepted by the user on 2026-11-23, to stop roles
+- [x] 13. Verification by review — accepted by the user on 2026-11-23, to stop roles
   rerunning checks another role already ran; widened the same day to set when the full
   suite runs.
   Done when: `skills/agile-principles/reference.md` has a Verifying section: a check
@@ -240,6 +240,21 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   it runs the full suite once, after merging `dev` and before merging into `dev`. The
   adapters deliver `vibe.md` byte for byte; both plugin validators pass; local links
   resolve.
+  Outcome: the Agile reference's Verifying section carries run-once evidence, review
+  before rerun, four rerun exceptions, the cadence and the judgment rule; the spine's
+  Lifecycle names the covering checks per task, one full-suite run at DONE and no extra
+  run at a milestone, and Ownership reviews rather than reruns (1,054 → 1,079 words). The
+  implementer runs covering checks; the tester reviews first. Built by a delegated
+  developer from reviewed boards; the lead tightened wording in four places. Early checks
+  with only "narrowest check" wording reran the full suite on stale evidence in 4 of 4
+  runs, which led to the cadence.
+  Verified: in scratch projects through `claude --plugin-dir` with Sonnet, 5 of 5 runs
+  each found a planted defect in a slice handback with no rerun; reran only the covering
+  tests on stale evidence (and caught the refactor's regression by review); and, completing
+  the increment, merged `dev`, ran the full suite once and then merged into `dev`. The
+  lead's single full run at DONE: 21 adapter cases byte for byte on the `jq` and
+  `python3` paths, both plugin validators, shellcheck, 67 local links and
+  `git diff --check`. pi was not run.
 
 ## Candidates
 

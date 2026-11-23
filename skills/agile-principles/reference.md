@@ -84,6 +84,25 @@ the implementation.
 - Keeping the code requires an accepted increment that brings it to production standard.
 - Do not probe for an answer already in project documents or to avoid an unmade decision.
 
+### Verifying
+
+- **Run each check once, where the work is done.** The role doing the work reports the
+  command, its observed result and the commit it ran on.
+- **Cadence: covering checks per change, one full run at DONE.** Tasks and slices run
+  only the checks covering what they change. The full suite runs once per increment, by
+  the session that owns DONE, after merging `dev` into the increment branch and before
+  merging into `dev`. Milestone verification adds end-to-end checks on `dev` without
+  another full run.
+- **Judge scope per project.** The role running a check judges which checks cover a
+  change and what the full suite is for the project; these rules prescribe no commands.
+- **Verify by review.** Later verifiers check that each piece of evidence proves its
+  "done when" item and read the diff for logic gaps and untested edge cases, adding only
+  the checks that are missing.
+- **Rerun only on an exception:** the evidence is missing; it is stale, because relevant
+  files changed since its commit (including a merge of `dev` that touched them); the diff
+  contradicts it; or the check could not run where the work was done. Then run only the
+  checks covering what changed or is in doubt, not the full suite.
+
 ### Releasing
 
 For projects that publish versions. A release is an event, not a lifecycle state: it

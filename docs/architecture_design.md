@@ -52,3 +52,15 @@ documents ([constraints](../vdesign/constraints.md)).
 The spine owns artifacts, lifecycle and decisions. Roles own responsibilities; skill
 entry points route to authoritative references. The README owns installation steps;
 this document owns adapter mechanisms.
+
+Verification runs each check once, where the work is done; later verifiers review the
+reported evidence and the diff ([Agile reference](../skills/agile-principles/reference.md#verifying)).
+Rerunning a check another role ran on the same commit costs tokens and repeats its
+blind spots, while asking whether the evidence proves the claim catches logic gaps and
+missing cases. Tasks and slices run only covering checks, while one full-suite run per
+increment at DONE (after merging `dev` and before merging into `dev`) tests the exact
+integrated code that reaches `dev` without repeating full runs at each task or milestone.
+Which checks cover a change and what constitutes the full suite are left to the running
+role's judgment because projects differ too much to prescribe commands. The rule refines
+[ADR 0006](adr/0006-delegated-work.md)'s "delegating session verifies results" and is
+easy to reverse, so it needs no ADR.
