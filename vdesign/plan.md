@@ -216,7 +216,7 @@ Status: `[ ]` ACCEPTED, `[/]` BUILDING, `[x]` DONE.
   verified M1 on `dev` and stopped. Both plugin validators pass with no version warning;
   shellcheck, local links and `git diff --check` are clean. pi was not run.
   Released in v0.11.0.
-- [ ] 13. Verification by review — accepted by the user on 2026-11-23, to stop roles
+- [/] 13. Verification by review — accepted by the user on 2026-11-23, to stop roles
   rerunning checks another role already ran.
   Done when: `skills/agile-principles/reference.md` has a Verifying section: a check
   runs once, where the work is done, and is reported as command, result and commit;
