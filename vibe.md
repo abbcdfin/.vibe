@@ -24,9 +24,9 @@ sequencing, verification and releasing, and `agentic-principles` to agentic syst
   each contract item's commit and evidence (command and result), then what was not run
   and out-of-scope findings.
 - **Ownership.** The delegating session creates and merges the branch, verifies results
-  by reviewing reported evidence and the diff, rerunning only on an exception (completion
-  claims are not evidence; `agile-principles` lists the exceptions), and owns `plan.md`,
-  the checkpoint and decisions.
+  itself by reviewing reported evidence and the diff, rerunning only on an exception
+  (completion claims are not evidence; `agile-principles` lists the exceptions), and
+  owns `plan.md`, the checkpoint and decisions.
 
 ## Output discipline
 
@@ -109,11 +109,11 @@ rewrite `main`, `dev` or tags (rebase only unshared commits).
 
 Group increments under headings, never nest them. An optional **milestone** heading has
 no checkbox and its own "done when"; once its increments are DONE, verify it end to end
-on `dev` without another full run and record `Outcome` and `Verified` under the heading. A **goal** runs accepted
-milestones in order — each DONE before the next begins — with the goal and active
-milestone in `checkpoint.md`; running toward a goal changes no gate (stop wherever
-governance asks the user). Tasks use plain checkboxes; infer feature progress from
-delivered increments.
+on `dev` without another full run and record `Outcome` and `Verified` under the heading.
+A **goal** runs accepted milestones in order — each DONE before the next begins — with
+the goal and active milestone in `checkpoint.md`; running toward a goal changes no gate
+(stop wherever governance asks the user). Tasks use plain checkboxes; infer feature
+progress from delivered increments.
 
 **Build thin, then widen.** For software, make the narrowest end-to-end path work first.
 Unhandled cases fail loudly and drive widening within "done when".
